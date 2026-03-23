@@ -1,0 +1,118 @@
+body {
+    --culoare-fundal: #575757;
+    --culoare-zona: #E1012F;
+    --culoare-zona-secundara: #E62459;
+    --culoare-highlight: #E01816;
+    --culoare-bordura: #E02F35;
+    --culoare-text-deschis: #FFFFFF;
+    --culoare-text-inchis: #575757;
+
+    background-color: var(--culoare-fundal);
+    color: var(--culoare-text-deschis);
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+header,
+footer {
+    background-color: var(--culoare-zona);
+    color: var(--culoare-text-deschis);
+    border-top: 4px solid var(--culoare-bordura);
+    border-bottom: 4px solid var(--culoare-bordura);
+    padding: 1rem;
+}
+
+main {
+    background-color: var(--culoare-fundal);
+    color: var(--culoare-text-deschis);
+    padding: 1rem;
+}
+
+section,
+article,
+aside,
+details,
+figure,
+address,
+nav {
+    background-color: var(--culoare-zona);
+    color: var(--culoare-text-deschis);
+    border: 2px solid var(--culoare-text-deschis);
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    padding: 0.85rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+li,
+summary,
+figcaption,
+caption,
+td,
+th {
+    color: var(--culoare-text-deschis);
+}
+
+a {
+    color: var(--culoare-text-deschis);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--culoare-text-deschis);
+    text-decoration: underline;
+}
+
+strong,
+b {
+    color: var(--culoare-text-deschis);
+}
+
+mark {
+    background-color: var(--culoare-text-deschis);
+    color: var(--culoare-highlight);
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: var(--culoare-zona-secundara);
+    color: var(--culoare-text-deschis);
+}
+
+th {
+    background-color: var(--culoare-highlight);
+    color: var(--culoare-text-deschis);
+}
+
+td,
+th {
+    border: 1px solid var(--culoare-text-deschis);
+    padding: 0.5rem;
+}
+
+caption {
+    color: var(--culoare-text-deschis);
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+img,
+iframe {
+    max-width: 100%;
+    border: 3px solid var(--culoare-text-deschis);
+    border-radius: 12px;
+}
+
+details summary {
+    color: var(--culoare-text-deschis);
+    font-weight: bold;
+}
+
+meter {
+    accent-color: var(--culoare-text-deschis);
+}
