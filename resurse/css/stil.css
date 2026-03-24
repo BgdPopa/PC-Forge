@@ -116,3 +116,110 @@ details summary {
 meter {
     accent-color: var(--culoare-text-deschis);
 }
+html {
+    transition: font-size 0.3s ease;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+h1 { font-size: 2rem; }
+h2 { font-size: 1.6rem; }
+h3 { font-size: 1.3rem; }
+h4 { font-size: 1.1rem; }
+
+p, li, td, th, summary, figcaption, caption, a {
+    font-size: 1rem;
+}
+
+small {
+    font-size: 0.9rem;
+}
+.grid-pagina {
+    display: grid;
+    gap: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-areas:
+        "zona1 zona1 zona1"
+        "zona3 zona2 zona4"
+        "zona5 zona2 zona4"
+        "zona5 zona6 zona7"
+        "zona8 zona8 zona8";
+}
+
+.zona1 { grid-area: zona1; }
+.zona2 { grid-area: zona2; }
+.zona3 { grid-area: zona3; }
+.zona4 { grid-area: zona4; }
+.zona5 { grid-area: zona5; }
+.zona6 { grid-area: zona6; }
+.zona7 { grid-area: zona7; }
+.zona8 { grid-area: zona8; }
+
+.zona {
+    min-width: 0;
+}
+@media screen and (max-width: 1100px) and (min-width: 701px) {
+    html {
+        font-size: 15px;
+    }
+
+    .grid-pagina {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "zona1 zona1"
+            "zona3 zona4"
+            "zona2 zona2"
+            "zona5 zona7"
+            "zona6 zona6"
+            "zona8 zona8";
+    }
+
+    .zona {
+        min-width: 0;
+    }
+
+    table,
+    img,
+    iframe {
+        max-width: 100%;
+    }
+}
+@media screen and (max-width: 700px) {
+    html {
+        font-size: 14px;
+    }
+
+    .grid-pagina {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "zona1"
+            "zona3"
+            "zona4"
+            "zona2"
+            "zona5"
+            "zona6"
+            "zona7"
+            "zona8";
+    }
+
+    .zona {
+        min-width: 0;
+    }
+
+    table,
+    img,
+    iframe {
+        max-width: 100%;
+    }
+
+    iframe {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 9;
+    }
+}
