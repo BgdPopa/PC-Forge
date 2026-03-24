@@ -1,3 +1,4 @@
+/* Etapa 2 - task 1: schema cromatica definita cu variabile CSS in body */
 body {
     --culoare-fundal: #575757;
     --culoare-zona: #E1012F;
@@ -13,6 +14,35 @@ body {
     margin: 0;
 }
 
+/* Etapa 2 - task layout:
+   Tranzitie pentru schimbarea dimensiunii textului intre breakpoint-uri */
+html {
+    transition: font-size 0.3s ease;
+}
+
+/* Etapa 2 - task layout:
+   Prevenirea scrollului orizontal */
+body {
+    overflow-x: hidden;
+}
+
+/* Etapa 2 - task design rudimentar:
+   Dimensiuni de baza pentru text, in unitati relative */
+h1 { font-size: 2rem; }
+h2 { font-size: 1.6rem; }
+h3 { font-size: 1.3rem; }
+h4 { font-size: 1.1rem; }
+
+p, li, td, th, summary, figcaption, caption, a {
+    font-size: 1rem;
+}
+
+small {
+    font-size: 0.9rem;
+}
+
+/* Etapa 2 - task schema cromatica:
+   Stilizarea generala a zonelor header si footer */
 header,
 footer {
     background-color: var(--culoare-zona);
@@ -22,12 +52,16 @@ footer {
     padding: 1rem;
 }
 
+/* Etapa 2 - task schema cromatica:
+   Fundalul general al continutului principal */
 main {
     background-color: var(--culoare-fundal);
     color: var(--culoare-text-deschis);
     padding: 1rem;
 }
 
+/* Etapa 2 - task design rudimentar:
+   Separarea vizuala a zonelor prin fundal, border si colturi rotunjite */
 section,
 article,
 aside,
@@ -43,6 +77,8 @@ nav {
     padding: 0.85rem;
 }
 
+/* Etapa 2 - task schema cromatica:
+   Culoarea textului in zonele principale */
 h1,
 h2,
 h3,
@@ -57,6 +93,8 @@ th {
     color: var(--culoare-text-deschis);
 }
 
+/* Etapa 2 - task schema cromatica:
+   Linkuri si hover */
 a {
     color: var(--culoare-text-deschis);
     text-decoration: none;
@@ -67,16 +105,22 @@ a:hover {
     text-decoration: underline;
 }
 
+/* Etapa 1 - task 12:
+   Evidentierea anumitor texte marcate cu b si strong */
 strong,
 b {
     color: var(--culoare-text-deschis);
 }
 
+/* Etapa 1 - task 12:
+   Stilizare pentru mark */
 mark {
     background-color: var(--culoare-text-deschis);
     color: var(--culoare-highlight);
 }
 
+/* Etapa 2 - baza pentru tabel;
+   Urmeaza sa fie completata la taskul individual de stilizare tabel */
 table {
     border-collapse: collapse;
     width: 100%;
@@ -101,6 +145,8 @@ caption {
     margin-bottom: 0.5rem;
 }
 
+/* Etapa 2 - task design rudimentar:
+   Media cu latime relativa si aspect placut */
 img,
 iframe {
     max-width: 100%;
@@ -108,40 +154,26 @@ iframe {
     border-radius: 12px;
 }
 
+/* Etapa 1 - task 16:
+   Evidentierea summary din details */
 details summary {
     color: var(--culoare-text-deschis);
     font-weight: bold;
 }
 
+/* Etapa 1 - task 17:
+   Culoare pentru meter */
 meter {
     accent-color: var(--culoare-text-deschis);
 }
-html {
-    transition: font-size 0.3s ease;
-}
 
-body {
-    overflow-x: hidden;
-}
-
-h1 { font-size: 2rem; }
-h2 { font-size: 1.6rem; }
-h3 { font-size: 1.3rem; }
-h4 { font-size: 1.1rem; }
-
-p, li, td, th, summary, figcaption, caption, a {
-    font-size: 1rem;
-}
-
-small {
-    font-size: 0.9rem;
-}
+/* Etapa 2 - task layout:
+   Grid-ul principal pentru ecran mare */
 .grid-pagina {
     display: grid;
     gap: 1rem;
     padding-left: 1rem;
     padding-right: 1rem;
-
     grid-template-columns: 1fr 2fr 1fr;
     grid-template-areas:
         "zona1 zona1 zona1"
@@ -163,6 +195,9 @@ small {
 .zona {
     min-width: 0;
 }
+
+/* Etapa 2 - task layout:
+   Varianta pentru ecran mediu */
 @media screen and (max-width: 1100px) and (min-width: 701px) {
     html {
         font-size: 15px;
@@ -189,6 +224,9 @@ small {
         max-width: 100%;
     }
 }
+
+/* Etapa 2 - task layout:
+   Varianta pentru ecran mic */
 @media screen and (max-width: 700px) {
     html {
         font-size: 14px;

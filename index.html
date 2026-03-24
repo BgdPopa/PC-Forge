@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
+    <!-- Etapa 1 - task 1 si 2:
+         Structura HTML de baza, limba documentului, meta-uri si titlu relevant -->
     <meta charset="UTF-8">
     <meta name="author" content="Popa Bogdan">
     <meta name="keywords" content="PC Forge, componente PC, periferice, placi video, procesoare, memorii RAM, accesorii calculator">
@@ -9,13 +11,21 @@
     <meta name="msapplication-TileColor" content="#1e1e1e">
     <title>PC Forge - Componente si periferice pentru calculator</title>
 
+    <!-- Etapa 1 - task 4:
+         Favicon si icon pentru dispozitive Apple -->
     <link rel="icon" type="image/png" href="resurse/favicons/favicon-32x32.png">
     <link rel="apple-touch-icon" href="resurse/favicons/apple-touch-icon.png">
+
+    <!-- Etapa 2 - task schema cromatica + inceput stilizare generala -->
     <link rel="stylesheet" href="resurse/css/stil.css">
 </head>
 <body id="top">
 
+    <!-- Etapa 1 - task 5:
+         Impartirea body-ului in header, main si footer -->
     <header>
+        <!-- Etapa 1 - task 7:
+             Titlu principal si subtitlu / introducere -->
         <h1>PC Forge</h1>
 
         <hgroup>
@@ -23,6 +33,8 @@
             <p>Prima pagina a site-ului prezinta oferta generala, categoriile importante si cateva informatii utile pentru clienti.</p>
         </hgroup>
 
+        <!-- Etapa 1 - task 8:
+             Meniu de navigatie cu lista imbricata -->
         <nav aria-label="Meniu principal">
             <ul>
                 <li><a href="#top">Acasa</a></li>
@@ -47,270 +59,307 @@
         </nav>
     </header>
 
-<main>
-    <div class="grid-pagina">
-        <section class="zona zona1" id="prezentare">
-            <h2>Bine ai venit la PC Forge</h2>
-            <p>
-                PC Forge este un site dedicat pasionatilor de <b>componente PC</b>, <b>periferice</b> si accesorii pentru calculator.
-                Aici poti descoperi produse precum placi video, procesoare, memorii RAM, SSD-uri si dispozitive utile pentru un sistem modern.
-            </p>
-            <p>
-                Platforma este gandita pentru utilizatorii care vor sa isi construiasca un calculator nou sau sa faca upgrade la unul existent.
-                Pentru un rezultat bun, este important sa intelegi termeni precum <i>latency</i> sau <i>bottleneck</i>, mai ales cand alegi intre mai multe configuratii.
-            </p>
-            <p>
-                <strong>Compatibilitatea componentelor este foarte importanta</strong>, iar alegerea corecta inseamna echilibru intre performanta, buget si utilizare.
-            </p>
-        </section>
+    <!-- Etapa 2 - task layout:
+         Main reorganizat intr-un grid cu 8 zone -->
+    <main>
+        <div class="grid-pagina">
 
-        <section class="zona zona2" id="tabel-oferte">
-            <h2>Tabel cu produse populare</h2>
+            <!-- Etapa 2 - task layout:
+                 Zona 1 - prezentare principala -->
+            <section class="zona zona1" id="prezentare">
+                <h2>Bine ai venit la PC Forge</h2>
+                <p>
+                    PC Forge este un site dedicat pasionatilor de <b>componente PC</b>, <b>periferice</b> si accesorii pentru calculator.
+                    Aici poti descoperi produse precum placi video, procesoare, memorii RAM, SSD-uri si dispozitive utile pentru un sistem modern.
+                </p>
+                <p>
+                    Platforma este gandita pentru utilizatorii care vor sa isi construiasca un calculator nou sau sa faca upgrade la unul existent.
+                    Pentru un rezultat bun, este important sa intelegi termeni precum <i>latency</i> sau <i>bottleneck</i>, mai ales cand alegi intre mai multe configuratii.
+                </p>
+                <p>
+                    <strong>Compatibilitatea componentelor este foarte importanta</strong>, iar alegerea corecta inseamna echilibru intre performanta, buget si utilizare.
+                </p>
+            </section>
 
-            <table>
-                <caption>Exemple de produse si informatii orientative</caption>
-                <thead>
-                    <tr>
-                        <th>Produs</th>
-                        <th>Categorie</th>
-                        <th>Pret estimativ</th>
-                        <th>Disponibilitate</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td rowspan="2">RTX 4060</td>
-                        <td>Placi video</td>
-                        <td>1700 lei</td>
-                        <td>In stoc</td>
-                    </tr>
-                    <tr>
-                        <td>Placi video</td>
-                        <td>1650 lei</td>
-                        <td>Stoc limitat</td>
-                    </tr>
-                    <tr>
-                        <td>Ryzen 5 7600</td>
-                        <td>Procesoare</td>
-                        <td>1100 lei</td>
-                        <td>In stoc</td>
-                    </tr>
-                    <tr>
-                        <td>Kingston Fury 16GB</td>
-                        <td>Memorii RAM</td>
-                        <td>320 lei</td>
-                        <td>In stoc</td>
-                    </tr>
-                    <tr>
-                        <td>SSD NVMe 1TB</td>
-                        <td>Stocare</td>
-                        <td>380 lei</td>
-                        <td>Stoc limitat</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">Pachet tastatura + mouse</td>
-                        <td>250 lei</td>
-                        <td>Disponibil</td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="4">Datele din tabel sunt orientative si au rol demonstrativ pentru proiect.</td>
-                    </tr>
-                </tfoot>
-            </table>
-        </section>
+            <!-- Etapa 1 - task 15:
+                 Tabel cu thead, tbody, tfoot, caption, rowspan si colspan
+                 Etapa 2 - task layout:
+                 Zona 2 - tabelul este plasat central in grid -->
+            <section class="zona zona2" id="tabel-oferte">
+                <h2>Tabel cu produse populare</h2>
 
-        <section class="zona zona3" id="oferte">
-            <h2>Calendar de evenimente</h2>
-            <ol>
-                <li>
-                    <b>Promotie placi video</b> -
-                    <time datetime="2026-03-20T12:00">20 martie 2026, ora 12:00</time>
-                </li>
-                <li>
-                    <b>Weekend periferice</b> -
-                    <time datetime="2026-03-22T10:00">22 martie 2026, ora 10:00</time>
-                </li>
-                <li>
-                    <b>Ghid de configurare PC</b> -
-                    <time datetime="2026-03-25T18:00">25 martie 2026, ora 18:00</time>
-                </li>
-                <li>
-                    <b>Oferta SSD</b> -
-                    <time datetime="2026-03-28T09:30">28 martie 2026, ora 09:30</time>
-                </li>
-            </ol>
-        </section>
+                <table>
+                    <caption>Exemple de produse si informatii orientative</caption>
+                    <thead>
+                        <tr>
+                            <th>Produs</th>
+                            <th>Categorie</th>
+                            <th>Pret estimativ</th>
+                            <th>Disponibilitate</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td rowspan="2">RTX 4060</td>
+                            <td>Placi video</td>
+                            <td>1700 lei</td>
+                            <td>In stoc</td>
+                        </tr>
+                        <tr>
+                            <td>Placi video</td>
+                            <td>1650 lei</td>
+                            <td>Stoc limitat</td>
+                        </tr>
+                        <tr>
+                            <td>Ryzen 5 7600</td>
+                            <td>Procesoare</td>
+                            <td>1100 lei</td>
+                            <td>In stoc</td>
+                        </tr>
+                        <tr>
+                            <td>Kingston Fury 16GB</td>
+                            <td>Memorii RAM</td>
+                            <td>320 lei</td>
+                            <td>In stoc</td>
+                        </tr>
+                        <tr>
+                            <td>SSD NVMe 1TB</td>
+                            <td>Stocare</td>
+                            <td>380 lei</td>
+                            <td>Stoc limitat</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Pachet tastatura + mouse</td>
+                            <td>250 lei</td>
+                            <td>Disponibil</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4">Datele din tabel sunt orientative si au rol demonstrativ pentru proiect.</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </section>
 
-        <section class="zona zona4" id="anunturi">
-            <h2>Anunturi importante</h2>
-            <p>Livrarea gratuita este disponibila pentru comenzile care depasesc 500 lei.</p>
-            <p>Stocurile pentru placile video si SSD-uri se actualizeaza zilnic.</p>
-            <p>In perioada promotiilor, timpul de procesare a comenzilor poate fi usor mai mare.</p>
-        </section>
+            <!-- Etapa 1 - task 10:
+                 Sectiune de evenimente cu time
+                 Etapa 2 - task layout:
+                 Zona 3 - calendar / evenimente -->
+            <section class="zona zona3" id="oferte">
+                <h2>Calendar de evenimente</h2>
+                <ol>
+                    <li>
+                        <b>Promotie placi video</b> -
+                        <time datetime="2026-03-20T12:00">20 martie 2026, ora 12:00</time>
+                    </li>
+                    <li>
+                        <b>Weekend periferice</b> -
+                        <time datetime="2026-03-22T10:00">22 martie 2026, ora 10:00</time>
+                    </li>
+                    <li>
+                        <b>Ghid de configurare PC</b> -
+                        <time datetime="2026-03-25T18:00">25 martie 2026, ora 18:00</time>
+                    </li>
+                    <li>
+                        <b>Oferta SSD</b> -
+                        <time datetime="2026-03-28T09:30">28 martie 2026, ora 09:30</time>
+                    </li>
+                </ol>
+            </section>
 
-        <section class="zona zona5" id="utilizatori-online">
-            <h2>Utilizatori online</h2>
-            <p>Zona de placeholder pentru lista utilizatorilor activi pe site.</p>
-            <ul>
-                <li>AlexP - interesat de procesoare</li>
-                <li>MariaG - compara placi video</li>
-                <li>DanT - cauta periferice</li>
-                <li>IoanaM - verifica stocuri SSD</li>
-            </ul>
-        </section>
+            <!-- Etapa 2 - task layout:
+                 Zona 4 - anunturi importante -->
+            <section class="zona zona4" id="anunturi">
+                <h2>Anunturi importante</h2>
+                <p>Livrarea gratuita este disponibila pentru comenzile care depasesc 500 lei.</p>
+                <p>Stocurile pentru placile video si SSD-uri se actualizeaza zilnic.</p>
+                <p>In perioada promotiilor, timpul de procesare a comenzilor poate fi usor mai mare.</p>
+            </section>
 
-        <section class="zona zona6" id="evaluari">
-            <h2>Statistici rapide</h2>
-            <p>
-                Grad satisfactie clienti:
-                <meter min="0" max="100" value="92">92%</meter>
-            </p>
-            <p>
-                Nivel stoc promotii:
-                <meter min="0" max="100" value="35" low="30" high="80" optimum="90">35%</meter>
-            </p>
-            <p>Numar mediu de comenzi zilnice: 120</p>
-            <p>Produse cele mai cautate: GPU, SSD, RAM</p>
-        </section>
+            <!-- Etapa 2 - task layout:
+                 Zona 5 - lista utilizatori online / placeholder -->
+            <section class="zona zona5" id="utilizatori-online">
+                <h2>Utilizatori online</h2>
+                <p>Zona de placeholder pentru lista utilizatorilor activi pe site.</p>
+                <ul>
+                    <li>AlexP - interesat de procesoare</li>
+                    <li>MariaG - compara placi video</li>
+                    <li>DanT - cauta periferice</li>
+                    <li>IoanaM - verifica stocuri SSD</li>
+                </ul>
+            </section>
 
-        <section class="zona zona7" id="date-site">
-            <h2>Date despre site si server</h2>
-            <p>Versiune site: 1.0</p>
-            <p>Status server: online</p>
-            <p>Timp mediu de raspuns: 0.8 secunde</p>
-            <p>Actualizare continut: zilnica</p>
-        </section>
+            <!-- Etapa 1 - task 17:
+                 Utilizarea tagului meter
+                 Etapa 2 - task layout:
+                 Zona 6 - statistici -->
+            <section class="zona zona6" id="evaluari">
+                <h2>Statistici rapide</h2>
+                <p>
+                    Grad satisfactie clienti:
+                    <meter min="0" max="100" value="92">92%</meter>
+                </p>
+                <p>
+                    Nivel stoc promotii:
+                    <meter min="0" max="100" value="35" low="30" high="80" optimum="90">35%</meter>
+                </p>
+                <p>Numar mediu de comenzi zilnice: 120</p>
+                <p>Produse cele mai cautate: GPU, SSD, RAM</p>
+            </section>
 
-        <section class="zona zona8" id="continut-divers">
-            <h2>Resurse si continut util</h2>
+            <!-- Etapa 2 - task layout:
+                 Zona 7 - date despre site si server -->
+            <section class="zona zona7" id="date-site">
+                <h2>Date despre site si server</h2>
+                <p>Versiune site: 1.0</p>
+                <p>Status server: online</p>
+                <p>Timp mediu de raspuns: 0.8 secunde</p>
+                <p>Actualizare continut: zilnica</p>
+            </section>
 
-            <section id="categorii">
-                <h3>Categorii principale</h3>
+            <!-- Etapa 2 - task layout:
+                 Zona 8 - continut mixt / util -->
+            <section class="zona zona8" id="continut-divers">
+                <h2>Resurse si continut util</h2>
 
-                <article id="componente">
-                    <h4>Componente PC</h4>
+                <!-- Etapa 1 - task 3, 5, 6 si 12:
+                     Cuvinte-cheie relevante in continut, section/article, marcaje text -->
+                <section id="categorii">
+                    <h3>Categorii principale</h3>
+
+                    <article id="componente">
+                        <h4>Componente PC</h4>
+                        <p>
+                            In aceasta categorie intra produsele esentiale pentru functionarea unui calculator:
+                            procesoare, placi video, placi de baza, memorii RAM, SSD-uri, HDD-uri, surse si carcase.
+                        </p>
+                        <ul>
+                            <li>Procesoare</li>
+                            <li>Placi video</li>
+                            <li>Memorii RAM</li>
+                            <li>SSD / HDD</li>
+                        </ul>
+                    </article>
+
+                    <article id="periferice">
+                        <h4>Periferice</h4>
+                        <p>
+                            Perifericele completeaza experienta de utilizare si includ monitoare, mouse, tastaturi, casti, webcam si alte dispozitive externe.
+                        </p>
+                        <ul>
+                            <li>Mouse</li>
+                            <li>Tastaturi</li>
+                            <li>Monitoare</li>
+                            <li>Casti</li>
+                        </ul>
+                    </article>
+
+                    <article id="accesorii">
+                        <h4>Accesorii</h4>
+                        <p>
+                            Accesoriile pot imbunatati montajul, organizarea si intretinerea sistemului: cabluri, adaptoare, pasta termoconductoare si kituri de curatare.
+                        </p>
+                        <ul>
+                            <li>Cabluri</li>
+                            <li>Adaptoare</li>
+                            <li>Pasta termoconductoare</li>
+                            <li>Suporturi si organizatoare</li>
+                        </ul>
+                    </article>
+                </section>
+
+                <!-- Etapa 1 - task 11 si 13d:
+                     Imagine cu figure, figcaption, picture si link pe imagine -->
+                <section id="imagine-reprezentativa">
+                    <h3>Imagine reprezentativa</h3>
+                    <figure>
+                        <a href="resurse/imagini/promotie-desktop.jpg" target="_blank" title="Deschide imaginea mare intr-un tab nou">
+                            <picture>
+                                <source media="(max-width: 600px)" srcset="resurse/imagini/promotie-mobil.jpg">
+                                <source media="(max-width: 1000px)" srcset="resurse/imagini/promotie-tableta.jpg">
+                                <img
+                                    src="resurse/imagini/promotie-desktop.jpg"
+                                    alt="Promotie componente PC si oferte speciale pentru upgrade hardware"
+                                    title="Promotie PC Forge">
+                            </picture>
+                        </a>
+                        <figcaption>
+                            Imagine promotionala pentru ofertele PC Forge la componente si periferice.
+                        </figcaption>
+                    </figure>
+                </section>
+
+                <!-- Etapa 1 - task 13:
+                     Link extern, link intern, link cu wbr si link de download -->
+                <section id="linkuri">
+                    <h3>Linkuri utile</h3>
                     <p>
-                        In aceasta categorie intra produsele esentiale pentru functionarea unui calculator:
-                        procesoare, placi video, placi de baza, memorii RAM, SSD-uri, HDD-uri, surse si carcase.
+                        Pentru informatii suplimentare despre procesoare si placi video poti consulta si site-ul oficial
+                        <a href="https://www.nvidia.com/" target="_blank" rel="noopener noreferrer">NVIDIA</a>.
                     </p>
-                    <ul>
-                        <li>Procesoare</li>
-                        <li>Placi video</li>
-                        <li>Memorii RAM</li>
-                        <li>SSD / HDD</li>
-                    </ul>
-                </article>
-
-                <article id="periferice">
-                    <h4>Periferice</h4>
                     <p>
-                        Perifericele completeaza experienta de utilizare si includ monitoare, mouse, tastaturi, casti, webcam si alte dispozitive externe.
+                        Daca vrei sa sari direct la zona de intrebari frecvente, mergi la
+                        <a href="#faq">sectiunea FAQ</a>.
                     </p>
-                    <ul>
-                        <li>Mouse</li>
-                        <li>Tastaturi</li>
-                        <li>Monitoare</li>
-                        <li>Casti</li>
-                    </ul>
-                </article>
-
-                <article id="accesorii">
-                    <h4>Accesorii</h4>
                     <p>
-                        Accesoriile pot imbunatati montajul, organizarea si intretinerea sistemului: cabluri, adaptoare, pasta termoconductoare si kituri de curatare.
+                        Mai jos este un exemplu de link cu textul chiar sub forma adresei:
+                        <a href="https://www.amd.com/en/products/processors/desktops/ryzen.html">
+                            https://www.amd.com/en/products/processors/<wbr>desktops/<wbr>ryzen.html
+                        </a>
                     </p>
-                    <ul>
-                        <li>Cabluri</li>
-                        <li>Adaptoare</li>
-                        <li>Pasta termoconductoare</li>
-                        <li>Suporturi si organizatoare</li>
-                    </ul>
-                </article>
+                    <p>
+                        Poti descarca si un material scurt despre alegerea componentelor:
+                        <a href="resurse/download/ghid-pc-forge.pdf" download="ghid-pc-forge.pdf">Descarca ghidul PC Forge</a>
+                    </p>
+                </section>
+
+                <!-- Etapa 1 - task 14:
+                     Iframe YouTube si linkuri care schimba videoclipul -->
+                <section id="video">
+                    <h3>Videoclipuri recomandate</h3>
+                    <div>
+                        <a href="https://www.youtube.com/embed/BL4DCEp7blY" target="video-pc-forge">Configurare PC pas cu pas</a> |
+                        <a href="https://www.youtube.com/embed/2joA_S92p64" target="video-pc-forge">Cum alegi componente compatibile</a>
+                    </div>
+
+                    <iframe
+                        name="video-pc-forge"
+                        width="560"
+                        height="315"
+                        src="https://www.youtube.com/embed/BL4DCEp7blY"
+                        title="Videoclip YouTube despre configurarea unui PC"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+                </section>
+
+                <!-- Etapa 1 - task 16:
+                     Details si summary pentru intrebari frecvente -->
+                <section id="faq">
+                    <h3>Intrebari frecvente</h3>
+
+                    <details>
+                        <summary>Cum aleg o placa video potrivita?</summary>
+                        <p>Alege placa video in functie de buget, rezolutia monitorului si tipul de aplicatii sau jocuri folosite.</p>
+                    </details>
+
+                    <details>
+                        <summary>Ce procesor este bun pentru gaming?</summary>
+                        <p>Un procesor modern din gama mid-range este suficient pentru majoritatea utilizatorilor, mai ales daca este combinat cu o placa video buna.</p>
+                    </details>
+
+                    <details>
+                        <summary>Cat de importanta este memoria RAM?</summary>
+                        <p>Memoria RAM influenteaza multitasking-ul si fluiditatea generala. Pentru utilizare moderna, 16 GB reprezinta un punct de plecare bun.</p>
+                    </details>
+                </section>
             </section>
+        </div>
+    </main>
 
-            <section id="imagine-reprezentativa">
-                <h3>Imagine reprezentativa</h3>
-                <figure>
-                    <a href="resurse/imagini/promotie-desktop.jpg" target="_blank" title="Deschide imaginea mare intr-un tab nou">
-                        <picture>
-                            <source media="(max-width: 600px)" srcset="resurse/imagini/promotie-mobil.jpg">
-                            <source media="(max-width: 1000px)" srcset="resurse/imagini/promotie-tableta.jpg">
-                            <img
-                                src="resurse/imagini/promotie-desktop.jpg"
-                                alt="Promotie componente PC si oferte speciale pentru upgrade hardware"
-                                title="Promotie PC Forge">
-                        </picture>
-                    </a>
-                    <figcaption>
-                        Imagine promotionala pentru ofertele PC Forge la componente si periferice.
-                    </figcaption>
-                </figure>
-            </section>
-
-            <section id="linkuri">
-                <h3>Linkuri utile</h3>
-                <p>
-                    Pentru informatii suplimentare despre procesoare si placi video poti consulta si site-ul oficial
-                    <a href="https://www.nvidia.com/" target="_blank" rel="noopener noreferrer">NVIDIA</a>.
-                </p>
-                <p>
-                    Daca vrei sa sari direct la zona de intrebari frecvente, mergi la
-                    <a href="#faq">sectiunea FAQ</a>.
-                </p>
-                <p>
-                    Mai jos este un exemplu de link cu textul chiar sub forma adresei:
-                    <a href="https://www.amd.com/en/products/processors/desktops/ryzen.html">
-                        https://www.amd.com/en/products/processors/<wbr>desktops/<wbr>ryzen.html
-                    </a>
-                </p>
-                <p>
-                    Poti descarca si un material scurt despre alegerea componentelor:
-                    <a href="resurse/download/ghid-pc-forge.pdf" download="ghid-pc-forge.pdf">Descarca ghidul PC Forge</a>
-                </p>
-            </section>
-
-            <section id="video">
-                <h3>Videoclipuri recomandate</h3>
-                <div>
-                    <a href="https://www.youtube.com/embed/BL4DCEp7blY" target="video-pc-forge">Configurare PC pas cu pas</a> |
-                    <a href="https://www.youtube.com/embed/2joA_S92p64" target="video-pc-forge">Cum alegi componente compatibile</a>
-                </div>
-
-                <iframe
-                    name="video-pc-forge"
-                    width="560"
-                    height="315"
-                    src="https://www.youtube.com/embed/BL4DCEp7blY"
-                    title="Videoclip YouTube despre configurarea unui PC"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen>
-                </iframe>
-            </section>
-
-            <section id="faq">
-                <h3>Intrebari frecvente</h3>
-
-                <details>
-                    <summary>Cum aleg o placa video potrivita?</summary>
-                    <p>Alege placa video in functie de buget, rezolutia monitorului si tipul de aplicatii sau jocuri folosite.</p>
-                </details>
-
-                <details>
-                    <summary>Ce procesor este bun pentru gaming?</summary>
-                    <p>Un procesor modern din gama mid-range este suficient pentru majoritatea utilizatorilor, mai ales daca este combinat cu o placa video buna.</p>
-                </details>
-
-                <details>
-                    <summary>Cat de importanta este memoria RAM?</summary>
-                    <p>Memoria RAM influenteaza multitasking-ul si fluiditatea generala. Pentru utilizare moderna, 16 GB reprezinta un punct de plecare bun.</p>
-                </details>
-            </section>
-        </section>
-    </div>
-</main>
-
+    <!-- Etapa 1 - task 18 si 19:
+         Footer cu address, tel, maps, mailto, WhatsApp, copyright si time -->
     <footer id="contact">
         <h2>Contact</h2>
 
@@ -319,11 +368,11 @@
             <a href="tel:+40700111222">+40 700 111 222</a>
             <br>
             Adresa:
-          <a href="https://www.google.com/maps/search/Facultatea+de+Matematica+si+Informatica+Bucuresti" target="_blank" rel="noopener noreferrer">
-           Strada Academiei 14,<br>
-           Bucuresti,<br>
-           Romania
-          </a>
+            <a href="https://www.google.com/maps?q=Strada+Academiei+14,+Bucuresti" target="_blank" rel="noopener noreferrer">
+                Strada Academiei 14,<br>
+                Bucuresti,<br>
+                Romania
+            </a>
             <br>
             E-mail:
             <a href="mailto:contact@pcforge.ro">contact@pcforge.ro</a>
@@ -332,6 +381,8 @@
             <a href="https://wa.me/40700111222" target="_blank" rel="noopener noreferrer">Deschide conversatia WhatsApp</a>
         </address>
 
+        <!-- Etapa 1 - task 13c:
+             Link catre inceputul paginii -->
         <p>
             <a href="#top">Inapoi la inceputul paginii</a>
         </p>
