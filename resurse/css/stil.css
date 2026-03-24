@@ -1,4 +1,6 @@
 /* Etapa 2 - task 1: schema cromatica definita cu variabile CSS in body */
+/* Etapa 2 - task design rudimentar, punctul a:
+   spatierea paginii pe orizontala si verticala prin variabile CSS */
 body {
     --culoare-fundal: #575757;
     --culoare-zona: #E1012F;
@@ -8,22 +10,20 @@ body {
     --culoare-text-deschis: #FFFFFF;
     --culoare-text-inchis: #575757;
 
+    --spatiere-pagina-orizontala: 4vw;
+    --spatiere-pagina-verticala: 1rem;
+
     background-color: var(--culoare-fundal);
     color: var(--culoare-text-deschis);
     font-family: Arial, sans-serif;
     margin: 0;
+    overflow-x: hidden;
 }
 
 /* Etapa 2 - task layout:
    Tranzitie pentru schimbarea dimensiunii textului intre breakpoint-uri */
 html {
     transition: font-size 0.3s ease;
-}
-
-/* Etapa 2 - task layout:
-   Prevenirea scrollului orizontal */
-body {
-    overflow-x: hidden;
 }
 
 /* Etapa 2 - task design rudimentar:
@@ -43,25 +43,29 @@ small {
 
 /* Etapa 2 - task schema cromatica:
    Stilizarea generala a zonelor header si footer */
+/* Etapa 2 - task design rudimentar, punctul a:
+   padding lateral si vertical controlat prin variabile */
 header,
 footer {
     background-color: var(--culoare-zona);
     color: var(--culoare-text-deschis);
     border-top: 4px solid var(--culoare-bordura);
     border-bottom: 4px solid var(--culoare-bordura);
-    padding: 1rem;
+    padding: var(--spatiere-pagina-verticala) var(--spatiere-pagina-orizontala);
 }
 
 /* Etapa 2 - task schema cromatica:
    Fundalul general al continutului principal */
+/* Etapa 2 - task design rudimentar, punctul a:
+   padding lateral si vertical controlat prin variabile */
 main {
     background-color: var(--culoare-fundal);
     color: var(--culoare-text-deschis);
-    padding: 1rem;
+    padding: var(--spatiere-pagina-verticala) var(--spatiere-pagina-orizontala);
 }
 
-/* Etapa 2 - task design rudimentar:
-   Separarea vizuala a zonelor prin fundal, border si colturi rotunjite */
+/* Etapa 2 - task design rudimentar, punctul c si d:
+   Separarea vizuala a zonelor si padding interior egal pentru zonele de text */
 section,
 article,
 aside,
@@ -120,7 +124,7 @@ mark {
 }
 
 /* Etapa 2 - baza pentru tabel;
-   Urmeaza sa fie completata la taskul individual de stilizare tabel */
+   urmeaza sa fie completata la taskul individual de stilizare tabel */
 table {
     border-collapse: collapse;
     width: 100%;
@@ -145,13 +149,14 @@ caption {
     margin-bottom: 0.5rem;
 }
 
-/* Etapa 2 - task design rudimentar:
+/* Etapa 2 - task design rudimentar, punctul e:
    Media cu latime relativa si aspect placut */
 img,
 iframe {
     max-width: 100%;
     border: 3px solid var(--culoare-text-deschis);
     border-radius: 12px;
+    display: block;
 }
 
 /* Etapa 1 - task 16:
@@ -169,11 +174,11 @@ meter {
 
 /* Etapa 2 - task layout:
    Grid-ul principal pentru ecran mare */
+/* Etapa 2 - task design rudimentar, punctul b:
+   Spatierea dintre zone este realizata prin gap */
 .grid-pagina {
     display: grid;
     gap: 1rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
     grid-template-columns: 1fr 2fr 1fr;
     grid-template-areas:
         "zona1 zona1 zona1"
@@ -214,10 +219,6 @@ meter {
             "zona8 zona8";
     }
 
-    .zona {
-        min-width: 0;
-    }
-
     table,
     img,
     iframe {
@@ -243,10 +244,6 @@ meter {
             "zona6"
             "zona7"
             "zona8";
-    }
-
-    .zona {
-        min-width: 0;
     }
 
     table,
