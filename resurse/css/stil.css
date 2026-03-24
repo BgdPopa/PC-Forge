@@ -9,9 +9,16 @@ body {
     --culoare-bordura: #E02F35;
     --culoare-text-deschis: #FFFFFF;
     --culoare-text-inchis: #575757;
+    --culoare-umbra: rgba(87, 87, 87, 0.35);
 
     --spatiere-pagina-orizontala: 4vw;
     --spatiere-pagina-verticala: 1rem;
+
+    --padding-zona-text: 1rem;
+
+    --gap-grid-mare: 1.2rem;
+    --gap-grid-mediu: 0.9rem;
+    --gap-grid-mic: 0.6rem;
 
     background-color: var(--culoare-fundal);
     color: var(--culoare-text-deschis);
@@ -33,7 +40,14 @@ h2 { font-size: 1.6rem; }
 h3 { font-size: 1.3rem; }
 h4 { font-size: 1.1rem; }
 
-p, li, td, th, summary, figcaption, caption, a {
+p,
+li,
+td,
+th,
+summary,
+figcaption,
+caption,
+a {
     font-size: 1rem;
 }
 
@@ -45,12 +59,16 @@ small {
    Stilizarea generala a zonelor header si footer */
 /* Etapa 2 - task design rudimentar, punctul a:
    padding lateral si vertical controlat prin variabile */
+/* Etapa 2 - task design rudimentar, punctul c:
+   separare vizuala prin background, border, colturi rotunjite si box-shadow */
 header,
 footer {
     background-color: var(--culoare-zona);
     color: var(--culoare-text-deschis);
     border-top: 4px solid var(--culoare-bordura);
     border-bottom: 4px solid var(--culoare-bordura);
+    border-radius: 10px;
+    box-shadow: 0 8px 18px var(--culoare-umbra);
     padding: var(--spatiere-pagina-verticala) var(--spatiere-pagina-orizontala);
 }
 
@@ -65,7 +83,7 @@ main {
 }
 
 /* Etapa 2 - task design rudimentar, punctul c si d:
-   Separarea vizuala a zonelor si padding interior egal pentru zonele de text */
+   separarea vizuala a zonelor si padding interior egal pentru zonele de text */
 section,
 article,
 aside,
@@ -77,8 +95,17 @@ nav {
     color: var(--culoare-text-deschis);
     border: 2px solid var(--culoare-text-deschis);
     border-radius: 12px;
+    box-shadow: 0 6px 14px var(--culoare-umbra);
     margin-bottom: 1rem;
-    padding: 0.85rem;
+    padding: var(--padding-zona-text);
+}
+
+/* Etapa 2 - task design rudimentar, punctul c:
+   unele zone ale gridului primesc o nuanta diferita pentru delimitare vizuala */
+.zona2,
+.zona6,
+.zona8 {
+    background-color: var(--culoare-zona-secundara);
 }
 
 /* Etapa 2 - task schema cromatica:
@@ -150,13 +177,22 @@ caption {
 }
 
 /* Etapa 2 - task design rudimentar, punctul e:
-   Media cu latime relativa si aspect placut */
+   elementele media au latime setata in procente si valori min/max pentru ecrane mari */
+picture,
+figure {
+    display: block;
+}
+
 img,
 iframe {
+    display: block;
+    width: 90%;
+    min-width: 280px;
     max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
     border: 3px solid var(--culoare-text-deschis);
     border-radius: 12px;
-    display: block;
 }
 
 /* Etapa 1 - task 16:
@@ -175,10 +211,10 @@ meter {
 /* Etapa 2 - task layout:
    Grid-ul principal pentru ecran mare */
 /* Etapa 2 - task design rudimentar, punctul b:
-   Spatierea dintre zone este realizata prin gap */
+   spatierea dintre zone este realizata prin gap */
 .grid-pagina {
     display: grid;
-    gap: 1rem;
+    gap: var(--gap-grid-mare);
     grid-template-columns: 1fr 2fr 1fr;
     grid-template-areas:
         "zona1 zona1 zona1"
@@ -203,12 +239,19 @@ meter {
 
 /* Etapa 2 - task layout:
    Varianta pentru ecran mediu */
+/* Etapa 2 - task design rudimentar, punctele a, b si e:
+   spatiere laterala mai mica, gap mai mic si media adaptata pentru ecran mediu */
 @media screen and (max-width: 1100px) and (min-width: 701px) {
     html {
         font-size: 15px;
     }
 
+    body {
+        --spatiere-pagina-orizontala: 3vw;
+    }
+
     .grid-pagina {
+        gap: var(--gap-grid-mediu);
         grid-template-columns: 1fr 1fr;
         grid-template-areas:
             "zona1 zona1"
@@ -219,21 +262,29 @@ meter {
             "zona8 zona8";
     }
 
-    table,
     img,
     iframe {
+        width: 95%;
+        min-width: 220px;
         max-width: 100%;
     }
 }
 
 /* Etapa 2 - task layout:
    Varianta pentru ecran mic */
+/* Etapa 2 - task design rudimentar, punctele a, b si e:
+   spatiere minima, gap minim si media adaptata pentru telefon */
 @media screen and (max-width: 700px) {
     html {
         font-size: 14px;
     }
 
+    body {
+        --spatiere-pagina-orizontala: 2vw;
+    }
+
     .grid-pagina {
+        gap: var(--gap-grid-mic);
         grid-template-columns: 1fr;
         grid-template-areas:
             "zona1"
@@ -246,14 +297,14 @@ meter {
             "zona8";
     }
 
-    table,
     img,
     iframe {
+        width: 100%;
+        min-width: 0;
         max-width: 100%;
     }
 
     iframe {
-        width: 100%;
         height: auto;
         aspect-ratio: 16 / 9;
     }
