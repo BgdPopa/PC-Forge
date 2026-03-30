@@ -316,23 +316,29 @@
 
                 <!-- Etapa 1 - task 14:
                      Iframe YouTube si linkuri care schimba videoclipul -->
-                <section id="video">
-                    <h3>Videoclipuri recomandate</h3>
-                    <div>
-                        <a href="https://www.youtube.com/embed/BL4DCEp7blY" target="video-pc-forge">Configurare PC pas cu pas</a> |
-                        <a href="https://www.youtube.com/embed/2joA_S92p64" target="video-pc-forge">Cum alegi componente compatibile</a>
-                    </div>
+                <!-- Etapa 2 - task stilizare taburi:
+     linkuri catre iframe stilizate ca butoane, cu containere separate -->
+<section id="video">
+    <h3>Videoclipuri recomandate</h3>
 
-                    <iframe
-                        name="video-pc-forge"
-                        width="560"
-                        height="315"
-                        src="https://www.youtube.com/embed/BL4DCEp7blY"
-                        title="Videoclip YouTube despre configurarea unui PC"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen>
-                    </iframe>
-                </section>
+    <div class="container-video-taburi">
+        <div class="container-iframe">
+            <iframe
+                name="video-pc-forge"
+                src="https://www.youtube.com/embed/BL4DCEp7blY"
+                title="Videoclip YouTube despre configurarea unui PC"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <div class="taburi-iframe">
+            <a href="https://www.youtube.com/embed/BL4DCEp7blY" target="video-pc-forge">Build PC complet</a>
+            <a href="https://www.youtube.com/embed/AiVWQthb-20" target="video-pc-forge">Compatibilitate piese</a>
+            <a href="https://www.youtube.com/embed/s1fxZ-VWs2U" target="video-pc-forge">Ghid complet 2024</a>
+        </div>
+    </div>
+</section>
 
                 <!-- Etapa 1 - task 16:
                      Details si summary pentru intrebari frecvente -->

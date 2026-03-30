@@ -195,6 +195,80 @@ iframe {
     border-radius: 12px;
 }
 
+/* Etapa 2 - task stilizare taburi:
+   containerul principal pentru iframe si butoanele-tab */
+#video .container-video-taburi {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+/* Etapa 2 - task stilizare taburi:
+   dreptunghiul alb cu border in care este iframe-ul */
+#video .container-iframe {
+    width: 100%;
+    max-width: 760px;
+    background-color: var(--culoare-text-deschis);
+    border: 3px solid var(--culoare-text-deschis);
+    border-radius: 14px;
+    padding: 0.6rem;
+    box-shadow: 0 8px 18px var(--culoare-umbra);
+}
+
+/* Etapa 2 - task stilizare taburi:
+   iframe-ul propriu-zis */
+#video .container-iframe iframe {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 0;
+    border-radius: 10px;
+    background-color: var(--culoare-text-deschis);
+}
+
+/* Etapa 2 - task stilizare taburi:
+   container pentru taburi/butoane; se foloseste flexbox */
+#video .taburi-iframe {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    width: 100%;
+}
+
+/* Etapa 2 - task stilizare taburi:
+   linkurile catre iframe sunt stilizate ca butoane */
+#video .taburi-iframe a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 11rem;
+    height: 3rem;
+    padding: 0 1rem;
+    border-radius: 999px;
+    border: 2px solid var(--culoare-text-deschis);
+    background-color: var(--culoare-zona-secundara);
+    color: var(--culoare-text-deschis);
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 6px 12px var(--culoare-umbra);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+/* Etapa 2 - task stilizare taburi:
+   efect la hover pe butoane */
+#video .taburi-iframe a:hover {
+    background-color: var(--culoare-highlight);
+    color: var(--culoare-text-deschis);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 16px var(--culoare-umbra);
+}
+
 /* Etapa 1 - task 16:
    Evidentierea summary din details */
 details summary {
@@ -268,6 +342,14 @@ meter {
         min-width: 220px;
         max-width: 100%;
     }
+
+    #video .container-iframe {
+        max-width: 680px;
+    }
+
+    #video .taburi-iframe a {
+        min-width: 10rem;
+    }
 }
 
 /* Etapa 2 - task layout:
@@ -307,5 +389,15 @@ meter {
     iframe {
         height: auto;
         aspect-ratio: 16 / 9;
+    }
+
+    #video .taburi-iframe {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #video .taburi-iframe a {
+        width: 100%;
+        min-width: 0;
     }
 }
