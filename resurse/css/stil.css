@@ -11,6 +11,9 @@ body {
     --culoare-text-inchis: #575757;
     --culoare-umbra: rgba(87, 87, 87, 0.35);
 
+    --culoare-tabel-col1: #FFFFFF;
+    --culoare-tabel-col2: #575757;
+
     --spatiere-pagina-orizontala: 4vw;
     --spatiere-pagina-verticala: 1rem;
 
@@ -31,6 +34,7 @@ body {
    Tranzitie pentru schimbarea dimensiunii textului intre breakpoint-uri */
 html {
     transition: font-size 0.3s ease;
+    scroll-behavior: smooth;
 }
 
 /* Etapa 2 - task design rudimentar:
@@ -124,6 +128,11 @@ th {
     color: var(--culoare-text-deschis);
 }
 
+#tabel-oferte h2 {
+    margin-top: 0;
+    margin-bottom: 0.8rem;
+}
+
 /* Etapa 2 - task schema cromatica:
    Linkuri si hover */
 a {
@@ -150,30 +159,138 @@ mark {
     color: var(--culoare-highlight);
 }
 
-/* Etapa 2 - baza pentru tabel;
-   urmeaza sa fie completata la taskul individual de stilizare tabel */
-table {
-    border-collapse: collapse;
+/* Etapa 2 - task stilizare tabel:
+   container separat pentru scroll orizontal doar pe tabel */
+.container-tabel {
     width: 100%;
-    background-color: var(--culoare-zona-secundara);
-    color: var(--culoare-text-deschis);
+    max-width: 100%;
+    display: block;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 0.4rem;
+    border-radius: 10px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
 }
 
+.container-tabel::-webkit-scrollbar {
+    height: 10px;
+}
+
+.container-tabel::-webkit-scrollbar-thumb {
+    background-color: var(--culoare-text-deschis);
+    border-radius: 999px;
+}
+
+.container-tabel::-webkit-scrollbar-track {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 999px;
+}
+
+/* Etapa 2 - task stilizare tabel:
+   tabelul propriu-zis */
+table {
+    border-collapse: collapse;
+    width: max-content;
+    min-width: 600px;
+    background-color: var(--culoare-zona-secundara);
+    color: var(--culoare-text-deschis);
+    table-layout: auto;
+}
+
+/* Etapa 2 - task stilizare tabel:
+   caption pozitionat sub tabel */
+caption {
+    caption-side: bottom;
+    color: var(--culoare-text-deschis);
+    font-weight: bold;
+    margin-top: 0.7rem;
+    text-align: left;
+    padding-left: 0.25rem;
+    white-space: normal;
+}
+
+/* Etapa 2 - task stilizare tabel:
+   antetul tabelului */
 th {
     background-color: var(--culoare-highlight);
     color: var(--culoare-text-deschis);
 }
 
+/* Etapa 2 - task stilizare tabel:
+   stilizare de baza pentru celule */
 td,
 th {
-    border: 1px solid var(--culoare-text-deschis);
-    padding: 0.5rem;
+    padding: 0.45rem;
+    border-top: 1px solid var(--culoare-text-deschis);
+    border-bottom: 1px solid var(--culoare-text-deschis);
+    white-space: nowrap;
 }
 
-caption {
-    color: var(--culoare-text-deschis);
-    font-weight: bold;
-    margin-bottom: 0.5rem;
+#tabel-oferte td,
+#tabel-oferte th {
+    font-size: 0.92rem;
+}
+
+/* Etapa 2 - task stilizare tabel:
+   borduri laterale alternate intre coloane */
+td:nth-child(odd),
+th:nth-child(odd) {
+    border-left: 2px solid var(--culoare-tabel-col2);
+    border-right: 2px solid var(--culoare-tabel-col1);
+}
+
+td:nth-child(even),
+th:nth-child(even) {
+    border-left: 2px solid var(--culoare-tabel-col1);
+    border-right: 2px solid var(--culoare-tabel-col2);
+}
+
+/* Etapa 2 - task stilizare tabel:
+   separatoare mai groase intre thead/tbody si tbody/tfoot */
+thead th {
+    border-bottom: 4px solid var(--culoare-text-deschis);
+}
+
+tfoot td {
+    border-top: 4px solid var(--culoare-text-deschis);
+    font-style: italic;
+}
+
+/* Etapa 2 - task stilizare tabel:
+   alternanta pe randuri cu pseudoclase */
+tbody tr:nth-child(odd) td {
+    background-color: var(--culoare-zona-secundara);
+}
+
+tbody tr:nth-child(even) td {
+    background-color: var(--culoare-highlight);
+}
+
+/* Etapa 2 - task stilizare tabel:
+   tranzitie si efect de hover pe rand */
+tbody td {
+    transition: background-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+tbody tr:hover td {
+    box-shadow:
+        inset 0 8px 10px rgba(255, 255, 255, 0.08),
+        inset 0 -8px 10px rgba(0, 0, 0, 0.16);
+}
+
+tbody tr:hover td:first-child {
+    box-shadow:
+        inset 8px 0 10px rgba(0, 0, 0, 0.16),
+        inset 0 8px 10px rgba(255, 255, 255, 0.08),
+        inset 0 -8px 10px rgba(0, 0, 0, 0.16);
+}
+
+tbody tr:hover td:last-child {
+    box-shadow:
+        inset -8px 0 10px rgba(0, 0, 0, 0.16),
+        inset 0 8px 10px rgba(255, 255, 255, 0.08),
+        inset 0 -8px 10px rgba(0, 0, 0, 0.16);
 }
 
 /* Etapa 2 - task design rudimentar, punctul e:
@@ -269,6 +386,75 @@ iframe {
     box-shadow: 0 10px 16px var(--culoare-umbra);
 }
 
+/* Etapa 2 - task link-top:
+   romb fix in dreapta-jos */
+#link-top {
+    position: fixed;
+    right: 1.2rem;
+    bottom: 1.2rem;
+    width: 3.4rem;
+    height: 3.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--culoare-zona-secundara);
+    border: 3px solid var(--culoare-text-deschis);
+    border-radius: 0.7rem;
+    transform: rotate(45deg);
+    box-shadow: 0 8px 16px var(--culoare-umbra);
+    opacity: 0.7;
+    z-index: 2000;
+    transition: opacity 0.35s ease, background-color 0.35s ease, border-color 0.35s ease;
+}
+
+#link-top:hover {
+    opacity: 1;
+    background-color: var(--culoare-text-deschis);
+    border-color: var(--culoare-highlight);
+    text-decoration: none;
+}
+
+/* Etapa 2 - task link-top:
+   tooltip la hover */
+#link-top::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    right: calc(100% + 0.7rem);
+    top: 50%;
+    transform: translateY(-50%) rotate(-45deg);
+    background-color: var(--culoare-text-deschis);
+    color: var(--culoare-highlight);
+    border: 2px solid var(--culoare-highlight);
+    border-radius: 0.7rem;
+    padding: 0.45rem 0.75rem;
+    font-size: 0.9rem;
+    font-weight: bold;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+}
+
+#link-top:hover::after {
+    opacity: 1;
+}
+
+/* Etapa 2 - task link-top:
+   triunghiul interior */
+#link-top .sageata-link-top {
+    width: 0;
+    height: 0;
+    border-left: 0.65rem solid transparent;
+    border-right: 0.65rem solid transparent;
+    border-bottom: 1.1rem solid var(--culoare-text-deschis);
+    transform: rotate(-45deg);
+    transition: border-bottom-color 0.35s ease;
+}
+
+#link-top:hover .sageata-link-top {
+    border-bottom-color: var(--culoare-highlight);
+}
+
 /* Etapa 1 - task 16:
    Evidentierea summary din details */
 details summary {
@@ -356,6 +542,8 @@ meter {
    Varianta pentru ecran mic */
 /* Etapa 2 - task design rudimentar, punctele a, b si e:
    spatiere minima, gap minim si media adaptata pentru telefon */
+/* Etapa 2 - task stilizare tabel:
+   pe ecran mic doar containerul tabelului primeste scroll orizontal */
 @media screen and (max-width: 700px) {
     html {
         font-size: 14px;
@@ -379,6 +567,25 @@ meter {
             "zona8";
     }
 
+    .container-tabel {
+        overflow-x: scroll;
+    }
+
+    table {
+        min-width: 560px;
+    }
+
+    #tabel-oferte td,
+    #tabel-oferte th {
+        font-size: 0.82rem;
+        padding: 0.35rem;
+    }
+
+    #tabel-oferte caption {
+        font-size: 0.85rem;
+        text-align: left;
+    }
+
     img,
     iframe {
         width: 100%;
@@ -399,5 +606,26 @@ meter {
     #video .taburi-iframe a {
         width: 100%;
         min-width: 0;
+    }
+
+    #link-top {
+        width: 3rem;
+        height: 3rem;
+        right: 0.8rem;
+        bottom: 0.8rem;
+    }
+
+    #link-top::after {
+        font-size: 0.8rem;
+    }
+
+    #link-top .sageata-link-top {
+        border-left: 0.55rem solid transparent;
+        border-right: 0.55rem solid transparent;
+        border-bottom: 0.95rem solid var(--culoare-text-deschis);
+    }
+
+    #link-top:hover .sageata-link-top {
+        border-bottom-color: var(--culoare-highlight);
     }
 }

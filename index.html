@@ -16,7 +16,7 @@
     <link rel="icon" type="image/png" href="resurse/favicons/favicon-32x32.png">
     <link rel="apple-touch-icon" href="resurse/favicons/apple-touch-icon.png">
 
-    <!-- Etapa 2 - task schema cromatica + inceput stilizare generala -->
+    <!-- Etapa 2 - schema cromatica si stilizare generala -->
     <link rel="stylesheet" href="resurse/css/stil.css">
 </head>
 <body id="top">
@@ -85,61 +85,65 @@
                  Tabel cu thead, tbody, tfoot, caption, rowspan si colspan
                  Etapa 2 - task layout:
                  Zona 2 - tabelul este plasat central in grid -->
+            <!-- Etapa 2 - task stilizare tabel:
+                 tabelul este pus intr-un container separat pentru overflow orizontal -->
             <section class="zona zona2" id="tabel-oferte">
                 <h2>Tabel cu produse populare</h2>
 
-                <table>
-                    <caption>Exemple de produse si informatii orientative</caption>
-                    <thead>
-                        <tr>
-                            <th>Produs</th>
-                            <th>Categorie</th>
-                            <th>Pret estimativ</th>
-                            <th>Disponibilitate</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td rowspan="2">RTX 4060</td>
-                            <td>Placi video</td>
-                            <td>1700 lei</td>
-                            <td>In stoc</td>
-                        </tr>
-                        <tr>
-                            <td>Placi video</td>
-                            <td>1650 lei</td>
-                            <td>Stoc limitat</td>
-                        </tr>
-                        <tr>
-                            <td>Ryzen 5 7600</td>
-                            <td>Procesoare</td>
-                            <td>1100 lei</td>
-                            <td>In stoc</td>
-                        </tr>
-                        <tr>
-                            <td>Kingston Fury 16GB</td>
-                            <td>Memorii RAM</td>
-                            <td>320 lei</td>
-                            <td>In stoc</td>
-                        </tr>
-                        <tr>
-                            <td>SSD NVMe 1TB</td>
-                            <td>Stocare</td>
-                            <td>380 lei</td>
-                            <td>Stoc limitat</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">Pachet tastatura + mouse</td>
-                            <td>250 lei</td>
-                            <td>Disponibil</td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="4">Datele din tabel sunt orientative si au rol demonstrativ pentru proiect.</td>
-                        </tr>
-                    </tfoot>
-                </table>
+                <div class="container-tabel">
+                    <table>
+                        <caption>Date orientative</caption>
+                        <thead>
+                            <tr>
+                                <th>Produs</th>
+                                <th>Categorie</th>
+                                <th>Pret estimativ</th>
+                                <th>Disponibilitate</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td rowspan="2">RTX 4060</td>
+                                <td>Placi video</td>
+                                <td>1700 lei</td>
+                                <td>In stoc</td>
+                            </tr>
+                            <tr>
+                                <td>Placi video</td>
+                                <td>1650 lei</td>
+                                <td>Stoc limitat</td>
+                            </tr>
+                            <tr>
+                                <td>Ryzen 5 7600</td>
+                                <td>Procesoare</td>
+                                <td>1100 lei</td>
+                                <td>In stoc</td>
+                            </tr>
+                            <tr>
+                                <td>Kingston Fury 16GB</td>
+                                <td>Memorii RAM</td>
+                                <td>320 lei</td>
+                                <td>In stoc</td>
+                            </tr>
+                            <tr>
+                                <td>SSD NVMe 1TB</td>
+                                <td>Stocare</td>
+                                <td>380 lei</td>
+                                <td>Stoc limitat</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">Pachet tastatura + mouse</td>
+                                <td>250 lei</td>
+                                <td>Disponibil</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4">Datele din tabel sunt orientative si au rol demonstrativ pentru proiect.</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
             </section>
 
             <!-- Etapa 1 - task 10:
@@ -317,28 +321,28 @@
                 <!-- Etapa 1 - task 14:
                      Iframe YouTube si linkuri care schimba videoclipul -->
                 <!-- Etapa 2 - task stilizare taburi:
-     linkuri catre iframe stilizate ca butoane, cu containere separate -->
-<section id="video">
-    <h3>Videoclipuri recomandate</h3>
+                     linkurile catre iframe sunt reorganizate in taburi stilizate -->
+                <section id="video">
+                    <h3>Videoclipuri recomandate</h3>
 
-    <div class="container-video-taburi">
-        <div class="container-iframe">
-            <iframe
-                name="video-pc-forge"
-                src="https://www.youtube.com/embed/BL4DCEp7blY"
-                title="Videoclip YouTube despre configurarea unui PC"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen>
-            </iframe>
-        </div>
+                    <div class="container-video-taburi">
+                        <div class="container-iframe">
+                            <iframe
+                                name="video-pc-forge"
+                                src="https://www.youtube.com/embed/BL4DCEp7blY"
+                                title="Videoclip YouTube despre configurarea unui PC"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
 
-        <div class="taburi-iframe">
-            <a href="https://www.youtube.com/embed/BL4DCEp7blY" target="video-pc-forge">Build PC complet</a>
-            <a href="https://www.youtube.com/embed/AiVWQthb-20" target="video-pc-forge">Compatibilitate piese</a>
-            <a href="https://www.youtube.com/embed/s1fxZ-VWs2U" target="video-pc-forge">Ghid complet 2024</a>
-        </div>
-    </div>
-</section>
+                        <div class="taburi-iframe">
+                            <a href="https://www.youtube.com/embed/BL4DCEp7blY" target="video-pc-forge">Build PC complet</a>
+                            <a href="https://www.youtube.com/embed/AiVWQthb-20" target="video-pc-forge">Compatibilitate piese</a>
+                            <a href="https://www.youtube.com/embed/s1fxZ-VWs2U" target="video-pc-forge">Ghid complet 2024</a>
+                        </div>
+                    </div>
+                </section>
 
                 <!-- Etapa 1 - task 16:
                      Details si summary pentru intrebari frecvente -->
@@ -397,6 +401,12 @@
         <br>
         <small>Ultima actualizare: <time datetime="2026-03-23">23 martie 2026</time></small>
     </footer>
+
+    <!-- Etapa 2 - task link-top:
+         buton fix, fara imagini, care duce la inceputul paginii -->
+    <a href="#top" id="link-top" data-tooltip="Inapoi la inceput" aria-label="Inapoi la inceput">
+        <span class="sageata-link-top"></span>
+    </a>
 
 </body>
 </html>
