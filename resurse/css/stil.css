@@ -25,7 +25,7 @@ body {
 
     background-color: var(--culoare-fundal);
     color: var(--culoare-text-deschis);
-    font-family: Arial, sans-serif;
+    font-family: 'Rajdhani', Arial, sans-serif;
     margin: 0;
     overflow-x: hidden;
 }

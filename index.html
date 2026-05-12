@@ -16,6 +16,9 @@
     <link rel="icon" type="image/png" href="resurse/favicons/favicon-32x32.png">
     <link rel="apple-touch-icon" href="resurse/favicons/apple-touch-icon.png">
 
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
     <!-- Etapa 2 - schema cromatica si stilizare generala -->
     <link rel="stylesheet" href="resurse/css/stil.css">
 </head>
@@ -26,7 +29,7 @@
     <header>
         <!-- Etapa 1 - task 7:
              Titlu principal si subtitlu / introducere -->
-        <h1>PC Forge</h1>
+        <h1><i class="fas fa-microchip"></i> PC Forge</h1>
 
         <hgroup>
             <h2>Componente si periferice pentru calculator</h2>
@@ -70,14 +73,15 @@
                 <h2>Bine ai venit la PC Forge</h2>
                 <p>
                     PC Forge este un site dedicat pasionatilor de <b>componente PC</b>, <b>periferice</b> si accesorii pentru calculator.
-                    Aici poti descoperi produse precum placi video, procesoare, memorii RAM, SSD-uri si dispozitive utile pentru un sistem modern.
+                    Aici poti descoperi produse precum placi video (<abbr title="Graphics Processing Unit">GPU</abbr>), procesoare (<abbr title="Central Processing Unit">CPU</abbr>), memorii RAM, SSD-uri si dispozitive utile pentru un sistem modern.
                 </p>
                 <p>
                     Platforma este gandita pentru utilizatorii care vor sa isi construiasca un calculator nou sau sa faca upgrade la unul existent.
-                    Pentru un rezultat bun, este important sa intelegi termeni precum <i>latency</i> sau <i>bottleneck</i>, mai ales cand alegi intre mai multe configuratii.
+                    Pentru un rezultat bun, este important sa intelegi termeni precum <i>latency</i> sau <i>bottleneck</i>, mai ales cand alegi intre mai multe <em>configuratii</em>.
                 </p>
                 <p>
                     <strong>Compatibilitatea componentelor este foarte importanta</strong>, iar alegerea corecta inseamna echilibru intre performanta, buget si utilizare.
+                    <q>Verifica socketul si dimensiunile inainte de comanda</q> este un sfat frecvent in comunitatile de hardware.
                 </p>
             </section>
 
@@ -199,7 +203,7 @@
                  Etapa 2 - task layout:
                  Zona 6 - statistici -->
             <section class="zona zona6" id="evaluari">
-                <h2>Statistici rapide</h2>
+                <h2><i class="fas fa-gear fa-spin"></i> Statistici rapide</h2>
                 <p>
                     Grad satisfactie clienti:
                     <meter min="0" max="100" value="92">92%</meter>
@@ -326,6 +330,12 @@
                     <h3>Videoclipuri recomandate</h3>
 
                     <div class="container-video-taburi">
+                        <div class="taburi-iframe">
+                            <a href="https://www.youtube.com/embed/BL4DCEp7blY" target="video-pc-forge">Build PC complet</a>
+                            <a href="https://www.youtube.com/embed/AiVWQthb-20" target="video-pc-forge">Compatibilitate piese</a>
+                            <a href="https://www.youtube.com/embed/s1fxZ-VWs2U" target="video-pc-forge">Ghid complet 2024</a>
+                        </div>
+
                         <div class="container-iframe">
                             <iframe
                                 name="video-pc-forge"
@@ -334,12 +344,6 @@
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                 allowfullscreen>
                             </iframe>
-                        </div>
-
-                        <div class="taburi-iframe">
-                            <a href="https://www.youtube.com/embed/BL4DCEp7blY" target="video-pc-forge">Build PC complet</a>
-                            <a href="https://www.youtube.com/embed/AiVWQthb-20" target="video-pc-forge">Compatibilitate piese</a>
-                            <a href="https://www.youtube.com/embed/s1fxZ-VWs2U" target="video-pc-forge">Ghid complet 2024</a>
                         </div>
                     </div>
                 </section>
