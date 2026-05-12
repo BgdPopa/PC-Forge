@@ -1,0 +1,302 @@
+@import "meniu-animatii";
+
+// Variabile SASS (durate, dimensiuni, raze)
+$duratie-bara-gradient: 0.38s;
+$duratie-submeniu-scale: 0.32s;
+$duratie-submeniu-clip: 0.4s;
+$raza-border-meniu: 10px;
+$inaltime-hamburger-container: 2.5rem;
+$latime-bar-hamburger: 1.75rem;
+$inaltime-bar-hamburger: 3px;
+$gap-bar-hamburger: 5px;
+$latime-min-submeniu: 12rem;
+
+// Ascunde banner / watermark pe ecran (printare.css are media=print)
+@media screen {
+    .banner-print,
+    .watermark-print {
+        display: none !important;
+    }
+}
+
+%meniu-link-reset {
+    font: inherit;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    box-sizing: border-box;
+}
+
+%meniu-sub-link-baza {
+    @extend %meniu-link-reset;
+    display: block;
+    padding: 0.55rem 0.85rem;
+    border-radius: $raza-border-meniu;
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.meniu-hamburger {
+    display: none;
+    position: relative;
+    width: 2.75rem;
+    height: $inaltime-hamburger-container;
+    padding: 0;
+    margin: 0 0 0.5rem 0;
+    border: 2px solid var(--culoare-text-deschis);
+    border-radius: $raza-border-meniu;
+    background-color: var(--culoare-zona-secundara);
+    cursor: pointer;
+    flex-shrink: 0;
+
+    .meniu-hamburger__bar {
+        position: absolute;
+        left: 50%;
+        width: $latime-bar-hamburger;
+        height: $inaltime-bar-hamburger;
+        margin-left: -0.875rem;
+        background-color: var(--culoare-text-deschis);
+        border-radius: 2px;
+        transform-origin: center;
+    }
+
+    .meniu-hamburger__bar:nth-child(1) {
+        top: calc(50% - #{$gap-bar-hamburger + $inaltime-bar-hamburger});
+    }
+
+    .meniu-hamburger__bar:nth-child(2) {
+        top: 50%;
+        margin-top: -1.5px;
+    }
+
+    .meniu-hamburger__bar:nth-child(3) {
+        top: calc(50% + #{$gap-bar-hamburger});
+    }
+}
+
+.meniu-principal {
+    position: relative;
+    width: 100%;
+
+    .meniu-principal__lista {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: stretch;
+        gap: 0.25rem;
+    }
+
+    .meniu-principal__item {
+        position: relative;
+        list-style: none;
+    }
+
+    .meniu-principal__link {
+        @extend %meniu-link-reset;
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        padding: 0.55rem 0.9rem;
+        border-radius: $raza-border-meniu;
+        overflow: hidden;
+        z-index: 0;
+        transition: background-color $duratie-bara-gradient ease;
+
+        i {
+            font-size: 1.05rem;
+            pointer-events: none;
+        }
+
+        .meniu-principal__text {
+            pointer-events: none;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            height: 0;
+            z-index: -1;
+            opacity: 0;
+            background: linear-gradient(
+                180deg,
+                var(--culoare-fundal) 0%,
+                var(--culoare-text-deschis) 50%,
+                var(--culoare-fundal) 100%
+            );
+            transition:
+                height $duratie-bara-gradient ease,
+                opacity $duratie-bara-gradient ease;
+        }
+
+        &:hover {
+            background-color: var(--culoare-highlight);
+
+            &::after {
+                height: 100%;
+                opacity: 1;
+            }
+        }
+    }
+
+    .meniu-principal__sub {
+        list-style: none;
+        margin: 0;
+        padding: 0.35rem 0;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: $latime-min-submeniu;
+        background-color: var(--culoare-zona-secundara);
+        border: 2px solid var(--culoare-text-deschis);
+        border-radius: $raza-border-meniu;
+        box-shadow: 0 8px 16px var(--culoare-umbra);
+        z-index: 50;
+        transform: scale(0);
+        transform-origin: center center;
+        transition: transform $duratie-submeniu-scale ease;
+        pointer-events: none;
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            @extend %meniu-sub-link-baza;
+            color: var(--culoare-text-deschis);
+
+            &:hover {
+                background-color: var(--culoare-highlight);
+            }
+        }
+    }
+
+}
+
+// Ecran mediu: doar iconite
+@media screen and (min-width: 701px) and (max-width: 1100px) {
+    .meniu-principal {
+        .meniu-principal__link {
+            .meniu-principal__text {
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                padding: 0;
+                margin: -1px;
+                overflow: hidden;
+                clip: rect(0, 0, 0, 0);
+                white-space: nowrap;
+                border: 0;
+            }
+        }
+    }
+}
+
+// Ecran mare: gradient bara + submeniu scale (comportament implicit de mai sus)
+@media screen and (min-width: 1101px) {
+    .meniu-principal {
+        .meniu-principal__lista {
+            flex-wrap: nowrap;
+        }
+    }
+}
+
+// Desktop + mediu: submeniu la hover (scalare)
+@media screen and (min-width: 701px) {
+    .meniu-principal {
+        .meniu-principal__item--has-sub:hover > .meniu-principal__sub {
+            transform: scale(1);
+            pointer-events: auto;
+        }
+    }
+
+    header {
+        overflow: visible;
+    }
+}
+
+// Ecran mic: hamburger, fara bara ::after, submeniu clip-path + click
+@media screen and (max-width: 700px) {
+    .meniu-hamburger {
+        display: block;
+    }
+
+    .meniu-principal {
+        .meniu-principal__lista {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            gap: 0;
+            padding-top: 0.25rem;
+        }
+
+        &.meniu-principal--deschis .meniu-principal__lista {
+            display: flex;
+        }
+
+        .meniu-principal__item {
+            width: 100%;
+        }
+
+        .meniu-principal__link {
+            width: 100%;
+            border-radius: $raza-border-meniu;
+
+            &::after {
+                display: none;
+            }
+
+            &:hover {
+                background-color: var(--culoare-zona-secundara);
+            }
+
+            &:active,
+            &:focus-visible {
+                background-color: var(--culoare-highlight);
+            }
+        }
+
+        .meniu-principal__item--has-sub {
+            > .meniu-principal__link--subdeclansator:hover {
+                background-color: var(--culoare-highlight);
+            }
+        }
+
+        .meniu-principal__sub {
+            position: static;
+            display: block;
+            max-height: 0;
+            overflow: hidden;
+            padding: 0;
+            margin: 0;
+            border: none;
+            box-shadow: none;
+            transform: none;
+            transform-origin: top left;
+            clip-path: circle(0 at 0 0);
+            transition:
+                clip-path $duratie-submeniu-clip ease,
+                max-height $duratie-submeniu-clip ease;
+
+            a {
+                border-radius: $raza-border-meniu;
+            }
+        }
+
+        .meniu-principal__item--has-sub.meniu-principal__item--sub-deschis > .meniu-principal__sub {
+            max-height: 24rem;
+            padding: 0.35rem 0;
+            margin-top: 0.2rem;
+            border: 2px solid var(--culoare-text-deschis);
+            background-color: var(--culoare-zona-secundara);
+            clip-path: circle(150% at 0 0);
+            pointer-events: auto;
+        }
+    }
+}

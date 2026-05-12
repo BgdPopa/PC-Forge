@@ -21,8 +21,11 @@
 
     <!-- Etapa 2 - schema cromatica si stilizare generala -->
     <link rel="stylesheet" href="resurse/css/stil.css">
+    <link rel="stylesheet" href="resurse/css/meniu.css">
+    <link rel="stylesheet" href="resurse/css/printare.css" media="print">
 </head>
 <body id="top">
+    <div class="banner-print">Acesta este un proiect scolar!</div>
 
     <!-- Etapa 1 - task 5:
          Impartirea body-ului in header, main si footer -->
@@ -38,26 +41,42 @@
 
         <!-- Etapa 1 - task 8:
              Meniu de navigatie cu lista imbricata -->
-        <nav aria-label="Meniu principal">
-            <ul>
-                <li><a href="#top">Acasa</a></li>
-                <li>
-                    Produse
-                    <ul>
+        <nav class="meniu-principal" aria-label="Meniu principal">
+            <button type="button" class="meniu-hamburger" id="meniu-hamburger-btn" aria-expanded="false" aria-controls="meniu-principal-lista">
+                <span class="meniu-hamburger__bar"></span>
+                <span class="meniu-hamburger__bar"></span>
+                <span class="meniu-hamburger__bar"></span>
+            </button>
+            <ul class="meniu-principal__lista" id="meniu-principal-lista">
+                <li class="meniu-principal__item">
+                    <a class="meniu-principal__link" href="#top"><i class="fas fa-house" aria-hidden="true"></i><span class="meniu-principal__text">Acasa</span></a>
+                </li>
+                <li class="meniu-principal__item meniu-principal__item--has-sub">
+                    <button type="button" class="meniu-principal__link meniu-principal__link--subdeclansator" aria-expanded="false"><i class="fas fa-microchip" aria-hidden="true"></i><span class="meniu-principal__text">Produse</span></button>
+                    <ul class="meniu-principal__sub">
                         <li><a href="#componente">Componente PC</a></li>
                         <li><a href="#periferice">Periferice</a></li>
                         <li><a href="#accesorii">Accesorii</a></li>
                     </ul>
                 </li>
-                <li>
-                    Informatii
-                    <ul>
+                <li class="meniu-principal__item meniu-principal__item--has-sub">
+                    <button type="button" class="meniu-principal__link meniu-principal__link--subdeclansator" aria-expanded="false"><i class="fas fa-circle-info" aria-hidden="true"></i><span class="meniu-principal__text">Informatii</span></button>
+                    <ul class="meniu-principal__sub">
                         <li><a href="#oferte">Oferte si evenimente</a></li>
                         <li><a href="#faq">Intrebari frecvente</a></li>
                         <li><a href="#tabel-oferte">Tabel produse</a></li>
                     </ul>
                 </li>
-                <li><a href="#contact">Contact</a></li>
+                <li class="meniu-principal__item meniu-principal__item--has-sub">
+                    <button type="button" class="meniu-principal__link meniu-principal__link--subdeclansator" aria-expanded="false"><i class="fas fa-images" aria-hidden="true"></i><span class="meniu-principal__text">Galerie</span></button>
+                    <ul class="meniu-principal__sub">
+                        <li><a href="galerie-componente.html">Galerie componente</a></li>
+                        <li><a href="galerie-periferice.html">Galerie periferice</a></li>
+                    </ul>
+                </li>
+                <li class="meniu-principal__item">
+                    <a class="meniu-principal__link" href="#contact"><i class="fas fa-address-card" aria-hidden="true"></i><span class="meniu-principal__text">Contact</span></a>
+                </li>
             </ul>
         </nav>
     </header>
@@ -404,6 +423,7 @@
         <small>&copy; 2026 PC Forge. Toate drepturile rezervate.</small>
         <br>
         <small>Ultima actualizare: <time datetime="2026-03-23">23 martie 2026</time></small>
+        <div class="watermark-print">Popa Bogdan</div>
     </footer>
 
     <!-- Etapa 2 - task link-top:
@@ -411,6 +431,10 @@
     <a href="#top" id="link-top" data-tooltip="Inapoi la inceput" aria-label="Inapoi la inceput">
         <span class="sageata-link-top"></span>
     </a>
+
+    <script>
+document.addEventListener("DOMContentLoaded",function(){var n=document.querySelector(".meniu-principal");var b=document.getElementById("meniu-hamburger-btn");var mq=window.matchMedia("(max-width: 700px)");if(b&&n){b.addEventListener("click",function(e){e.stopPropagation();var o=n.classList.toggle("meniu-principal--deschis");b.classList.toggle("meniu-hamburger--activ",o);b.setAttribute("aria-expanded",o?"true":"false");});}if(n){n.querySelectorAll(".meniu-principal__item--has-sub > .meniu-principal__link--subdeclansator").forEach(function(btn){btn.addEventListener("click",function(){if(!mq.matches)return;var li=btn.closest(".meniu-principal__item--has-sub");var open=!li.classList.contains("meniu-principal__item--sub-deschis");n.querySelectorAll(".meniu-principal__item--sub-deschis").forEach(function(x){if(x!==li)x.classList.remove("meniu-principal__item--sub-deschis");});li.classList.toggle("meniu-principal__item--sub-deschis",open);btn.setAttribute("aria-expanded",open?"true":"false");});});}});
+    </script>
 
 </body>
 </html>
