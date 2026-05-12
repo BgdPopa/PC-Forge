@@ -2,13 +2,128 @@
 <html lang="ro">
 <head>
     <meta charset="UTF-8">
+    <meta name="author" content="Popa Bogdan">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Galerie orientativa cu exemple de componente PC prezentate pe PC Forge.">
     <title>PC Forge - Galerie componente</title>
+    <link rel="icon" type="image/png" href="resurse/favicons/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="resurse/favicons/apple-touch-icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="resurse/css/stil.css">
+    <link rel="stylesheet" href="resurse/css/meniu.css">
+    <link rel="stylesheet" href="resurse/css/printare.css" media="print">
 </head>
-<body>
-    <p><a href="index.html">Inapoi la PC Forge</a></p>
-    <h1>Galerie componente</h1>
-    <p>Pagina demonstrativa pentru submeniul Galerie.</p>
+<body id="top">
+    <div class="banner-print">Acesta este un proiect scolar!</div>
+
+    <header>
+        <h1><i class="fas fa-microchip"></i> PC Forge</h1>
+        <hgroup>
+            <h2>Galerie componente</h2>
+            <p>Pagina prezinta exemple de categorii de componente interne pentru calculator, aliniate cu structura site-ului principal.</p>
+        </hgroup>
+
+        <nav class="meniu-principal" aria-label="Meniu principal">
+            <button type="button" class="meniu-hamburger" id="meniu-hamburger-btn" aria-expanded="false" aria-controls="meniu-principal-lista">
+                <span class="meniu-hamburger__bar"></span>
+                <span class="meniu-hamburger__bar"></span>
+                <span class="meniu-hamburger__bar"></span>
+            </button>
+            <ul class="meniu-principal__lista" id="meniu-principal-lista">
+                <li class="meniu-principal__item">
+                    <a class="meniu-principal__link" href="index.html#top"><i class="fas fa-house" aria-hidden="true"></i><span class="meniu-principal__text">Acasa</span></a>
+                </li>
+                <li class="meniu-principal__item meniu-principal__item--has-sub">
+                    <button type="button" class="meniu-principal__link meniu-principal__link--subdeclansator" aria-expanded="false"><i class="fas fa-microchip" aria-hidden="true"></i><span class="meniu-principal__text">Produse</span></button>
+                    <ul class="meniu-principal__sub">
+                        <li><a href="index.html#componente">Componente PC</a></li>
+                        <li><a href="index.html#periferice">Periferice</a></li>
+                        <li><a href="index.html#accesorii">Accesorii</a></li>
+                    </ul>
+                </li>
+                <li class="meniu-principal__item meniu-principal__item--has-sub">
+                    <button type="button" class="meniu-principal__link meniu-principal__link--subdeclansator" aria-expanded="false"><i class="fas fa-circle-info" aria-hidden="true"></i><span class="meniu-principal__text">Informatii</span></button>
+                    <ul class="meniu-principal__sub">
+                        <li><a href="index.html#oferte">Oferte si evenimente</a></li>
+                        <li><a href="index.html#faq">Intrebari frecvente</a></li>
+                        <li><a href="index.html#tabel-oferte">Tabel produse</a></li>
+                    </ul>
+                </li>
+                <li class="meniu-principal__item meniu-principal__item--has-sub">
+                    <button type="button" class="meniu-principal__link meniu-principal__link--subdeclansator" aria-expanded="false"><i class="fas fa-images" aria-hidden="true"></i><span class="meniu-principal__text">Galerie</span></button>
+                    <ul class="meniu-principal__sub">
+                        <li><a href="galerie-componente.html">Galerie componente</a></li>
+                        <li><a href="galerie-periferice.html">Galerie periferice</a></li>
+                    </ul>
+                </li>
+                <li class="meniu-principal__item">
+                    <a class="meniu-principal__link" href="index.html#contact"><i class="fas fa-address-card" aria-hidden="true"></i><span class="meniu-principal__text">Contact</span></a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="zona zona1" id="intro-galerie-componente">
+            <h2>Despre galeria de componente</h2>
+            <p>Componentele interne definesc performanta sistemului: de la placa de baza si procesor pana la sursa si racire. Pe aceasta pagina regasesti o selectie orientativa, fara preturi fixe, pentru a intelege mai usor familiile de produse.</p>
+            <p>Compatibilitatea intre socket, dimensiunea carcasei si consumul cumulat ramane esentiala atunci cand compari mai multe variante. Recomandarea PC Forge este sa pleci mereu de la nevoile tale reale de utilizare.</p>
+            <p>Daca vrei detalii complete despre oferta din site, revino la pagina principala si exploreaza sectiunile dedicate fiecarei categorii.</p>
+        </section>
+
+        <section class="zona zona4" id="carduri-componente">
+            <h2>Exemple de linii de produse</h2>
+            <article>
+                <h3>Procesoare si placi de baza</h3>
+                <p>Alegeri mid-range pentru birou si gaming moderat, cu accent pe eficienta energetica si suport pentru memorii rapide.</p>
+            </article>
+            <article>
+                <h3>Placi video si stocare</h3>
+                <p>Combinatii echilibrate intre GPU si SSD NVMe pentru timpi de incarcare redusi in aplicatii si jocuri.</p>
+            </article>
+            <article>
+                <h3>Surse si racire</h3>
+                <p>Marja de putere a sursei si fluxul de aer din carcasa influenteaza stabilitatea pe termen lung a intregului sistem.</p>
+            </article>
+        </section>
+    </main>
+
+    <footer id="contact">
+        <h2>Contact</h2>
+        <address>
+            Telefon:
+            <a href="tel:+40700111222">+40 700 111 222</a>
+            <br>
+            Adresa:
+            <a href="https://www.google.com/maps?q=Strada+Academiei+14,+Bucuresti" target="_blank" rel="noopener noreferrer">
+                Strada Academiei 14,<br>
+                Bucuresti,<br>
+                Romania
+            </a>
+            <br>
+            E-mail:
+            <a href="mailto:contact@pcforge.ro">contact@pcforge.ro</a>
+            <br>
+            WhatsApp:
+            <a href="https://wa.me/40700111222" target="_blank" rel="noopener noreferrer">Deschide conversatia WhatsApp</a>
+        </address>
+        <p>
+            <a href="index.html#top">Inapoi la pagina principala PC Forge</a>
+        </p>
+        <small>&copy; 2026 PC Forge. Toate drepturile rezervate.</small>
+        <br>
+        <small>Ultima actualizare: <time datetime="2026-03-23">23 martie 2026</time></small>
+        <div class="watermark-print">Popa Bogdan</div>
+    </footer>
+
+    <a href="#top" id="link-top" data-tooltip="Inapoi la inceput" aria-label="Inapoi la inceput">
+        <span class="sageata-link-top"></span>
+    </a>
+
+    <script>
+document.addEventListener("DOMContentLoaded",function(){var n=document.querySelector(".meniu-principal");var b=document.getElementById("meniu-hamburger-btn");var mq=window.matchMedia("(max-width: 700px)");if(b&&n){b.addEventListener("click",function(e){e.stopPropagation();var o=n.classList.toggle("meniu-principal--deschis");b.classList.toggle("meniu-hamburger--activ",o);b.setAttribute("aria-expanded",o?"true":"false");});}if(n){n.querySelectorAll(".meniu-principal__item--has-sub > .meniu-principal__link--subdeclansator").forEach(function(btn){btn.addEventListener("click",function(){if(!mq.matches)return;var li=btn.closest(".meniu-principal__item--has-sub");var open=!li.classList.contains("meniu-principal__item--sub-deschis");n.querySelectorAll(".meniu-principal__item--sub-deschis").forEach(function(x){if(x!==li)x.classList.remove("meniu-principal__item--sub-deschis");});li.classList.toggle("meniu-principal__item--sub-deschis",open);btn.setAttribute("aria-expanded",open?"true":"false");});});}});
+    </script>
+
 </body>
 </html>
