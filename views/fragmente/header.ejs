@@ -1,0 +1,77 @@
+<%# Etapa 4 - task 5:
+    Fragment comun de header (titlu site + meniu de navigare) decupat din index.html.
+    Este refolosit pe toate paginile site-ului. %>
+
+<div class="banner-print">Acesta este un proiect scolar!</div>
+
+<!-- Etapa 1 - task 5:
+     Impartirea body-ului in header, main si footer -->
+<header>
+    <!-- Etapa 1 - task 7:
+         Titlu principal si subtitlu / introducere -->
+    <h1><i class="fas fa-microchip"></i> PC Forge</h1>
+
+    <hgroup>
+        <h2>Componente si periferice pentru calculator</h2>
+        <p>Magazin online de componente si periferice PC. Foloseste meniul pentru a naviga
+            prin categorii, oferte si informatii utile.</p>
+    </hgroup>
+
+    <!-- Etapa 1 - task 8:
+         Meniu de navigatie cu lista imbricata -->
+    <!-- Etapa 4 - task 7:
+         Linkurile interne pornesc de la "/" (cereri catre server), nu sunt relative -->
+    <nav class="meniu-principal" aria-label="Meniu principal">
+        <button type="button" class="meniu-hamburger" id="meniu-hamburger-btn" aria-expanded="false"
+            aria-controls="meniu-principal-lista">
+            <span class="meniu-hamburger__bar"></span>
+            <span class="meniu-hamburger__bar"></span>
+            <span class="meniu-hamburger__bar"></span>
+        </button>
+        <ul class="meniu-principal__lista" id="meniu-principal-lista">
+            <li class="meniu-principal__item">
+                <a class="meniu-principal__link" href="/#top"><i class="fas fa-house"
+                        aria-hidden="true"></i><span class="meniu-principal__text">Acasa</span></a>
+            </li>
+            <li class="meniu-principal__item meniu-principal__item--has-sub">
+                <button type="button" class="meniu-principal__link meniu-principal__link--subdeclansator"
+                    aria-expanded="false"><i class="fas fa-microchip" aria-hidden="true"></i><span
+                        class="meniu-principal__text">Produse</span></button>
+                <ul class="meniu-principal__sub">
+                    <li><a href="/#componente">Componente PC</a></li>
+                    <li><a href="/#periferice">Periferice</a></li>
+                    <li><a href="/#accesorii">Accesorii</a></li>
+                </ul>
+            </li>
+            <li class="meniu-principal__item meniu-principal__item--has-sub">
+                <button type="button" class="meniu-principal__link meniu-principal__link--subdeclansator"
+                    aria-expanded="false"><i class="fas fa-circle-info" aria-hidden="true"></i><span
+                        class="meniu-principal__text">Informatii</span></button>
+                <ul class="meniu-principal__sub">
+                    <li><a href="/#oferte">Oferte si evenimente</a></li>
+                    <li><a href="/#faq">Intrebari frecvente</a></li>
+                    <li><a href="/#tabel-oferte">Tabel produse</a></li>
+                </ul>
+            </li>
+            <li class="meniu-principal__item meniu-principal__item--has-sub">
+                <button type="button" class="meniu-principal__link meniu-principal__link--subdeclansator"
+                    aria-expanded="false"><i class="fas fa-images" aria-hidden="true"></i><span
+                        class="meniu-principal__text">Galerie</span></button>
+                <ul class="meniu-principal__sub">
+                    <li><a href="/galerie-componente.html">Galerie componente</a></li>
+                    <li><a href="/galerie-periferice.html">Galerie periferice</a></li>
+                </ul>
+            </li>
+            <!-- Etapa 4 - task 15:
+                 Link nou in meniu catre pagina /despre (cerere de tip GET) -->
+            <li class="meniu-principal__item">
+                <a class="meniu-principal__link" href="/despre"><i class="fas fa-circle-question"
+                        aria-hidden="true"></i><span class="meniu-principal__text">Despre</span></a>
+            </li>
+            <li class="meniu-principal__item">
+                <a class="meniu-principal__link" href="/#contact"><i class="fas fa-address-card"
+                        aria-hidden="true"></i><span class="meniu-principal__text">Contact</span></a>
+            </li>
+        </ul>
+    </nav>
+</header>

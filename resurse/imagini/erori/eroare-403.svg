@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" role="img" aria-label="Eroare 403">
+    <rect width="400" height="260" rx="16" fill="#575757"/>
+    <rect x="10" y="10" width="380" height="240" rx="12" fill="none" stroke="#E02F35" stroke-width="4"/>
+    <rect x="168" y="96" width="64" height="48" rx="6" fill="#E1012F"/>
+    <path d="M180 96 v-12 a20 20 0 0 1 40 0 v12" fill="none" stroke="#FFFFFF" stroke-width="8"/>
+    <text x="200" y="200" text-anchor="middle" font-family="Arial, sans-serif" font-size="40" font-weight="bold" fill="#FFFFFF">403</text>
+</svg>

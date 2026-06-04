@@ -1,0 +1,8 @@
+# Etapa 4 - dependinte Node
+node_modules
+
+# Etapa 4 - foldere generate automat de aplicatie (vezi vect_foldere din index.js)
+temp
+logs
+backup
+fisiere_uploadate

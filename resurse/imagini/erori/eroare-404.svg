@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" role="img" aria-label="Eroare 404">
+    <rect width="400" height="260" rx="16" fill="#575757"/>
+    <rect x="10" y="10" width="380" height="240" rx="12" fill="none" stroke="#E02F35" stroke-width="4"/>
+    <text x="200" y="130" text-anchor="middle" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="#E1012F">404</text>
+    <text x="200" y="190" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#FFFFFF">Pagina nu a fost gasita</text>
+</svg>

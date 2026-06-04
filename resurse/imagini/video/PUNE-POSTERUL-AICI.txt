@@ -1,0 +1,9 @@
+Etapa 4 - task video-vtt
+
+In acest folder trebuie adaugat manual fisierul poster pentru videoclip:
+- poster-pc-forge.jpg
+
+Calea folosita in pagina (index.ejs) este:
+/resurse/imagini/video/poster-pc-forge.jpg
+
+Dupa ce adaugi fisierul, poti sterge acest fisier placeholder.

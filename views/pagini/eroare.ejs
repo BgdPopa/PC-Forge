@@ -1,0 +1,29 @@
+<%# Etapa 4 - task 12:
+    Template pentru afisarea erorilor. Preia din locals titlul, textul si imaginea
+    erorii si foloseste aceleasi fragmente comune ca restul paginilor. %>
+<!DOCTYPE html>
+<html lang="ro">
+
+<%- include("../fragmente/head", { titlu: titlu }) %>
+
+<body id="top">
+
+    <%- include("../fragmente/header") %>
+
+    <main>
+        <div class="grid-pagina">
+            <!-- Etapa 4 - task 12:
+                 Continutul erorii: titlu, text si imagine descriptiva -->
+            <section class="zona zona1" id="zona-eroare">
+                <h2><%= titlu %></h2>
+                <p><%= text %></p>
+                <img src="<%= imagine %>" alt="<%= titlu %>" class="imagine-eroare">
+            </section>
+        </div>
+    </main>
+
+    <%- include("../fragmente/footer") %>
+
+</body>
+
+</html>

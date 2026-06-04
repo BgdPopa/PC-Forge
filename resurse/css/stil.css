@@ -629,3 +629,44 @@ meter {
         border-bottom-color: var(--culoare-highlight);
     }
 }
+
+/* Etapa 4 - task 12:
+   Imaginea din pagina de eroare, dimensionata responsive */
+.imagine-eroare {
+    display: block;
+    width: 60%;
+    min-width: 220px;
+    max-width: 400px;
+    height: auto;
+    margin: 1rem auto 0 auto;
+}
+
+/* Etapa 4 - task video-vtt */
+.video-vtt {
+    display: block;
+    width: 90%;
+    min-width: 280px;
+    max-width: 850px;
+    margin: 1rem auto;
+    border: 2px solid var(--culoare-text-deschis);
+    border-radius: 12px;
+    box-shadow: 0 6px 14px var(--culoare-umbra);
+}
+
+.video-vtt::cue {
+    background-color: #ffffff;
+    color: var(--culoare-fundal);
+    font-size: 1rem;
+}
+
+.video-vtt::cue(i) {
+    font-style: italic;
+}
+
+@media screen and (max-width: 700px) {
+    .video-vtt {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+    }
+}

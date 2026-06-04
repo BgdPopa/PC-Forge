@@ -1,0 +1,58 @@
+<%# Etapa 4 - task 15:
+    Pagina suplimentara "Despre", accesibila din meniu printr-o cerere GET catre /despre.
+    Foloseste aceleasi fragmente comune ca prima pagina. %>
+<!DOCTYPE html>
+<html lang="ro">
+
+<%- include("../fragmente/head", { titlu: "Despre PC Forge" }) %>
+
+<body id="top">
+
+    <%- include("../fragmente/header") %>
+
+    <main>
+        <div class="grid-pagina">
+
+            <section class="zona zona1" id="despre-pc-forge">
+                <h2>Despre PC Forge</h2>
+                <p>
+                    <b>PC Forge</b> este un magazin online dedicat <b>componentelor PC</b>, <b>perifericelor</b> si
+                    accesoriilor pentru calculator. Pe site gasesti placi video, procesoare, memorii RAM, SSD-uri si
+                    alte produse utile pentru a-ti construi sau imbunatati un sistem modern.
+                </p>
+            </section>
+
+            <section class="zona zona2" id="despre-tema">
+                <h2>Tema site-ului</h2>
+                <p>
+                    Tema aleasa este zona de <i>hardware</i> si configurare de calculatoare. Continutul este organizat
+                    pe categorii (componente, periferice, accesorii), oferte si informatii utile, astfel incat
+                    utilizatorul sa gaseasca rapid ceea ce cauta.
+                </p>
+            </section>
+
+            <section class="zona zona3" id="despre-scop">
+                <h2>Scopul site-ului</h2>
+                <p>
+                    Scopul site-ului este sa prezinte intr-un mod clar si organizat produse pentru PC si sa ofere
+                    informatii care ajuta la alegerea componentelor compatibile, in functie de buget si de utilizare.
+                </p>
+            </section>
+
+            <section class="zona zona4" id="despre-proiect">
+                <h2>Proiect educational</h2>
+                <p>
+                    <strong>Acesta este un proiect educational</strong>, realizat in scop didactic in cadrul unui
+                    curs de dezvoltare web. Datele despre produse, preturi si oferte sunt orientative si au rol
+                    demonstrativ.
+                </p>
+            </section>
+
+        </div>
+    </main>
+
+    <%- include("../fragmente/footer") %>
+
+</body>
+
+</html>

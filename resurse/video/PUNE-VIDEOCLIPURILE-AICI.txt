@@ -1,0 +1,12 @@
+Etapa 4 - task video-vtt
+
+In acest folder trebuie adaugate manual fisierele video reale:
+- prezentare-pc-forge.mp4
+- prezentare-pc-forge.webm
+
+Caile folosite in pagina (index.ejs) sunt:
+/resurse/video/prezentare-pc-forge.mp4
+/resurse/video/prezentare-pc-forge.webm
+
+Subtitrarile (.vtt) sunt deja create in subfolderul "subtitrari".
+Dupa ce adaugi fisierele video, poti sterge acest fisier placeholder.

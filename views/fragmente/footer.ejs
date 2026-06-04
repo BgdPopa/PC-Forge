@@ -1,0 +1,66 @@
+<%# Etapa 4 - task 5:
+    Fragment comun de footer decupat din index.html.
+    Include footerul, butonul fix "link-top" si scriptul de meniu,
+    elemente refolosite pe toate paginile site-ului. %>
+
+<!-- Etapa 1 - task 18:
+     Footer cu address, tel, maps, WhatsApp si time -->
+<footer id="contact">
+    <h2>Contact</h2>
+
+    <address>
+        Telefon:
+        <a href="tel:+40726581013">+40 726 581 013</a>
+        <br>
+        Adresa:
+        <a href="https://www.google.com/maps?q=Strada+Academiei+14,+Bucuresti" target="_blank"
+            rel="noopener noreferrer">
+            Strada Academiei 14,<br>
+            Bucuresti,<br>
+            Romania
+        </a>
+        <br>
+        WhatsApp:
+        <a href="https://wa.me/40726581013" target="_blank" rel="noopener noreferrer">Deschide conversatia
+            WhatsApp</a>
+        <br>
+        E-Mail:
+        <a href="mailto:bogdi5053@gmail.com">bogdi5053@gmail.com</a>
+    </address>
+    <!-- Etapa 1 - bonus 4:
+         Iframe cu locatia Facultatii de Matematica si Informatica pe Google Maps -->
+    <section id="harta-facultate">
+        <h2>Locatie pe harta</h2>
+        <p>Harta de mai jos indica locatia Facultatii de Matematica si Informatica.</p>
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2848.884301139313!2d26.097011776046255!3d44.43553547107584!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b1ff472f47f047%3A0x493984726f0235f9!2sFacultatea%20de%20Matematic%C4%83%20%C8%99i%20Informatic%C4%83!5e0!3m2!1sro!2sro!4v1779457514836!5m2!1sro!2sro"
+            height="250" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
+            title="Locatie Facultatea de Matematica si Informatica Bucuresti">
+        </iframe>
+    </section>
+    <!-- Etapa 1 - task 19:
+         Copyright si time cu datetime -->
+    <small>&copy; 2026 PC Forge. Toate drepturile rezervate.</small>
+    <br>
+    <small>Ultima actualizare: <time datetime="2026-03-23">23 martie 2026</time></small>
+
+
+    <div class="watermark-print">Popa Bogdan</div>
+    <!-- Etapa 1 - task 13c:
+         Link catre inceputul paginii -->
+    <p>
+        <a href="/#top">Inapoi la inceputul paginii</a>
+    </p>
+</footer>
+
+<!-- Etapa 2 - task link-top:
+     buton fix, fara imagini, care duce la inceputul paginii -->
+<a href="/#top" id="link-top" data-tooltip="Inapoi la inceput" aria-label="Inapoi la inceput">
+    <span class="sageata-link-top"></span>
+</a>
+
+<!-- Etapa 3 - task meniu:
+     scriptul care gestioneaza meniul hamburger si submeniurile pe ecran mic -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () { var n = document.querySelector(".meniu-principal"); var b = document.getElementById("meniu-hamburger-btn"); var mq = window.matchMedia("(max-width: 700px)"); if (b && n) { b.addEventListener("click", function (e) { e.stopPropagation(); var o = n.classList.toggle("meniu-principal--deschis"); b.classList.toggle("meniu-hamburger--activ", o); b.setAttribute("aria-expanded", o ? "true" : "false"); }); } if (n) { n.querySelectorAll(".meniu-principal__item--has-sub > .meniu-principal__link--subdeclansator").forEach(function (btn) { btn.addEventListener("click", function () { if (!mq.matches) return; var li = btn.closest(".meniu-principal__item--has-sub"); var open = !li.classList.contains("meniu-principal__item--sub-deschis"); n.querySelectorAll(".meniu-principal__item--sub-deschis").forEach(function (x) { if (x !== li) x.classList.remove("meniu-principal__item--sub-deschis"); }); li.classList.toggle("meniu-principal__item--sub-deschis", open); btn.setAttribute("aria-expanded", open ? "true" : "false"); }); }); } });
+</script>

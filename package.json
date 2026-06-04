@@ -1,0 +1,23 @@
+{
+  "name": "pc-forge",
+  "version": "1.0.0",
+  "description": "PC Forge - site dedicat componentelor de calculator, perifericelor si accesoriilor. Proiect educational trecut pe Node + Express + EJS in Etapa 4.",
+  "author": "Popa Bogdan",
+  "keywords": [
+    "PC Forge",
+    "componente PC",
+    "periferice",
+    "placi video",
+    "procesoare",
+    "memorii RAM",
+    "accesorii calculator"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.22.2"
+  }
+}
