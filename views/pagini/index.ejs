@@ -438,6 +438,76 @@
                     Browserul nu suporta elementul video.
                 </video>
             </section>
+
+            <!-- Etapa 5 - efect-css-stilizare-hr:
+                 hr stilizat din 2 gradienturi liniare identice, unul la 45deg si
+                 unul la -45deg, fiecare ocupand jumatate din inaltimea elementului,
+                 al doilea pozitionat in jumatatea de jos, repetate doar orizontal
+                 pentru a sugera niste sageti -->
+            <hr class="hr-sageata">
+
+            <!-- Etapa 5 - efect-css-duotone:
+                 div cu imagine de fundal peste care se aplica un efect duotone
+                 folosind pseudo-elementele ::before si ::after cu mix-blend-mode.
+                 La hover straturile colorate dispar treptat si imaginea trece in
+                 grayscale. Se foloseste o imagine deja existenta din galerie -->
+            <section id="efect-duotone" class="zona zona-efect-duotone">
+                <h2>Componente in prim-plan</h2>
+                <p>
+                    Descopera configuratiile si componentele recomandate de PC Forge pentru
+                    un sistem echilibrat. Treci cu cursorul peste imagine pentru a o vedea clar.
+                </p>
+                <div class="duotone-card" role="img" aria-label="Componente PC recomandate de PC Forge"></div>
+            </section>
+
+            <!-- Etapa 5 - efect-css-reflexie-text:
+                 heading cu reflexie generata prin pseudo-elementul ::after, care
+                 copiaza textul din atributul data-text, il intoarce vertical cu
+                 scaleY(-1) si il estompeaza cu filter: blur si mask-image.
+                 La hover reflexia se alungeste -->
+            <section id="efect-reflexie" class="zona zona-efect-reflexie">
+                <h2 class="titlu-reflexie" data-text="PC Forge">PC Forge</h2>
+                <p>Pasiune pentru componente PC, periferice si configuratii pe masura.</p>
+            </section>
+
+            <!-- Etapa 5 - efect-css-coloane:
+                 sectiune cu mai mult text pe care se aplica column-count; pe ecran
+                 mediu si mic se afiseaza o singura coloana, iar intre coloane apare
+                 o linie despartitoare prin column-rule -->
+            <section id="efect-coloane" class="zona zona-efect-coloane">
+                <h2>Ghid rapid de configurare</h2>
+                <div class="text-coloane">
+                    <p>
+                        Alegerea componentelor pentru un calculator incepe cu stabilirea bugetului si a
+                        scopului principal: gaming, lucru de birou, editare video sau un sistem mixt.
+                    </p>
+                    <p>
+                        Procesorul si placa video trebuie alese impreuna, pentru a evita un bottleneck,
+                        adica situatia in care o componenta limiteaza performanta celeilalte.
+                    </p>
+                    <p>
+                        Memoria RAM influenteaza multitasking-ul, iar un SSD rapid scurteaza considerabil
+                        timpii de incarcare ai sistemului de operare si ai aplicatiilor.
+                    </p>
+                    <p>
+                        Sursa de alimentare si carcasa sunt adesea neglijate, dar o sursa de calitate si o
+                        ventilatie buna prelungesc durata de viata a intregului sistem.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Etapa 5 - efect-css-text-animat:
+                 text care se plimba orizontal printr-o animatie recurenta (keyframes).
+                 Containerul are overflow ascuns ca sa nu apara scrollbar orizontal pe pagina -->
+            <section id="efect-text-animat" class="zona zona-efect-text-animat">
+                <h2>Anunt in miscare</h2>
+                <div class="banda-animata">
+                    <span class="text-animat">
+                        Promotii noi la componente PC si periferice &bull; Livrare gratuita peste 500 lei
+                        &bull; Configuratii la comanda &bull; Bine ai venit la PC Forge!
+                    </span>
+                </div>
+            </section>
         </div>
     </main>
 

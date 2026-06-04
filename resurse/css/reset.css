@@ -1,0 +1,239 @@
+/* Etapa 2 - bonus reset:
+   Variabile CSS pentru valorile care se repeta si depind logic unele de altele */
+:root {
+    --reset-spacing: 0;
+    --reset-font-size: 1rem;
+    --reset-line-height: 1.5;
+    --reset-font-weight-normal: normal;
+    --reset-font-weight-bold: bold;
+    --reset-font-style-normal: normal;
+    --reset-font-style-italic: italic;
+    --reset-font-size-small: 0.875em;
+    --reset-font-size-sub-sup: 0.75em;
+}
+
+/* Etapa 2 - bonus reset:
+   html si body primesc dimensiuni in unitati fixe (conform cerintei).
+   line-height fix asigura coerenta de baza inainte de cel al stilului principal */
+html {
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+body {
+    font-size: 16px;
+    line-height: 1.5;
+    margin: var(--reset-spacing);
+    padding: var(--reset-spacing);
+}
+
+/* Etapa 2 - bonus reset:
+   Resetarea box-model pentru toate elementele */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* Etapa 2 - bonus reset:
+   Resetarea marginilor si spatierii implicite ale browserului
+   pe toate elementele de bloc si inline-block relevante */
+h1, h2, h3, h4, h5, h6,
+p, ul, ol, dl, dt, dd,
+blockquote, figure, figcaption,
+table, caption, th, td,
+form, fieldset, legend,
+address, article, aside, section, nav,
+header, footer, main, details, summary {
+    margin: var(--reset-spacing);
+    padding: var(--reset-spacing);
+}
+
+/* Etapa 2 - bonus reset:
+   Dimensiunile headingurilor in unitati relative */
+h1 { font-size: 2rem; }
+h2 { font-size: 1.6rem; }
+h3 { font-size: 1.3rem; }
+h4 { font-size: 1.1rem; }
+h5 { font-size: var(--reset-font-size); }
+h6 { font-size: 0.875rem; }
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: var(--reset-font-weight-bold);
+    line-height: var(--reset-line-height);
+}
+
+/* Etapa 2 - bonus reset:
+   Dimensiune si line-height uniforma pentru elementele de text */
+p, li, td, th, dt, dd,
+summary, figcaption, caption, a {
+    font-size: var(--reset-font-size);
+    line-height: var(--reset-line-height);
+}
+
+/* Etapa 2 - bonus reset:
+   Redefinirea stilului bold - greutate explicita */
+b, strong {
+    font-weight: var(--reset-font-weight-bold);
+    font-style: var(--reset-font-style-normal);
+    font-size: inherit;
+}
+
+/* Etapa 2 - bonus reset:
+   Redefinirea stilului italic - stil explicit */
+i, em {
+    font-style: var(--reset-font-style-italic);
+    font-weight: var(--reset-font-weight-normal);
+    font-size: inherit;
+}
+
+/* Etapa 2 - bonus reset:
+   Redefinirea dfn, cite si var (text idiomatic/italic) */
+dfn, cite, var {
+    font-style: var(--reset-font-style-italic);
+    font-weight: var(--reset-font-weight-normal);
+    font-size: inherit;
+}
+
+/* Etapa 2 - bonus reset:
+   Eliminarea bulleturilor si a indicilor impliciti din liste */
+ul, ol {
+    list-style: none;
+    padding-left: var(--reset-spacing);
+}
+
+dl, dt, dd {
+    font-size: var(--reset-font-size);
+    line-height: var(--reset-line-height);
+}
+
+/* Etapa 2 - bonus reset:
+   Resetarea culorilor si decoratiei implicite ale linkurilor */
+a {
+    color: inherit;
+    text-decoration: none;
+    font-size: inherit;
+}
+
+/* Etapa 2 - bonus reset:
+   Resetarea completa a stilului implicit al tabelelor */
+table {
+    border-collapse: collapse;
+    border-spacing: var(--reset-spacing);
+}
+
+th, td {
+    padding: var(--reset-spacing);
+    text-align: left;
+    vertical-align: top;
+    font-size: var(--reset-font-size);
+}
+
+th {
+    font-weight: var(--reset-font-weight-bold);
+}
+
+caption {
+    font-size: var(--reset-font-size);
+    text-align: left;
+    caption-side: bottom;
+}
+
+/* Etapa 2 - bonus reset:
+   Resetarea elementelor media - responsive by default */
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border: 0;
+}
+
+video, iframe, embed, object {
+    max-width: 100%;
+}
+
+/* Etapa 2 - bonus reset:
+   Elementele small, sub si sup in unitati relative */
+small {
+    font-size: var(--reset-font-size-small);
+}
+
+sub, sup {
+    font-size: var(--reset-font-size-sub-sup);
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+sup { top: -0.5em; }
+sub { bottom: -0.25em; }
+
+/* Etapa 2 - bonus reset:
+   Resetarea elementelor de cod */
+code, pre, kbd, samp {
+    font-family: monospace, monospace;
+    font-size: 1em;
+}
+
+/* Etapa 2 - bonus reset:
+   Linie orizontala fara stil implicit */
+hr {
+    border: none;
+    border-top: 1px solid currentColor;
+    margin: var(--reset-spacing);
+}
+
+/* Etapa 2 - bonus reset:
+   Resetarea stilului implicit al citatelor */
+blockquote, q {
+    quotes: none;
+    font-size: var(--reset-font-size);
+}
+
+blockquote::before, blockquote::after,
+q::before, q::after {
+    content: '';
+    content: none;
+}
+
+/* Etapa 2 - bonus reset:
+   Resetarea formularelor - mostenesc fontul si dimensiunea de la parinte */
+button, input, select, textarea {
+    font-family: inherit;
+    font-size: var(--reset-font-size);
+    background: transparent;
+    border: 0;
+    padding: var(--reset-spacing);
+    margin: var(--reset-spacing);
+}
+
+/* Etapa 2 - bonus reset:
+   Resetarea elementelor cu mark si abrevieri */
+mark {
+    background: transparent;
+    color: inherit;
+}
+
+abbr[title] {
+    text-decoration: none;
+    cursor: help;
+}
+
+/* Etapa 2 - bonus reset:
+   Resetarea elementului ins si s */
+ins {
+    text-decoration: underline;
+}
+
+s {
+    text-decoration: line-through;
+}
+
+/* Etapa 2 - bonus reset:
+   Exceptie pentru elementele MathML: box-sizing-ul implicit (content-box) este restaurat
+   deoarece motorul de formatare al MathML foloseste propriul model de layout
+   si poate fi perturbat de box-sizing: border-box */
+math,
+math * {
+    box-sizing: content-box;
+}

@@ -151,17 +151,24 @@ app.get("/despre", function (req, res) {
 app.get("/*", function (req, res) {
     let pagina = req.params[0];
 
-    res.render("pagini/" + pagina, { ip: req.ip }, function (eroare, rezultatRandare) {
-        if (eroare) {
-            if (eroare.message.startsWith("Failed to lookup view")) {
-                afisareEroare(res, 404);
+    // Unele cai (de exemplu cele cu extensia .html) fac ca express sa caute un motor
+    // de randare inexistent si sa arunce eroarea sincron, inainte de callback. Folosim
+    // try/catch ca serverul sa nu crashe, ci sa afiseze pagina de eroare 404.
+    try {
+        res.render("pagini/" + pagina, { ip: req.ip }, function (eroare, rezultatRandare) {
+            if (eroare) {
+                if (eroare.message.startsWith("Failed to lookup view")) {
+                    afisareEroare(res, 404);
+                } else {
+                    afisareEroare(res);
+                }
             } else {
-                afisareEroare(res);
+                res.send(rezultatRandare);
             }
-        } else {
-            res.send(rezultatRandare);
-        }
-    });
+        });
+    } catch (eroare) {
+        afisareEroare(res, 404);
+    }
 });
 
 // Etapa 4 - task 2:

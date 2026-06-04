@@ -1,0 +1,50 @@
+<%# Etapa 4 - task 5:
+    Pagina de galerie periferice, fosta galerie-periferice.html, transformata in
+    template EJS. Foloseste fragmentele comune head, header si footer prin include(). %>
+<!DOCTYPE html>
+<html lang="ro">
+
+<%- include("../fragmente/head", { titlu: "PC Forge - Galerie periferice" }) %>
+
+<body id="top">
+
+    <%- include("../fragmente/header") %>
+
+    <main>
+        <!-- Galerie periferice - intro -->
+        <section class="zona zona1" id="intro-galerie-periferice">
+            <h2>Despre galeria de periferice</h2>
+            <p>Perifericele influenteaza confortul zilnic: tastaturi ergonomice, mouse-uri precise, monitoare cu culori
+                calibrate si casti pentru conferinte sau gaming.</p>
+            <p>Pe aceasta pagina vezi grupari generale, utile pentru orientare inainte de a consulta lista completa din
+                sectiunea dedicata de pe pagina principala.</p>
+            <p>Conectivitatea (USB, Bluetooth, wireless dedicat) si compatibilitatea cu sistemul de operare sunt criterii
+                pe care le mentionam explicit in descrierile din magazin.</p>
+        </section>
+
+        <!-- Galerie periferice - exemple de familii de periferice -->
+        <section class="zona zona4" id="carduri-periferice">
+            <h2>Exemple de familii de periferice</h2>
+            <article>
+                <h3>Intrare: tastaturi si mouse</h3>
+                <p>De la modele silentioase pentru birou pana la variante mecanice pentru sesiuni indelungate de lucru
+                    sau joc.</p>
+            </article>
+            <article>
+                <h3>Iesire vizuala: monitoare</h3>
+                <p>Rezolutie, rata de refresh si tehnologie panel influenteaza citibilitatea textului si fluiditatea
+                    miscarii in continut dinamic.</p>
+            </article>
+            <article>
+                <h3>Audio si colaborare</h3>
+                <p>Casti cu microfon clar si webcam-uri stabile completeaza setup-ul pentru invatamant la distanta sau
+                    streaming ocazional.</p>
+            </article>
+        </section>
+    </main>
+
+    <%- include("../fragmente/footer") %>
+
+</body>
+
+</html>

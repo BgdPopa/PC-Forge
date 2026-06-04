@@ -811,3 +811,272 @@ footer a:not(#link-top):active {
     border: 2px solid var(--culoare-link-activ);
     border-radius: 0.35rem;
 }
+
+/* Etapa 2 - bonus stilizare MathML:
+   Centram blocul si adaugam spatiere, fara a rescrie display-ul sau font-size-ul
+   deoarece rescrierea acestora perturba contextul de formatare intern al MathML */
+#formula-mathml math {
+    text-align: center;
+    margin: 1rem auto;
+    overflow-x: auto;
+}
+
+/* Etapa 2 - bonus stilizare MathML:
+   Cuvantul "Eficienta" - alb si ingrosat pentru a fi lizibil pe fondul rosu */
+#formula-mathml math > mtext {
+    font-weight: bold;
+    color: var(--culoare-text-deschis);
+}
+
+/* Etapa 2 - bonus stilizare MathML:
+   Operatorii (=, x) - albi, ingrosati si usor mai mari decat restul textului */
+#formula-mathml mo {
+    font-weight: bold;
+    font-size: 1.15em;
+    color: var(--culoare-text-deschis);
+}
+
+/* Etapa 2 - bonus stilizare MathML:
+   Numaratorul fractiei (Scor benchmark) - alb si italic,
+   pentru a sublinia ca reprezinta o valoare variabila */
+#formula-mathml mfrac > mrow:first-child mtext {
+    font-style: italic;
+    color: var(--culoare-text-deschis);
+}
+
+/* Etapa 2 - bonus stilizare MathML:
+   Numitorul fractiei (Pret RON) - alb cu opacitate redusa
+   pentru contrast vizual fata de numarator care este italic */
+#formula-mathml mfrac > mrow:last-child mtext {
+    font-style: normal;
+    color: var(--culoare-text-deschis);
+    opacity: 0.65;
+}
+
+/* Etapa 2 - bonus stilizare MathML:
+   Numarul 100 - alb, ingrosat si usor mai mare,
+   evidentiind ca e o constanta de scalare a formulei */
+#formula-mathml mn {
+    font-weight: bold;
+    font-size: 1.1em;
+    color: var(--culoare-text-deschis);
+}
+
+/* Etapa 5 - efecte css:
+   sectiunile de efecte ocupa toata latimea gridului (full-width),
+   ca sa nu afecteze asezarea celor 8 zone deja definite */
+.hr-sageata,
+#efect-duotone,
+#efect-reflexie,
+#efect-coloane,
+#efect-text-animat {
+    grid-column: 1 / -1;
+}
+
+/* Etapa 5 - efect-css-stilizare-hr:
+   doua gradienturi liniare identice, unul la 45deg si unul la -45deg,
+   fiecare ocupand jumatate din inaltime (background-size ... 50%),
+   al doilea pozitionat in jumatatea de jos, repetate doar pe orizontala */
+.hr-sageata {
+    border: none;
+    height: 1.4rem;
+    margin: 2rem auto;
+    width: 90%;
+    max-width: 900px;
+
+    background-image:
+        linear-gradient(45deg,
+            transparent 0,
+            transparent 35%,
+            var(--culoare-text-deschis) 35%,
+            var(--culoare-text-deschis) 50%,
+            transparent 50%,
+            transparent 100%),
+        linear-gradient(-45deg,
+            transparent 0,
+            transparent 35%,
+            var(--culoare-text-deschis) 35%,
+            var(--culoare-text-deschis) 50%,
+            transparent 50%,
+            transparent 100%);
+
+    background-size: 2rem 50%;
+    background-position: 0 0, 0 50%;
+    background-repeat: repeat-x;
+}
+
+/* Etapa 5 - efect-css-duotone:
+   fundalul zonei primeste nuanta secundara pentru contrast */
+.zona-efect-duotone {
+    background-color: var(--culoare-zona-secundara);
+}
+
+/* Etapa 5 - efect-css-duotone:
+   div cu imagine de fundal (imagine existenta din galerie) si tranzitie
+   pe filter pentru trecerea graduala in grayscale la hover */
+.duotone-card {
+    position: relative;
+    width: 90%;
+    max-width: 650px;
+    min-height: 320px;
+    margin: 1.5rem auto;
+    border: 2px solid var(--culoare-text-deschis);
+    border-radius: 14px;
+    overflow: hidden;
+    background-image: url("/resurse/imagini/galerie/componente-pc-1.jpg");
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(0);
+    transition: filter 0.8s ease;
+}
+
+/* Etapa 5 - efect-css-duotone:
+   pseudo-elementele sunt doua straturi colorate suprapuse peste imagine */
+.duotone-card::before,
+.duotone-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    transition: opacity 0.8s ease;
+}
+
+/* Etapa 5 - efect-css-duotone:
+   primul strat (culoarea c1) combinat cu imaginea prin multiply */
+.duotone-card::before {
+    background-color: var(--culoare-zona);
+    mix-blend-mode: multiply;
+    opacity: 0.85;
+}
+
+/* Etapa 5 - efect-css-duotone:
+   al doilea strat (culoarea c2) combinat cu imaginea prin screen */
+.duotone-card::after {
+    background-color: var(--culoare-text-deschis);
+    mix-blend-mode: screen;
+    opacity: 0.35;
+}
+
+/* Etapa 5 - efect-css-duotone:
+   la hover imaginea trece in grayscale si straturile colorate dispar treptat */
+.duotone-card:hover {
+    filter: grayscale(1);
+}
+
+.duotone-card:hover::before,
+.duotone-card:hover::after {
+    opacity: 0;
+}
+
+/* Etapa 5 - efect-css-reflexie-text:
+   zona centrata, cu overflow ascuns ca reflexia alungita sa nu iasa din zona */
+.zona-efect-reflexie {
+    text-align: center;
+    overflow: hidden;
+}
+
+/* Etapa 5 - efect-css-reflexie-text:
+   titlul propriu-zis caruia i se ataseaza reflexia prin ::after */
+.titlu-reflexie {
+    position: relative;
+    display: inline-block;
+    margin: 2rem auto 4rem auto;
+    font-size: clamp(2.2rem, 6vw, 5rem);
+    line-height: 1;
+    color: var(--culoare-text-deschis);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+/* Etapa 5 - efect-css-reflexie-text:
+   reflexia copiaza textul din data-text, il intoarce vertical cu scaleY(-1)
+   si il estompeaza cu blur si mask-image; sta sub titlu prin top: 100% */
+.titlu-reflexie::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    color: var(--culoare-text-deschis);
+    transform: scaleY(-1);
+    transform-origin: top;
+    opacity: 0.45;
+    filter: blur(2px);
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);
+    transition:
+        transform 0.6s ease,
+        opacity 0.6s ease,
+        filter 0.6s ease;
+}
+
+/* Etapa 5 - efect-css-reflexie-text:
+   la hover reflexia se alungeste prin scaleY(-1.8) */
+.titlu-reflexie:hover::after {
+    transform: scaleY(-1.8);
+    opacity: 0.7;
+    filter: blur(3px);
+}
+
+/* Etapa 5 - efect-css-coloane:
+   textul dintr-o sectiune cu mai mult continut este impartit pe doua coloane,
+   cu o linie despartitoare intre ele prin column-rule */
+.text-coloane {
+    column-count: 2;
+    column-gap: 2rem;
+    column-rule: 2px solid var(--culoare-text-deschis);
+}
+
+/* Etapa 5 - efect-css-coloane:
+   pe ecran mediu si mic textul se afiseaza pe o singura coloana */
+@media screen and (max-width: 1100px) {
+    .text-coloane {
+        column-count: 1;
+    }
+}
+
+/* Etapa 5 - efect-css-selectie:
+   se schimba aspectul textului selectat (background si culoare), folosind
+   variabilele din schema cromatica. Fundal alb cu text inchis pentru contrast
+   bun fata de fundalul rosu al zonelor */
+::selection {
+    background-color: var(--culoare-text-deschis);
+    color: var(--culoare-text-inchis);
+}
+
+::-moz-selection {
+    background-color: var(--culoare-text-deschis);
+    color: var(--culoare-text-inchis);
+}
+
+/* Etapa 5 - efect-css-text-animat:
+   containerul ascunde tot ce iese in afara, ca sa nu apara scrollbar orizontal */
+.banda-animata {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    border: 2px solid var(--culoare-text-deschis);
+    border-radius: 10px;
+    background-color: var(--culoare-zona-secundara);
+    padding: 0.6rem 0;
+}
+
+/* Etapa 5 - efect-css-text-animat:
+   textul porneste din dreapta (padding-left: 100%) si se deplaseaza spre stanga;
+   animatia este recurenta, deci mesajul reapare dupa ce se termina */
+.text-animat {
+    display: inline-block;
+    padding-left: 100%;
+    font-weight: bold;
+    color: var(--culoare-text-deschis);
+    animation: deplasare-text 16s linear infinite;
+}
+
+@keyframes deplasare-text {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}

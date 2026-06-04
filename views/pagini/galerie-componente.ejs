@@ -1,0 +1,52 @@
+<%# Etapa 4 - task 5:
+    Pagina de galerie componente, fosta galerie-componente.html, transformata in
+    template EJS. Foloseste fragmentele comune head, header si footer prin include(). %>
+<!DOCTYPE html>
+<html lang="ro">
+
+<%- include("../fragmente/head", { titlu: "PC Forge - Galerie componente" }) %>
+
+<body id="top">
+
+    <%- include("../fragmente/header") %>
+
+    <main>
+        <!-- Galerie componente - intro -->
+        <section class="zona zona1" id="intro-galerie-componente">
+            <h2>Despre galeria de componente</h2>
+            <p>Componentele interne definesc performanta sistemului: de la placa de baza si procesor pana la sursa si
+                racire. Pe aceasta pagina regasesti o selectie orientativa, fara preturi fixe, pentru a intelege mai usor
+                familiile de produse.</p>
+            <p>Compatibilitatea intre socket, dimensiunea carcasei si consumul cumulat ramane esentiala atunci cand
+                compari mai multe variante. Recomandarea PC Forge este sa pleci mereu de la nevoile tale reale de
+                utilizare.</p>
+            <p>Daca vrei detalii complete despre oferta din site, revino la pagina principala si exploreaza sectiunile
+                dedicate fiecarei categorii.</p>
+        </section>
+
+        <!-- Galerie componente - exemple de linii de produse -->
+        <section class="zona zona4" id="carduri-componente">
+            <h2>Exemple de linii de produse</h2>
+            <article>
+                <h3>Procesoare si placi de baza</h3>
+                <p>Alegeri mid-range pentru birou si gaming moderat, cu accent pe eficienta energetica si suport pentru
+                    memorii rapide.</p>
+            </article>
+            <article>
+                <h3>Placi video si stocare</h3>
+                <p>Combinatii echilibrate intre GPU si SSD NVMe pentru timpi de incarcare redusi in aplicatii si jocuri.
+                </p>
+            </article>
+            <article>
+                <h3>Surse si racire</h3>
+                <p>Marja de putere a sursei si fluxul de aer din carcasa influenteaza stabilitatea pe termen lung a
+                    intregului sistem.</p>
+            </article>
+        </section>
+    </main>
+
+    <%- include("../fragmente/footer") %>
+
+</body>
+
+</html>
