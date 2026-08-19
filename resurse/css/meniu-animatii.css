@@ -1,0 +1,86 @@
+@keyframes meniu-hamb-bar1 {
+  0% {
+    opacity: 1;
+    background-color: var(--culoare-text-deschis);
+    transform: translateY(0) rotate(0deg) scaleX(1);
+  }
+  45% {
+    opacity: 0.35;
+    background-color: var(--culoare-highlight);
+    transform: translateY(5px) rotate(0deg) scaleX(1.08);
+  }
+  100% {
+    opacity: 1;
+    background-color: var(--culoare-text-deschis);
+    transform: translateY(10px) rotate(45deg) scaleX(1);
+  }
+}
+@keyframes meniu-hamb-bar2 {
+  0% {
+    opacity: 1;
+    background-color: var(--culoare-text-deschis);
+    transform: translateY(0) scaleX(1) rotate(0deg);
+  }
+  50% {
+    opacity: 0.15;
+    background-color: var(--culoare-zona-secundara);
+    transform: translateY(0) scaleX(0.2) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    background-color: var(--culoare-text-deschis);
+    transform: translateY(0) scaleX(0) rotate(90deg);
+  }
+}
+@keyframes meniu-hamb-bar3 {
+  0% {
+    opacity: 1;
+    background-color: var(--culoare-text-deschis);
+    transform: translateY(0) rotate(0deg) scaleX(1);
+  }
+  45% {
+    opacity: 0.35;
+    background-color: var(--culoare-highlight);
+    transform: translateY(-5px) rotate(0deg) scaleX(1.08);
+  }
+  100% {
+    opacity: 1;
+    background-color: var(--culoare-text-deschis);
+    transform: translateY(-10px) rotate(-45deg) scaleX(1);
+  }
+}
+.meniu-hamburger--activ .meniu-hamburger__bar:nth-child(1) {
+  animation-duration: 0.55s;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+  animation-delay: 0ms;
+}
+
+.meniu-hamburger--activ .meniu-hamburger__bar:nth-child(2) {
+  animation-duration: 0.55s;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+  animation-delay: 100ms;
+}
+
+.meniu-hamburger--activ .meniu-hamburger__bar:nth-child(3) {
+  animation-duration: 0.55s;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+  animation-delay: 200ms;
+}
+
+.meniu-hamburger--activ .meniu-hamburger__bar:nth-child(1) {
+  animation-name: meniu-hamb-bar1;
+}
+
+.meniu-hamburger--activ .meniu-hamburger__bar:nth-child(2) {
+  animation-name: meniu-hamb-bar2;
+}
+
+.meniu-hamburger--activ .meniu-hamburger__bar:nth-child(3) {
+  animation-name: meniu-hamb-bar3;
+}
