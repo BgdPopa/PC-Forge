@@ -755,7 +755,7 @@ meter {
       setata printr-o variabila CSS, din schema cromatica.
       In footer aplicam doar pe linkurile externe (http) deoarece linkurile interne
       (ex. "Inapoi la inceputul paginii") ar deveni invizibile pe fundalul rosu */
-main a:visited,
+main a:not(.btn):visited,
 footer a[href^="http"]:visited {
   color: var(--culoare-link-vizitat);
 }
@@ -785,7 +785,7 @@ footer a[href^="http"]:hover {
       display: inline-block permite background-size sa functioneze corect pe elemente inline.
       Footer-ul are linkuri cu <br> in interior (adresa, maps) - pentru ele nu aplicam
       inline-block ca sa nu stricam layout-ul; gradientul functioneaza si fara el. */
-main section a:not(.tab-video):not(#link-top) {
+main section a:not(.tab-video):not(#link-top):not(.btn) {
   position: relative;
   display: inline-block;
   padding: 0.05em 0.2em;
@@ -830,7 +830,7 @@ footer a:not(#link-top) {
 }
 
 /* La hover pata creste din centru */
-main section a:not(.tab-video):not(#link-top):hover {
+main section a:not(.tab-video):not(#link-top):not(.btn):hover {
   background-size: 100% 100%;
   color: var(--culoare-link-text-hover);
 }
@@ -841,7 +841,8 @@ footer a:not(#link-top):hover {
 }
 
 /* 5. La click apare border in jurul linkului */
-main section a:not(.tab-video):not(#link-top):active,
+main section a:not(.tab-video):not(#link-top):not(.btn):active,
+,
 footer a:not(#link-top):active {
   border: 2px solid var(--culoare-link-activ);
   border-radius: 0.35rem;
@@ -912,16 +913,27 @@ footer a:not(#link-top):active {
 /* Etapa 5 - corectii vizuale pentru sectiunea Bootstrap customizat */
 #bootstrap-custom .card,
 #bootstrap-custom .alert {
-  border: 2px solid var(--culoare-text-deschis);
-  box-shadow: 0 0 15px var(--culoare-umbra);
+  border: 2px solid var(--culoare-bordura);
+  box-shadow: 0 6px 14px var(--culoare-umbra);
 }
 
 #bootstrap-custom .card-title {
   margin-bottom: 0.75rem;
+  color: var(--culoare-text-inchis);
+}
+
+#bootstrap-custom .card-text {
+  color: var(--culoare-text-inchis);
+}
+
+#bootstrap-custom .alert,
+#bootstrap-custom .alert strong {
+  color: var(--culoare-text-inchis);
 }
 
 #bootstrap-custom .btn {
   font-weight: 700;
+  text-decoration: none;
 }
 
 /* Etapa 5 - efect-css-stilizare-hr:
