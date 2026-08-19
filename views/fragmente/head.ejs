@@ -1,38 +1,61 @@
-<%# Etapa 4 - task 5:
-    Fragment comun de <head> decupat din index.html.
-    Contine partea care nu se schimba de la o pagina la alta (meta-uri, favicon,
-    fonturi, fisiere css generale). Titlul poate fi transmis prin local-ul "titlu";
-    daca nu este transmis, se foloseste un titlu implicit. %>
-<% const titluPagina = (typeof titlu !== "undefined") ? titlu : "PC Forge - Componente si periferice pentru calculator"; %>
-
+<%# Etapa 4 - task 5: Fragment comun de
 <head>
+  decupat din index.html. Contine partea care nu se schimba de la o pagina la
+  alta (meta-uri, favicon, fonturi, fisiere css generale). Titlul poate fi
+  transmis prin local-ul "titlu"; daca nu este transmis, se foloseste un titlu
+  implicit. %> <% const titluPagina = (typeof titlu !== "undefined") ? titlu :
+  "PC Forge - Componente si periferice pentru calculator"; %>
+
+  <head>
     <!-- Etapa 1 - task 1 si 2:
          Structura HTML de baza, limba documentului, meta-uri si titlu relevant -->
-    <meta charset="UTF-8">
-    <meta name="author" content="Popa Bogdan">
-    <meta name="keywords"
-        content="PC Forge, componente PC, periferice, placi video, procesoare, memorii RAM, accesorii calculator">
-    <meta name="description"
-        content="PC Forge este un site dedicat componentelor de calculator, perifericelor si accesoriilor pentru utilizatorii care vor sa isi construiasca sau sa isi imbunatateasca un PC.">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="msapplication-TileColor" content="#1e1e1e">
+    <meta charset="UTF-8" />
+    <meta name="author" content="Popa Bogdan" />
+    <meta
+      name="keywords"
+      content="PC Forge, componente PC, periferice, placi video, procesoare, memorii RAM, accesorii calculator"
+    />
+    <meta
+      name="description"
+      content="PC Forge este un site dedicat componentelor de calculator, perifericelor si accesoriilor pentru utilizatorii care vor sa isi construiasca sau sa isi imbunatateasca un PC."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="msapplication-TileColor" content="#1e1e1e" />
     <title><%= titluPagina %></title>
 
     <!-- Etapa 1 - task 4:
          Favicon si icon pentru dispozitive Apple -->
     <!-- Etapa 4 - task 7:
          Caile resurselor sunt cereri catre server (/resurse/...), nu cai relative -->
-    <link rel="icon" type="image/png" href="/resurse/favicons/favicon-32x32.png">
-    <link rel="apple-touch-icon" href="/resurse/favicons/apple-touch-icon.png">
+    <link
+      rel="icon"
+      type="image/png"
+      href="/resurse/favicons/favicon-32x32.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="/resurse/favicons/apple-touch-icon.png"
+    />
 
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
 
     <!-- Etapa 2 - bonus reset: fisierul de resetare css se incarca primul,
          inainte de stilurile proprii, pentru a suprascrie valorile implicite ale browserului -->
-    <link rel="stylesheet" href="/resurse/css/reset.css">
+    <link rel="stylesheet" href="/resurse/css/reset.css" />
+
+    <!-- Etapa 5 - Bootstrap customizat compilat din SCSS -->
+    <link rel="stylesheet" href="/resurse/css/custom-bootstrap.css" />
+
     <!-- Etapa 2 - schema cromatica si stilizare generala -->
-    <link rel="stylesheet" href="/resurse/css/stil.css">
-    <link rel="stylesheet" href="/resurse/css/meniu.css">
-    <link rel="stylesheet" href="/resurse/css/printare.css" media="print">
+    <link rel="stylesheet" href="/resurse/css/stil.css" />
+    <link rel="stylesheet" href="/resurse/css/meniu.css" />
+    <link rel="stylesheet" href="/resurse/css/printare.css" media="print" />
+  </head>
 </head>

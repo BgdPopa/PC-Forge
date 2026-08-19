@@ -1,0 +1,62 @@
+/* Etapa 5 - Bootstrap customizat prin SCSS
+   Variabilele Bootstrap sunt suprascrise inainte de importul frameworkului.
+   Astfel, Bootstrap este generat direct cu tema PC Forge. */
+
+/* Culori principale din schema cromatica */
+$primary: #e1012f;
+$secondary: #575757;
+$danger: #e01816;
+$light: #ffffff;
+$dark: #1f1f1f;
+
+/* Fundal si culoare text */
+$body-bg: #575757;
+$body-color: #ffffff;
+
+/* Font implicit */
+$font-family-base: "Rajdhani", Arial, sans-serif;
+
+/* Dimensiuni headinguri */
+$h1-font-size: 3rem;
+$h2-font-size: 2.2rem;
+$h3-font-size: 1.6rem;
+
+/* Raze pentru border */
+$border-radius: 0.8rem;
+$border-radius-sm: 0.5rem;
+$border-radius-lg: 1.2rem;
+$border-radius-xl: 1.5rem;
+
+/* Breakpoint-uri custom pentru ecrane medii si mari */
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 760px,
+  lg: 1100px,
+  xl: 1320px,
+  xxl: 1500px,
+);
+
+/* Latimi custom pentru containere Bootstrap */
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 1040px,
+  xl: 1240px,
+  xxl: 1440px,
+);
+
+/* Alte variabile Bootstrap modificate */
+$btn-border-radius: 999px;
+$btn-padding-x: 1.2rem;
+$btn-padding-y: 0.55rem;
+
+$card-border-radius: 1rem;
+$card-border-color: #ffffff;
+$card-bg: #e1012f;
+$card-color: #ffffff;
+
+$alert-border-radius: 1rem;
+
+/* Import Bootstrap dupa modificarea variabilelor */
+@import "../../node_modules/bootstrap/scss/bootstrap";

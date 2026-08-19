@@ -17,6 +17,7 @@
     "start": "node index.js"
   },
   "dependencies": {
+    "bootstrap": "^5.3.8",
     "ejs": "^3.1.10",
     "express": "^4.22.2",
     "sass": "^1.102.0"
