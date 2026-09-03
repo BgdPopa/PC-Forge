@@ -14,12 +14,21 @@
   ],
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "seed:admin": "node scripts/creeaza-admin-etapa8.js"
   },
   "dependencies": {
     "bootstrap": "^5.3.8",
+    "bootstrap-icons": "^1.13.1",
+    "dotenv": "^17.4.2",
     "ejs": "^3.1.10",
     "express": "^4.22.2",
-    "sass": "^1.102.0"
+    "express-session": "^1.19.0",
+    "multer": "^2.2.0",
+    "nodemailer": "^9.0.5",
+    "pg": "^8.23.0",
+    "sass": "^1.102.0",
+    "sequelize": "^6.37.8",
+    "sharp": "^0.35.3"
   }
 }

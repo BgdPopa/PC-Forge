@@ -1,0 +1,19 @@
+<section id="galerie-animata" class="zona galerie-animata-sectiune" aria-labelledby="titlu-galerie-animata">
+  <div class="galerie-animata-sectiune__intro">
+    <span class="galerie-eticheta"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i> Bonus Etapa 5</span>
+    <h2 id="titlu-galerie-animata">Componente în mișcare</h2>
+    <p>O selecție aleatorie de <%= galerieAnimata.numarImagini %> imagini consecutive. Animația se oprește când treci cu cursorul peste galerie.</p>
+  </div>
+
+  <div class="galerie-animata galerie-animata--<%= galerieAnimata.numarImagini %>">
+    <% galerieAnimata.imagini.forEach(function(imagine, index) { %>
+      <figure class="galerie-animata__cadru">
+        <img src="<%= imagine.cale_thumbnail %>" alt="<%= imagine.descriere %>" width="720" height="480" <% if (index > 0) { %>loading="lazy"<% } %> />
+        <figcaption>
+          <strong><%= imagine.titlu %></strong>
+          <span><%= imagine.descriere %></span>
+        </figcaption>
+      </figure>
+    <% }); %>
+  </div>
+</section>

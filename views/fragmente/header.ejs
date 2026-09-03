@@ -38,9 +38,17 @@
                     aria-expanded="false"><i class="fas fa-microchip" aria-hidden="true"></i><span
                         class="meniu-principal__text">Produse</span></button>
                 <ul class="meniu-principal__sub">
-                    <li><a href="/#componente">Componente PC</a></li>
-                    <li><a href="/#periferice">Periferice</a></li>
-                    <li><a href="/#accesorii">Accesorii</a></li>
+                    <!-- Etapa 6 - cerinta individuala, punctul 4:
+                         optiunile sunt generate din ENUM-ul bazei de date. -->
+                    <li><a href="/produse">Toate produsele</a></li>
+                    <%# Etapa 6 - Bonus 17: pagina seturilor. %><li><a href="/seturi">Seturi PC Forge</a></li>
+                    <% if (typeof categoriiProduse !== "undefined") { %>
+                        <% categoriiProduse.forEach(function(categorie) { %>
+                            <li>
+                                <a href="/produse?categorie=<%= categorie.valoare %>"><%= categorie.eticheta %></a>
+                            </li>
+                        <% }); %>
+                    <% } %>
                 </ul>
             </li>
             <li class="meniu-principal__item meniu-principal__item--has-sub">
@@ -72,6 +80,52 @@
                 <a class="meniu-principal__link" href="/#contact"><i class="fas fa-address-card"
                         aria-hidden="true"></i><span class="meniu-principal__text">Contact</span></a>
             </li>
+            <%# Etapa 8 - cerintele 6, 9 si 10: stare autentificare si meniul administratorului. %>
+            <% if (typeof utilizatorCurent !== "undefined" && utilizatorCurent) { %>
+                <%# Etapa 8 - Bonus 13: lista personala de favorite. %>
+                <li class="meniu-principal__item"><a class="meniu-principal__link" href="/favorite"><i class="bi bi-heart-fill"></i><span class="meniu-principal__text">Favorite</span></a></li>
+                <%# Etapa 8 - Bonus 13f: cosul sesiunii primeste produsul din linkul e-mailului. %>
+                <li class="meniu-principal__item"><a class="meniu-principal__link" href="/cos"><i class="bi bi-cart-fill"></i><span class="meniu-principal__text">Coș</span></a></li>
+                <% if (utilizatorCurent.rol === "admin") { %>
+                    <li class="meniu-principal__item meniu-principal__item--has-sub">
+                        <button type="button" class="meniu-principal__link meniu-principal__link--subdeclansator" aria-expanded="false"><i class="bi bi-shield-lock-fill" aria-hidden="true"></i><span class="meniu-principal__text">Administrare</span></button>
+                        <ul class="meniu-principal__sub"><li><a href="/administrare-utilizatori">Utilizatori</a></li><li><a href="/administrare-roluri">Roluri și drepturi</a></li><li><a href="/administrare-produse">Produse</a></li><li><a href="/top-favorite">Top favorite</a></li></ul>
+                    </li>
+                <% } %>
+                <li class="meniu-principal__item utilizator-meniu">
+                    <img class="utilizator-meniu__avatar" src="<%= utilizatorCurent.imagine %>" alt="Avatar <%= utilizatorCurent.username %>" />
+                    <a href="/profil" title="<%= utilizatorCurent.prenume %> <%= utilizatorCurent.nume %>"><%= utilizatorCurent.username %></a>
+                    <span class="badge text-bg-light"><%= utilizatorCurent.rol %></span><a class="btn btn-sm btn-light" href="/logout">Logout</a>
+                </li>
+            <% } else { %>
+                <li class="meniu-principal__item autentificare-meniu">
+                    <form class="formular-login-header" action="/login" method="post">
+                        <input class="form-control form-control-sm" name="username" required placeholder="Username" aria-label="Username" />
+                        <input class="form-control form-control-sm" type="password" name="parola" required placeholder="Parolă" aria-label="Parolă" />
+                        <label class="form-check-label text-white"><input class="form-check-input" type="checkbox" name="ramai_conectat" value="da" /> Reține</label>
+                        <button class="btn btn-sm btn-light" type="submit">Login</button><a class="btn btn-sm btn-outline-light" href="/inregistrare">Cont nou</a><a class="btn btn-sm btn-link text-white" href="/recuperare-parola" title="Ai uitat parola?"><i class="bi bi-key-fill"></i></a>
+                    </form>
+                    <% if (typeof eroareLogin !== "undefined" && eroareLogin) { %><p class="eroare-login"><%= eroareLogin %></p><% } %>
+                </li>
+            <% } %>
+            <!-- Etapa 6 - task tema: switch Bootstrap light/dark, pastrat pe toate paginile. -->
+            <li class="meniu-principal__item tema-meniu">
+                <%# Etapa 6 - Bonus 2: minimum trei teme, alese explicit. %>
+                <label class="visually-hidden" for="selector-tema">Tema site-ului</label>
+                <select class="form-select form-select-sm selector-tema" id="selector-tema" aria-label="Tema site-ului"><option value="light">Luminoasă</option><option value="dark">Întunecată</option><option value="contrast">Contrast Forge</option></select>
+                <div class="form-check form-switch tema-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="comutator-tema" />
+                    <label class="form-check-label" for="comutator-tema">
+                        <i class="bi bi-sun-fill tema-icon-soare" aria-hidden="true"></i>
+                        <i class="bi bi-moon-stars-fill tema-icon-luna" aria-hidden="true"></i>
+                        <span class="visually-hidden">Schimbă tema luminoasă sau întunecată</span>
+                    </label>
+                </div>
+            </li>
         </ul>
     </nav>
 </header>
+<script>
+    // Etapa 8 - Bonus 2: tema salvata in cont are prioritate dupa autentificare.
+    window.pcForgeUtilizator = <%- JSON.stringify(typeof utilizatorCurent !== "undefined" && utilizatorCurent ? { tema: utilizatorCurent.tema } : null).replace(/</g, "\\u003c") %>;
+</script>

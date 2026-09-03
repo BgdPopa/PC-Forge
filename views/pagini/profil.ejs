@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ro">
+  <%- include("../fragmente/head", { titlu: "PC Forge - Profil" }) %>
+  <body id="top" data-pagina="profil"><%- include("../fragmente/header") %>
+    <main class="main-cont"><section class="cont-card">
+      <div class="profil-antet"><img src="<%= utilizator.imagine %>" alt="Avatar <%= utilizator.username %>" /><div><span class="badge text-bg-primary"><%= utilizator.rol.cod %></span><h2>Profilul <%= utilizator.username %></h2></div></div>
+      <% if (erori.length) { %><div class="alert alert-danger"><ul><% erori.forEach(e=>{ %><li><%= e %></li><% }) %></ul></div><% } %><% if (mesaj) { %><div class="alert alert-success"><%= mesaj %></div><% } %>
+      <!-- Etapa 8 - cerinta 8 si Bonus 9: profil, avatar, parola si preferinta sesiunii. -->
+      <form method="post" enctype="multipart/form-data"><div class="row g-3">
+        <div class="col-md-6"><label class="form-label">Username</label><input class="form-control" value="<%= utilizator.username %>" readonly /></div>
+        <div class="col-md-6"><label class="form-label" for="email">E-mail</label><input class="form-control" type="email" id="email" name="email" required value="<%= utilizator.email %>" /></div>
+        <div class="col-md-6"><label class="form-label" for="nume">Nume</label><input class="form-control" id="nume" name="nume" required value="<%= utilizator.nume %>" /></div>
+        <div class="col-md-6"><label class="form-label" for="prenume">Prenume</label><input class="form-control" id="prenume" name="prenume" required value="<%= utilizator.prenume %>" /></div>
+        <div class="col-md-6"><label class="form-label" for="data_nasterii">Data nașterii</label><input class="form-control" type="date" id="data_nasterii" name="data_nasterii" value="<%= utilizator.data_nasterii ? String(utilizator.data_nasterii).slice(0,10) : '' %>" /></div>
+        <div class="col-md-3"><label class="form-label" for="culoare_chat">Culoare chat</label><input class="form-control form-control-color" type="color" id="culoare_chat" name="culoare_chat" value="<%= utilizator.culoare_chat %>" /></div>
+        <div class="col-md-9"><label class="form-label" for="imagine">Schimbă avatarul</label><input class="form-control" type="file" id="imagine" name="imagine" accept="image/png,image/jpeg,image/webp" /></div>
+        <div class="col-12"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" id="ramai_conectat" name="ramai_conectat" value="da" <%= utilizator.ramai_conectat ? 'checked' : '' %> /><label class="form-check-label" for="ramai_conectat">Păstrează-mă autentificat automat pe acest dispozitiv</label></div><div class="form-text">Etapa 8 - Bonus 9: preferința este salvată în cont.</div></div>
+        <div class="col-md-6"><label class="form-label" for="parola_noua">Parolă nouă (opțional)</label><input class="form-control" type="password" id="parola_noua" name="parola_noua" minlength="8" /></div>
+        <div class="col-md-6"><label class="form-label" for="confirmare_parola_noua">Confirmă parola nouă</label><input class="form-control" type="password" id="confirmare_parola_noua" name="confirmare_parola_noua" minlength="8" /></div>
+        <div class="col-12"><label class="form-label" for="parola">Parola curentă pentru confirmare</label><input class="form-control" type="password" id="parola" name="parola" required /></div>
+      </div><button class="btn btn-primary mt-3" type="submit">Salvează modificările</button></form>
+      <hr /><h3>Ștergerea contului</h3><form method="post" action="/stergere-cont"><label class="form-label" for="parola_stergere">Introdu parola</label><div class="input-group"><input class="form-control" type="password" id="parola_stergere" name="parola_stergere" required /><button class="btn btn-outline-danger" type="submit">Șterge definitiv contul</button></div></form>
+    </section></main><%- include("../fragmente/footer") %>
+  </body>
+</html>

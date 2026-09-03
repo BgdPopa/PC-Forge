@@ -1,0 +1,10 @@
+{
+  "mentenanta": false,
+  "mesaj": "PC Forge este în mentenanță. Revenim în curând cu atelierul online.",
+  "minuteSesiune": 30,
+  "minuteOnline": 10,
+  "minutePanaNotificareConfirmare": 60,
+  "minuteGratieConfirmare": 1440,
+  "activeazaStergereConturiNeconfirmate": false,
+  "minutePastrareBackupCss": 43200
+}

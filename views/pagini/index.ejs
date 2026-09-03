@@ -12,6 +12,8 @@ include(). %>
          Main reorganizat intr-un grid cu 8 zone -->
     <main>
       <div class="grid-pagina">
+        <%# Etapa 6 - Bonus 12b/c: oferta curenta si temporizatorul. %>
+        <% if (typeof ofertaCurenta !== 'undefined' && ofertaCurenta) { %><section class="oferta-curenta" id="oferta-curenta" data-expira="<%= ofertaCurenta['data-finalizare'] %>"><div><span class="badge text-bg-light">Oferta atelierului</span><h2>-<%= ofertaCurenta.reducere %>% la categoria <%= ofertaCurenta.categorie %></h2><p>Prețurile reduse sunt afișate direct în lista de produse.</p></div><strong id="temporizator-oferta">--:--</strong><a class="btn btn-light" href="/produse?categorie=<%= ofertaCurenta.categorie %>">Vezi produsele</a></section><% } %>
         <!-- Etapa 2 - task layout:
                  Zona 1 - prezentare principala -->
         <section class="zona zona1" id="prezentare">
@@ -155,17 +157,19 @@ include(). %>
           </p>
         </section>
 
-        <!-- Etapa 2 - task layout:
-                 Zona 5 - lista utilizatori online / placeholder -->
+        <!-- Etapa 8 - cerintele 7 si 12: profilul curent si administratorii online. -->
         <section class="zona zona5" id="utilizatori-online">
-          <h2>Utilizatori online</h2>
-          <p>Zona de placeholder pentru lista utilizatorilor activi pe site.</p>
-          <ul>
-            <li>AlexP - interesat de procesoare</li>
-            <li>MariaG - compara placi video</li>
-            <li>DanT - cauta periferice</li>
-            <li>IoanaM - verifica stocuri SSD</li>
-          </ul>
+          <% if (typeof utilizatorCurent !== "undefined" && utilizatorCurent) { %>
+            <div class="profil-acasa">
+              <img src="<%= utilizatorCurent.imagine %>" alt="Imaginea utilizatorului <%= utilizatorCurent.username %>" />
+              <div><h2>Bine ai revenit, <%= utilizatorCurent.prenume %>!</h2><p>Cont: <strong><%= utilizatorCurent.username %></strong></p></div>
+            </div>
+            <% if (timpUltimaLogare) { %><p class="ultima-logare">Ultima autentificare a fost acum <%= timpUltimaLogare %>.</p><% } %>
+          <% } else { %>
+            <h2>Comunitatea PC Forge</h2><p><a href="/inregistrare">Creează un cont</a> pentru profil, avatar și preferințe salvate.</p>
+          <% } %>
+          <h3>Administratori online</h3>
+          <ul id="lista-admini-online"><li>Se verifică disponibilitatea...</li></ul>
         </section>
 
         <!-- Etapa 1 - task 17:
@@ -571,56 +575,76 @@ include(). %>
 
         <!-- Etapa 5 - Demonstratie Bootstrap customizat prin SCSS -->
         <section id="bootstrap-custom" class="zona">
-          <h2>Bootstrap customizat</h2>
-
-          <p>
-            Aceasta secțiune demonstrează folosirea Bootstrap-ului generat din
-            SCSS, cu variabile modificate pentru tema PC Forge.
-          </p>
+          <div class="bootstrap-intro">
+            <span class="badge text-bg-light">Etapa 5 · Bootstrap customizat</span>
+            <h2>Atelierul de configurare PC Forge</h2>
+            <p class="mb-0">
+              Trei verificări simple care te ajută să construiești un sistem
+              echilibrat, compatibil și pregătit pentru upgrade.
+            </p>
+          </div>
 
           <div class="container-fluid px-0">
-            <div class="row g-3">
+            <div class="row g-3 align-items-stretch">
               <div class="col-12 col-md-6 col-lg-4">
-                <div class="card h-100">
-                  <div class="card-body">
-                    <h3 class="card-title">Tema PC Forge</h3>
+                <article class="card h-100 shadow-sm">
+                  <div class="card-body d-flex flex-column">
+                    <i class="fa-solid fa-crosshairs bootstrap-card-icon" aria-hidden="true"></i>
+                    <h3 class="card-title h5">1. Definește utilizarea</h3>
                     <p class="card-text">
-                      Culorile Bootstrap au fost adaptate la schema roșu, gri și
-                      alb a site-ului.
+                      Gaming-ul pune accent pe placa video, editarea cere mai
+                      multe nuclee, iar un PC de birou trebuie să rămână eficient.
                     </p>
-                    <a href="#video-local" class="btn btn-primary">
-                      Vezi video
+                    <a href="#efect-coloane" class="btn btn-primary mt-auto align-self-start">
+                      Citește ghidul
                     </a>
                   </div>
-                </div>
+                </article>
               </div>
 
               <div class="col-12 col-md-6 col-lg-4">
-                <div class="card h-100">
-                  <div class="card-body">
-                    <h3 class="card-title">Grid responsive</h3>
+                <article class="card h-100 shadow-sm">
+                  <div class="card-body d-flex flex-column">
+                    <i class="fa-solid fa-puzzle-piece bootstrap-card-icon" aria-hidden="true"></i>
+                    <h3 class="card-title h5">2. Verifică compatibilitatea</h3>
                     <p class="card-text">
-                      Cardurile folosesc sistemul de grid Bootstrap și se
-                      reorganizează în funcție de ecran.
+                      Socket-ul procesorului, generația RAM și dimensiunea plăcii
+                      video trebuie să fie compatibile cu placa de bază și carcasa.
                     </p>
-                    <a href="#tabel-oferte" class="btn btn-outline-light">
-                        Vezi tabel
-                    </a>
-                      Vezi tabel
+                    <a href="#tabel-oferte" class="btn btn-outline-primary mt-auto align-self-start">
+                      Compară componente
                     </a>
                   </div>
-                </div>
+                </article>
               </div>
 
               <div class="col-12 col-lg-4">
-                <div class="alert alert-light mb-0" role="alert">
-                  <strong>PC Forge:</strong> Bootstrap este compilat din SCSS și
-                  integrat în tema proiectului.
-                </div>
+                <article class="card h-100 shadow-sm">
+                  <div class="card-body d-flex flex-column">
+                    <i class="fa-solid fa-temperature-half bootstrap-card-icon" aria-hidden="true"></i>
+                    <h3 class="card-title h5">3. Păstrează rezerva</h3>
+                    <p class="card-text">
+                      O sursă corect dimensionată și un traseu clar al aerului
+                      reduc temperaturile, zgomotul și riscul de instabilitate.
+                    </p>
+                    <div class="alert alert-primary mb-0 mt-auto" role="status">
+                      <strong>Regula Forge:</strong> păstrează aproximativ 20% rezervă de putere.
+                    </div>
+                  </div>
+                </article>
               </div>
             </div>
           </div>
         </section>
+
+        <!-- Etapa 5 - galeria statica este refolosita si pe pagina dedicata. -->
+        <%- include("../fragmente/galerie-statica", { imaginiGalerie: imaginiGalerie }) %>
+
+        <!-- Etapa 5 bonus - galerie animata cu numar aleator multiplu de trei. -->
+        <%- include("../fragmente/galerie-animata", { galerieAnimata: galerieAnimata }) %>
+
+        <%# Etapa 6 - Bonus 18: fragment reutilizabil cu cele mai noi produse. %>
+        <%- include("../fragmente/produse-noi", { produseNoi: produseNoi }) %>
 
         <!-- Etapa 5 - efect-css-stilizare-hr:
                  hr stilizat din 2 gradienturi liniare identice, unul la 45deg si
@@ -706,6 +730,6 @@ include(). %>
       </div>
     </main>
 
-    <%- include("../fragmente/footer") %>
+    <%- include("../fragmente/footer") %><script src="/resurse/js/oferte.js"></script>
   </body>
 </html>

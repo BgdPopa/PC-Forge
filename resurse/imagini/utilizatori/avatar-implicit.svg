@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-labelledby="titlu descriere">
+  <title id="titlu">Avatar implicit PC Forge</title>
+  <desc id="descriere">Microcip alb pe un fundal rosu inchis</desc>
+  <rect width="400" height="400" rx="56" fill="#83001c"/>
+  <rect x="105" y="105" width="190" height="190" rx="34" fill="#e1012f" stroke="#fff" stroke-width="14"/>
+  <g stroke="#fff" stroke-width="13" stroke-linecap="round">
+    <path d="M135 78v28M200 78v28M265 78v28M135 294v28M200 294v28M265 294v28"/>
+    <path d="M78 135h28M78 200h28M78 265h28M294 135h28M294 200h28M294 265h28"/>
+  </g>
+  <path d="M155 250v-100h52c32 0 53 17 53 45 0 30-22 47-57 47h-19v8zM184 178v36h20c17 0 27-6 27-18s-10-18-27-18z" fill="#fff"/>
+</svg>

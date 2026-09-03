@@ -1,0 +1,126 @@
+{
+  "cale_galerie": "/resurse/imagini/galerie/originale",
+  "cale_thumbnails": "/resurse/imagini/galerie/thumbnails",
+  "imagini": [
+    {
+      "cale_imagine": "placa-baza-desktop.jpg",
+      "titlu": "Placa de bază — centrul configurației",
+      "descriere": "Conectorii, sloturile și circuitele care coordonează toate componentele unui PC.",
+      "sfert_ora": 1,
+      "autor": "Luciamarflo",
+      "licenta": "CC BY-SA 4.0",
+      "url_licenta": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "sursa": "https://commons.wikimedia.org/wiki/File:Desktop_Computer_Motherboard.jpg"
+    },
+    {
+      "cale_imagine": "module-memorie.jpg",
+      "titlu": "Memorie RAM modulară",
+      "descriere": "Module de memorie care susțin multitasking-ul și răspunsul rapid al sistemului.",
+      "sfert_ora": 1,
+      "autor": "Peter Fiskerstrand",
+      "licenta": "CC BY-SA 4.0",
+      "url_licenta": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "sursa": "https://commons.wikimedia.org/wiki/File:Memory_modules.jpg"
+    },
+    {
+      "cale_imagine": "ssd-msata.jpg",
+      "titlu": "Stocare SSD compactă",
+      "descriere": "Un SSD mSATA construit pentru porniri rapide și acces eficient la fișiere.",
+      "sfert_ora": 1,
+      "autor": "Raimond Spekking",
+      "licenta": "CC BY-SA 4.0",
+      "url_licenta": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "sursa": "https://commons.wikimedia.org/wiki/File:MSATA_SSD_16_GB_Sandisk_-_SDSA3DD-016G-2494.jpg"
+    },
+    {
+      "cale_imagine": "carcasa-pc.jpg",
+      "titlu": "Carcasă cu flux de aer",
+      "descriere": "Șasiul protejează componentele și organizează răcirea întregului sistem.",
+      "sfert_ora": 2,
+      "autor": "Santeri Viinamäki",
+      "licenta": "CC BY-SA 4.0",
+      "url_licenta": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "sursa": "https://commons.wikimedia.org/wiki/File:Computer_case_20170910.jpg"
+    },
+    {
+      "cale_imagine": "placa-video-matrox.jpg",
+      "titlu": "Placă video dedicată",
+      "descriere": "Procesarea grafică separată accelerează jocurile și aplicațiile vizuale.",
+      "sfert_ora": 2,
+      "autor": "Peter Fiskerstrand",
+      "licenta": "CC BY-SA 4.0",
+      "url_licenta": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "sursa": "https://commons.wikimedia.org/wiki/File:Matrox_graphics_card.jpg"
+    },
+    {
+      "cale_imagine": "cooler-procesor.png",
+      "titlu": "Cooler pentru procesor",
+      "descriere": "Radiatorul și ventilatorul mențin temperatura procesorului sub control.",
+      "sfert_ora": 2,
+      "autor": "Kulmalukko",
+      "licenta": "CC BY-SA 4.0",
+      "url_licenta": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "sursa": "https://commons.wikimedia.org/wiki/File:CPU_cooler.png"
+    },
+    {
+      "cale_imagine": "tastatura.jpg",
+      "titlu": "Tastatură pentru stația de lucru",
+      "descriere": "Perifericul esențial pentru control precis, productivitate și gaming.",
+      "sfert_ora": 3,
+      "autor": "Srini297",
+      "licenta": "CC BY-SA 4.0",
+      "url_licenta": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "sursa": "https://commons.wikimedia.org/wiki/File:Computer_Keyboard.jpg"
+    },
+    {
+      "cale_imagine": "mouse.jpg",
+      "titlu": "Mouse optic",
+      "descriere": "Control ergonomic și rapid pentru navigare, lucru creativ și jocuri.",
+      "sfert_ora": 3,
+      "autor": "unmatched value",
+      "licenta": "CC BY 2.0",
+      "url_licenta": "https://creativecommons.org/licenses/by/2.0/",
+      "sursa": "https://commons.wikimedia.org/wiki/File:Computer_Mouse_(41561447025).jpg"
+    },
+    {
+      "cale_imagine": "monitor.jpg",
+      "titlu": "Monitor LCD",
+      "descriere": "Interfața vizuală a configurației, potrivită pentru lucru și divertisment.",
+      "sfert_ora": 3,
+      "autor": "Zzubnik",
+      "licenta": "Domeniu public",
+      "url_licenta": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "sursa": "https://commons.wikimedia.org/wiki/File:Computer_monitor.jpg"
+    },
+    {
+      "cale_imagine": "ventilatoare-carcasa.jpg",
+      "titlu": "Ventilatoare de carcasă",
+      "descriere": "Admisia și evacuarea corectă a aerului stabilizează temperaturile componentelor.",
+      "sfert_ora": 4,
+      "autor": "Bretwa",
+      "licenta": "CC BY-SA 4.0",
+      "url_licenta": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "sursa": "https://commons.wikimedia.org/wiki/File:Fans_from_computer_case_-_front_and_back_-_2018-05-22.jpg"
+    },
+    {
+      "cale_imagine": "placa-baza-at.jpg",
+      "titlu": "Placă de bază AT clasică",
+      "descriere": "O privire asupra evoluției formatelor care au definit calculatoarele desktop.",
+      "sfert_ora": 4,
+      "autor": "steverapaport",
+      "licenta": "CC BY-SA 2.0",
+      "url_licenta": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "sursa": "https://commons.wikimedia.org/wiki/File:Original_AT_motherboard.jpg"
+    },
+    {
+      "cale_imagine": "placa-baza-mini-itx.jpg",
+      "titlu": "Format Mini-ITX",
+      "descriere": "O platformă compactă pentru sisteme mici, eficiente și atent organizate.",
+      "sfert_ora": 4,
+      "autor": "A Meaden",
+      "licenta": "CC BY-SA 3.0",
+      "url_licenta": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "sursa": "https://commons.wikimedia.org/wiki/File:Mini-itx-motherboard.jpg"
+    }
+  ]
+}

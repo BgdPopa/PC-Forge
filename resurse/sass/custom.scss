@@ -1,0 +1,38 @@
+/* Etapa 5 - tema Bootstrap PC Forge.
+   Variabilele sunt suprascrise inainte de importul frameworkului. */
+$primary: #e1012f;
+$secondary: #575757;
+$danger: #e01816;
+$light: #ffffff;
+$dark: #1f1f1f;
+$body-bg: #575757;
+$body-color: #ffffff;
+$font-family-base: "Rajdhani", Arial, sans-serif;
+$h1-font-size: 3rem;
+$h2-font-size: 2.2rem;
+$h3-font-size: 1.6rem;
+$border-radius: 0.8rem;
+$border-radius-sm: 0.5rem;
+$border-radius-lg: 1.2rem;
+$border-radius-xl: 1.5rem;
+$grid-breakpoints: (xs: 0, sm: 576px, md: 760px, lg: 1100px, xl: 1320px, xxl: 1500px);
+$container-max-widths: (sm: 540px, md: 720px, lg: 1040px, xl: 1240px, xxl: 1440px);
+$btn-border-radius: 999px;
+$btn-border-width: 2px;
+$btn-padding-x: 1.2rem;
+$btn-padding-y: 0.55rem;
+$input-border-width: 2px;
+$input-border-radius: 0.8rem;
+$input-focus-border-color: #e1012f;
+$form-range-thumb-width: 1.5rem;
+$form-range-thumb-height: 1.5rem;
+$form-range-thumb-bg: #e1012f;
+$form-range-track-bg: #f5a3b4;
+$card-border-radius: 1rem;
+$card-border-color: rgba(#e02f35, 0.35);
+$card-bg: #ffffff;
+$card-color: #575757;
+$alert-border-radius: 1rem;
+$alert-padding-x: 1rem;
+$alert-padding-y: 0.8rem;
+@import "../../node_modules/bootstrap/scss/bootstrap";

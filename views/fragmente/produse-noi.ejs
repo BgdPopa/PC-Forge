@@ -1,0 +1,25 @@
+<%# Etapa 6 - Bonus 18: sectiune generata din cele mai recente produse din baza. %>
+<section id="produse-noi" class="zona zona-produse-noi">
+  <div class="produse-noi__antet">
+    <div>
+      <span class="eyebrow">Noutati PC Forge</span>
+      <h2>Componente adaugate recent</h2>
+    </div>
+    <a class="btn btn-outline-light" href="/produse">
+      <i class="bi bi-grid-3x3-gap" aria-hidden="true"></i>
+      Vezi catalogul
+    </a>
+  </div>
+  <div class="produse-noi__grid">
+    <% produseNoi.forEach(function(produs) { %>
+      <article class="produse-noi__card">
+        <img src="<%= produs.imagine %>" alt="<%= produs.nume %>" loading="lazy" />
+        <div>
+          <span class="badge text-bg-danger">Nou</span>
+          <h3><a href="/produs/<%= produs.id %>"><%= produs.nume %></a></h3>
+          <p><%= produs.subcategorie %> · <%= Number(produs.pret).toFixed(2) %> lei</p>
+        </div>
+      </article>
+    <% }) %>
+  </div>
+</section>

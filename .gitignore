@@ -6,3 +6,9 @@ temp
 logs
 backup
 fisiere_uploadate
+
+# Etapa 6 - date locale de conectare; parolele nu se salveaza in Git
+.env
+
+# Etapa 6 - volumul PostgreSQL este administrat de Docker
+database-data

@@ -1,0 +1,171 @@
+/* Etapa 6 - tema light/dark cu variabile CSS, aplicata pe toate paginile. */
+html[data-tema="dark"] body {
+  --culoare-fundal: #17181b;
+  --culoare-zona: #a90024;
+  --culoare-zona-secundara: #74182d;
+  --culoare-text-inchis: #e9e9ed;
+  --culoare-umbra: rgba(0, 0, 0, 0.48);
+}
+/* Etapa 6 - Bonus 2: a treia tema pastreaza rosul PC Forge, dar creste contrastul. */
+html[data-tema="contrast"] body { --culoare-fundal: #08090b; --culoare-zona: #ff174b; --culoare-zona-secundara: #3b0010; --culoare-text-inchis: #fff; --culoare-umbra: rgba(0,0,0,.65); background: #08090b; }
+html[data-tema="contrast"] .panou-filtre, html[data-tema="contrast"] .produs-card, html[data-tema="contrast"] .produs-detaliu, html[data-tema="contrast"] .cont-card { background: #111318; color: #fff; border-color: #ff174b; }
+html[data-tema="contrast"] .table { --bs-table-bg: transparent; --bs-table-color: #fff; --bs-table-striped-color: #fff; --bs-table-striped-bg: rgba(255,255,255,.08); }
+
+body, header, footer, .zona, .panou-filtre, .produs-card, .produs-detaliu {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.tema-meniu { display: flex; align-items: center; gap: .35rem; padding-inline: 0.75rem; }
+.selector-tema { width: 8.5rem; }
+.tema-switch { display: flex; align-items: center; gap: 0.4rem; min-height: auto; margin: 0; padding-left: 2.7rem; }
+.tema-switch .form-check-input, .tema-switch .form-check-label { cursor: pointer; }
+.tema-switch .form-check-label { color: #fff; }
+.tema-icon-luna, html[data-tema="dark"] .tema-icon-soare { display: none; }
+html[data-tema="dark"] .tema-icon-luna { display: inline-block; }
+
+/* Etapa 6 - pagina de produse, integrata in identitatea vizuala PC Forge. */
+.main-produse { width: min(1500px, calc(100% - 2rem)); margin: 0 auto; padding: 1.25rem 0 3rem; }
+.produse-hero, .panou-filtre, .zona-lista-produse { margin-bottom: 1.25rem; border-radius: 1.2rem; }
+.produse-hero {
+  position: relative; overflow: hidden; padding: clamp(1.3rem, 4vw, 3rem);
+  background: radial-gradient(circle at 90% 5%, rgba(255, 255, 255, 0.2), transparent 25rem), linear-gradient(135deg, #b80027, #e1012f 55%, #83001c);
+  color: #fff; box-shadow: 0 1rem 2.5rem var(--culoare-umbra);
+}
+.produse-hero h2 { margin: 0.8rem 0 0.4rem; font-size: clamp(2rem, 5vw, 4rem); }
+.produse-hero p { max-width: 760px; margin: 0; font-size: 1.08rem; }
+/* Etapa 6 - Bonus 12: anuntul ofertei si ultimele zece secunde. */
+.oferta-curenta { grid-column: 1 / -1; display: flex; align-items: center; gap: 1.25rem; margin-bottom: 1rem; padding: 1.25rem clamp(1rem,3vw,2rem); border: 2px solid #fff; border-radius: 1.2rem; background: linear-gradient(120deg,#83001c,#e1012f); color: #fff; box-shadow: 0 .9rem 2rem rgba(54,0,12,.28); }
+.oferta-curenta > div { flex: 1; }
+.oferta-curenta h2,.oferta-curenta p { margin: .2rem 0; color: #fff; }
+#temporizator-oferta { min-width: 6ch; font-size: clamp(1.8rem,4vw,3rem); font-variant-numeric: tabular-nums; }
+#temporizator-oferta.oferta-expira { color: #fff3a0; animation: pulse-oferta .55s alternate infinite; }
+@keyframes pulse-oferta { to { transform: scale(1.1); } }
+
+.panou-filtre { padding: clamp(1rem, 2.8vw, 2rem); background: #fff; color: #3d3d42; box-shadow: 0 0.8rem 2rem var(--culoare-umbra); }
+html[data-tema="dark"] .panou-filtre, html[data-tema="dark"] .produs-card, html[data-tema="dark"] .produs-detaliu { background: #25262b; color: #f3f3f4; }
+html[data-tema="dark"] .panou-filtre .form-text, html[data-tema="dark"] .produs-card__categorie { color: #c3c4ca; }
+html[data-tema="dark"] .produs-specificatii, html[data-tema="dark"] .produs-detaliu__tabel {
+  --bs-table-bg: transparent; --bs-table-color: #f3f3f4; --bs-table-striped-color: #f3f3f4; --bs-table-striped-bg: rgba(255, 255, 255, 0.05);
+}
+.panou-filtre__titlu { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1.2rem; }
+.panou-filtre__titlu h2 { margin: 0; color: inherit; }
+.eyebrow { color: #b80027; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+.range-limite { display: flex; justify-content: space-between; margin-top: -0.2rem; font-size: 0.8rem; color: #6c757d; }
+.filtre-check { display: flex; flex-wrap: wrap; gap: 0.3rem 1rem; }
+.textarea-filtru textarea { min-height: 94px !important; }
+.operatii-produse { display: flex; flex-wrap: wrap; align-items: center; gap: 0.55rem; padding-top: 1rem; border-top: 1px solid #dedee2; }
+.operatii-produse .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem; }
+.select-operatie { width: auto; min-width: 150px; }
+
+.zona-lista-produse { padding: clamp(1rem, 2.8vw, 2rem); background: linear-gradient(145deg, #cc002b, #e1012f); color: #fff; }
+.grid-produse { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.15rem; }
+.produs-card { position: relative; overflow: hidden; border: 1px solid rgba(225, 1, 47, 0.25); background: #fff; color: #3d3d42; box-shadow: 0 0.75rem 1.5rem rgba(54, 0, 12, 0.22); }
+.produs-card[hidden] { display: none !important; }
+.produs-card__imagine { position: relative; overflow: hidden; }
+.produs-card__imagine img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; transition: transform 0.45s ease; }
+.produs-card:hover .produs-card__imagine img { transform: scale(1.05); }
+.produs-card__badge-uri { position: absolute; inset: 0.7rem 0.7rem auto; display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.produs-card__categorie { margin-bottom: 0.25rem; color: #777982; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+.produs-favorite { color: #b80027; font-size: .86rem; font-weight: 700; }
+.produs-card__actiuni { display: flex; justify-content: flex-end; gap: 0.35rem; margin: -0.35rem 0 0.65rem; }
+.produs-card__actiuni .btn { width: 2.1rem; height: 2.1rem; padding: 0; border-radius: 50%; }
+.produs-card--fixat { border-color: #e1012f; box-shadow: 0 0 0 3px rgba(225,1,47,.2), 0 .9rem 1.8rem rgba(54,0,12,.25); }
+.produs-card--fixat::after { content: "FIXAT"; position: absolute; z-index: 2; top: .7rem; right: .7rem; padding: .2rem .5rem; border-radius: 999px; background: #e1012f; color: #fff; font-size: .7rem; font-weight: 700; }
+.produs-card .card-title a { padding: 0 !important; color: #b80027 !important; text-decoration: none !important; }
+.produs-card .card-title a:hover { color: #e1012f !important; background: transparent !important; }
+/* Etapa 10 - finisaj responsive: suprascrie min-width-ul global al tabelelor doar in cardurile de produs. */
+.produs-specificatii { width: 100%; min-width: 0; margin-bottom: 0; font-size: 0.9rem; }
+.produs-specificatii th { width: 40%; }
+.produs-specificatii { table-layout: fixed; }
+.produs-specificatii td { overflow-wrap: anywhere; word-break: break-word; }
+.produs-card__footer { display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; padding: 1rem; background: rgba(225, 1, 47, 0.06); }
+.produs-pret, .produs-detaliu__pret { color: #b80027; font-size: 1.35rem; }
+.rezultat-calcul { position: fixed; z-index: 2000; right: 1.2rem; bottom: 1.2rem; max-width: min(420px, calc(100% - 2.4rem)); border: 2px solid #e1012f; box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.28); }
+.paginare-produse { margin-top: 1.5rem; }
+.paginare-produse .page-link { color: #b80027; border-color: rgba(225,1,47,.35); }
+.paginare-produse .active .page-link { background: #83001c; border-color: #83001c; color: #fff; }
+.container-comparare { position: fixed; z-index: 2100; left: 1rem; bottom: 1rem; display: flex; align-items: center; gap: 1rem; width: min(620px, calc(100% - 2rem)); padding: .85rem 1rem; border: 2px solid #fff; border-radius: 1rem; background: linear-gradient(135deg,#83001c,#e1012f); color: #fff; box-shadow: 0 1rem 2.5rem rgba(0,0,0,.35); }
+.container-comparare[hidden] { display: none !important; }
+.container-comparare > div:first-child { flex: 1; }
+.container-comparare__butoane, .comparatie-produs { display: flex; align-items: center; gap: .5rem; }
+.comparatie-produs { display: inline-flex; margin: .35rem .5rem 0 0; padding: .25rem .5rem; border-radius: 999px; background: rgba(255,255,255,.16); }
+.comparatie-produs .btn-close { width: .55rem; height: .55rem; font-size: .55rem; }
+.comparare-imagine { display: block; width: 120px; aspect-ratio: 3/2; margin-bottom: .5rem; object-fit: cover; border-radius: .6rem; }
+
+/* Etapa 6 - Bonus 18: prezentarea produselor noi pe prima pagina. */
+.zona-produse-noi { grid-column: 1 / -1; padding: clamp(1rem, 2.8vw, 2rem); background: linear-gradient(145deg, #83001c, #e1012f); color: #fff; }
+.produse-noi__antet { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
+.produse-noi__antet h2 { margin: 0.2rem 0 0; color: #fff; }
+.produse-noi__antet .eyebrow { color: #ffd5de; }
+.produse-noi__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+.produse-noi__card { overflow: hidden; border-radius: 1rem; background: #fff; color: #3d3d42; box-shadow: 0 0.65rem 1.4rem rgba(54, 0, 12, 0.28); }
+.produse-noi__card img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+.produse-noi__card div { padding: 1rem; }
+.produse-noi__card h3 { margin: 0.55rem 0 0.25rem; font-size: 1.15rem; }
+.produse-noi__card h3 a { padding: 0 !important; color: #b80027 !important; text-decoration: none !important; }
+.produse-noi__card p { margin: 0; }
+html[data-tema="dark"] .produse-noi__card { background: #25262b; color: #f3f3f4; }
+
+/* Etapa 6 - Bonus 19: buton si panou fix pentru programul saptamanal. */
+.buton-orar { position: fixed; z-index: 1500; right: 1rem; bottom: 5.4rem; display: inline-flex; align-items: center; gap: 0.45rem; box-shadow: 0 0.7rem 1.5rem rgba(0, 0, 0, 0.3); }
+.panou-orar { position: fixed; z-index: 1600; right: 1rem; bottom: 9.2rem; width: min(390px, calc(100% - 2rem)); max-height: calc(100vh - 10.5rem); overflow: auto; padding: 1rem; border: 2px solid #e1012f; border-radius: 1rem; background: #fff; color: #3d3d42; box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.36); }
+.panou-orar[hidden] { display: none !important; }
+.panou-orar__antet { display: flex; justify-content: space-between; gap: 1rem; }
+.panou-orar__antet h2 { margin: 0 0 0.8rem; color: inherit; font-size: 1.45rem; }
+.panou-orar .zi-curenta > * { background: rgba(225, 1, 47, 0.16) !important; color: inherit; font-weight: 700; }
+html[data-tema="dark"] .panou-orar { background: #25262b; color: #f3f3f4; }
+html[data-tema="dark"] .panou-orar .table { --bs-table-bg: transparent; --bs-table-color: #f3f3f4; --bs-table-striped-color: #f3f3f4; --bs-table-striped-bg: rgba(255, 255, 255, 0.05); }
+
+/* Etapa 6 - pagina dinamica a unui singur produs. */
+.produs-detaliu { display: grid; grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr); overflow: hidden; border-radius: 1.2rem; background: #fff; color: #3d3d42; box-shadow: 0 1rem 2.5rem var(--culoare-umbra); }
+.produs-detaliu__imagine img { width: 100%; height: 100%; min-height: 520px; object-fit: cover; }
+.produs-detaliu__continut { padding: clamp(1.3rem, 4vw, 3rem); }
+.produs-detaliu__continut h2 { color: inherit; font-size: clamp(2rem, 4vw, 3.5rem); }
+.produs-inapoi { display: inline-flex; gap: 0.4rem; margin-bottom: 1.5rem; padding: 0 !important; color: #b80027 !important; font-weight: 700; }
+.produs-detaliu__descriere { font-size: 1.1rem; }
+.produs-detaliu__pret { display: block; margin: 1.2rem 0; font-size: 2rem; }
+.produse-similare { margin-top: 1.25rem; padding: clamp(1rem,2.8vw,2rem); border-radius: 1.2rem; background: linear-gradient(145deg,#83001c,#e1012f); color: #fff; box-shadow: 0 1rem 2.5rem var(--culoare-umbra); }
+.produse-similare__antet h2 { margin: .15rem 0 1rem; color: #fff; }
+.produse-similare__antet .eyebrow { color: #ffd5de; }
+.produse-similare__grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 1rem; }
+.produse-similare__grid article { overflow: hidden; border-radius: 1rem; background: #fff; color: #3d3d42; }
+.produse-similare__grid img { width: 100%; aspect-ratio: 3/2; object-fit: cover; }
+.produse-similare__grid h3, .produse-similare__grid p { margin: .65rem 1rem; }
+.produse-similare__grid a { padding: 0 !important; color: #b80027 !important; text-decoration: none !important; }
+.seturi-produs { margin-top: 1.25rem; padding: clamp(1rem,2.8vw,2rem); border-radius: 1.2rem; background: #fff; color: #3d3d42; box-shadow: var(--forge-umbra-soft,0 1rem 2.5rem var(--culoare-umbra)); }
+.seturi-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1rem; }
+.set-card { padding: 1.25rem; border: 1px solid rgba(225,1,47,.25); border-radius: 1rem; background: #fff; color: #3d3d42; box-shadow: 0 .6rem 1.3rem rgba(54,0,12,.13); }
+.set-card h2,.set-card h3 { color: #b80027; }
+.set-produse { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: .65rem; margin: 1rem 0; }
+.set-produse a { overflow: hidden; padding: 0 !important; border-radius: .7rem; background: #f7f3f4 !important; color: #83001c !important; text-decoration: none !important; }
+.set-produse img { width: 100%; aspect-ratio: 3/2; object-fit: cover; }
+.set-produse span { display: block; padding: .5rem; font-weight: 700; }
+html[data-tema="dark"] .set-card, html[data-tema="dark"] .seturi-produs, html[data-tema="contrast"] .set-card, html[data-tema="contrast"] .seturi-produs { background: #25262b; color: #fff; }
+
+@media screen and (max-width: 1100px) {
+  .grid-produse { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .produse-noi__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .produse-similare__grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .seturi-grid { grid-template-columns: 1fr; }
+  .produs-detaliu { grid-template-columns: 1fr; }
+  .produs-detaliu__imagine img { min-height: 320px; max-height: 520px; }
+}
+@media screen and (max-width: 759px) {
+  .oferta-curenta { align-items: flex-start; flex-direction: column; }
+  .grid-produse { grid-template-columns: 1fr; }
+  .produse-noi__grid { grid-template-columns: 1fr; }
+  .produse-similare__grid { grid-template-columns: 1fr; }
+  .set-produse { grid-template-columns: 1fr; }
+  .produse-noi__antet { align-items: flex-start; flex-direction: column; }
+  .main-produse { width: min(100% - 1rem, 720px); }
+}
+/* Etapa 6 - task Bootstrap 0.3a: pe ecran mic raman doar iconurile. */
+@media screen and (max-width: 575px) {
+  .text-buton { display: none; }
+  .operatii-produse .btn { width: 2.8rem; min-height: 2.8rem; padding-inline: 0; }
+  .select-operatie { flex: 1 1 46%; min-width: 0; }
+  .panou-filtre__titlu { flex-direction: column; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body, header, footer, .zona, .produs-card__imagine img { transition: none; }
+}

@@ -1,0 +1,248 @@
+@use "sass:math";
+
+/* Etapa 5 - galeria statica, afisata pe prima pagina si pe pagina dedicata. */
+.galerie-statica,
+.galerie-animata-sectiune {
+  grid-column: 1 / -1;
+  width: 100%;
+  overflow: visible;
+  background:
+    radial-gradient(circle at 94% 8%, rgba(255, 255, 255, 0.15), transparent 24rem),
+    linear-gradient(145deg, #c8002a, #e1012f 48%, #ba0027);
+}
+
+.galerie-statica__intro,
+.galerie-animata-sectiune__intro {
+  max-width: 760px;
+  margin-bottom: 1.4rem;
+}
+
+.galerie-eticheta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.65rem;
+  padding: 0.32rem 0.72rem;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 999px;
+  background: rgba(31, 31, 31, 0.18);
+  color: #fff;
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.galerie-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  width: 100%;
+}
+
+.galerie-card {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  margin: 0;
+  border: 0 solid #fff;
+  border-radius: 1rem;
+  background: #fff;
+  color: #3b3b3b;
+  box-shadow: 0 0.75rem 1.8rem rgba(31, 31, 31, 0.2);
+  transform-origin: center;
+  transition: transform 0.6s ease, border-width 0.6s ease, box-shadow 0.6s ease;
+}
+
+.galerie-card:hover,
+.galerie-card:focus-within {
+  z-index: 5;
+  border-width: 4px;
+  transform: scale(1.25) rotate(-10deg);
+  box-shadow: 0 1.4rem 3rem rgba(31, 31, 31, 0.38);
+}
+
+.galerie-card__imagine {
+  display: block;
+  padding: 0 !important;
+  border-radius: 0.9rem 0.9rem 0 0;
+  overflow: hidden;
+  text-decoration: none !important;
+}
+
+.galerie-card__imagine img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+.galerie-card figcaption {
+  display: grid;
+  gap: 0.3rem;
+  padding: 0.85rem 1rem 1rem;
+}
+
+.galerie-card figcaption strong {
+  color: #3b3b3b;
+  font-size: 1.08rem;
+}
+
+.galerie-card figcaption span {
+  line-height: 1.35;
+}
+
+.galerie-card figcaption small {
+  color: #6d6d6d;
+}
+
+.galerie-card .galerie-credit a {
+  padding: 0 !important;
+  color: #b30026 !important;
+  font-weight: 700;
+}
+
+.galerie-mesaj {
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 0.8rem;
+}
+
+/* Pentru zece imagini, randurile centrale lasa golul cerut in mijloc. */
+@media screen and (min-width: 1101px) {
+  .galerie-grid .galerie-card:nth-child(4),
+  .galerie-grid .galerie-card:nth-child(6) {
+    grid-column: 1;
+  }
+
+  .galerie-grid .galerie-card:nth-child(5),
+  .galerie-grid .galerie-card:nth-child(7) {
+    grid-column: 3;
+  }
+}
+
+@media screen and (min-width: 760px) and (max-width: 1100px) {
+  .galerie-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .galerie-card:hover,
+  .galerie-card:focus-within {
+    transform: scale(1.12) rotate(-6deg);
+  }
+}
+
+@media screen and (max-width: 759px) {
+  .galerie-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .galerie-card:hover,
+  .galerie-card:focus-within {
+    transform: scale(1.04) rotate(-2deg);
+  }
+}
+
+/* Etapa 5 bonus - galerie animata generata prin SASS pentru 3, 6, 9 sau 12 imagini. */
+.galerie-animata {
+  display: grid;
+  width: min(100%, 900px);
+  margin: 0 auto;
+  border: 10px solid transparent;
+  border-image: repeating-linear-gradient(135deg, #fff 0 12px, #e1012f 12px 24px, #575757 24px 36px) 10;
+  background: #1f1f1f;
+  box-shadow: 0 1.2rem 2.8rem rgba(31, 31, 31, 0.35);
+}
+
+.galerie-animata__cadru {
+  grid-area: 1 / 1;
+  position: relative;
+  margin: 0;
+  opacity: 0;
+  overflow: hidden;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+}
+
+.galerie-animata__cadru img {
+  display: block;
+  width: 100%;
+  height: clamp(300px, 46vw, 520px);
+  object-fit: cover;
+}
+
+.galerie-animata__cadru figcaption {
+  position: absolute;
+  inset: auto 0 0;
+  display: grid;
+  gap: 0.15rem;
+  padding: 2.4rem 1.3rem 1rem;
+  background: linear-gradient(transparent, rgba(20, 20, 20, 0.92));
+  color: #fff;
+}
+
+.galerie-animata__cadru figcaption strong {
+  color: #fff;
+  font-size: 1.25rem;
+}
+
+.galerie-animata:hover .galerie-animata__cadru {
+  animation-play-state: paused;
+}
+
+@each $total in 3, 6, 9, 12 {
+  $pas: math.div(100%, $total);
+  $sfarsit-vizibil: $pas * 0.72;
+  $durata: $total * 3s;
+
+  @keyframes galerie-estompare-#{$total} {
+    0%, #{$sfarsit-vizibil} { opacity: 1; }
+    #{$pas}, 100% { opacity: 0; }
+  }
+
+  @keyframes galerie-decupare-#{$total} {
+    0% { opacity: 1; clip-path: inset(50% 50% 50% 50%); }
+    #{$sfarsit-vizibil} { opacity: 1; clip-path: inset(0); }
+    #{$pas}, 100% { opacity: 0; clip-path: inset(0); }
+  }
+
+  .galerie-animata--#{$total} .galerie-animata__cadru {
+    animation-name: galerie-estompare-#{$total};
+    animation-duration: $durata;
+  }
+
+  .galerie-animata--#{$total} .galerie-animata__cadru:nth-child(3n) {
+    animation-name: galerie-decupare-#{$total};
+  }
+
+  @for $index from 1 through $total {
+    .galerie-animata--#{$total} .galerie-animata__cadru:nth-child(#{$index}) {
+      animation-delay: ($index - 1) * 3s;
+    }
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .galerie-animata-sectiune {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .galerie-card {
+    transition: none;
+  }
+
+  .galerie-animata__cadru {
+    display: none;
+    animation: none !important;
+  }
+
+  .galerie-animata__cadru:first-child {
+    display: block;
+    opacity: 1;
+  }
+}

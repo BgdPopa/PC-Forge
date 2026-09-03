@@ -52,11 +52,13 @@ $btn-padding-x: 1.2rem;
 $btn-padding-y: 0.55rem;
 
 $card-border-radius: 1rem;
-$card-border-color: #e02f35;
+$card-border-color: rgba(#e02f35, 0.35);
 $card-bg: #ffffff;
 $card-color: #575757;
 
 $alert-border-radius: 1rem;
+$alert-padding-x: 1rem;
+$alert-padding-y: 0.8rem;
 
 /* Import Bootstrap dupa modificarea variabilelor */
 @import "../../node_modules/bootstrap/scss/bootstrap";

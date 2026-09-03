@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ro">
+  <%- include("../fragmente/head", { titlu: "PC Forge - " + etichetaCategorie }) %>
+  <body id="top" data-pagina="produse">
+    <%- include("../fragmente/header") %>
+    <main class="main-produse">
+      <!-- Etapa 6 - cerinta individuala, punctul 1: pagina entitatilor aplicatiei. -->
+      <section class="produse-hero" aria-labelledby="titlu-produse">
+        <span class="badge text-bg-light">Etapa 6 · PostgreSQL + JavaScript</span>
+        <h2 id="titlu-produse"><%= etichetaCategorie %></h2>
+        <p>Compară componentele PC Forge după performanță, categorie, preț, conectivitate și disponibilitate. Datele sunt încărcate din PostgreSQL.</p>
+      </section>
+
+      <!-- Etapa 6 - cerinta individuala, punctele 6 si 7: cele opt filtre. -->
+      <section class="panou-filtre" aria-labelledby="titlu-filtre">
+        <div class="panou-filtre__titlu">
+          <div><span class="eyebrow">Configurator PC Forge</span><h2 id="titlu-filtre">Filtrează configurația</h2></div>
+          <!-- Etapa 6 - Bonus 15: numarul produselor afisate. -->
+          <span class="badge rounded-pill text-bg-secondary" id="numar-produse"><%= produse.length %> produse</span>
+        </div>
+
+        <!-- Etapa 6 - task Bootstrap 0.3d: inputurile sunt asezate in grid Bootstrap. -->
+        <div class="row g-3" id="zona-filtre">
+          <div class="col-12 col-md-6 col-xl-4">
+            <label class="form-label" for="inp-nume">Numele produsului</label>
+            <input class="form-control" type="text" id="inp-nume" placeholder="Exemplu: Forge" autocomplete="off" />
+            <div class="invalid-feedback">Folosește numai litere, spații și cratimă.</div>
+          </div>
+
+          <div class="col-12 col-md-6 col-xl-4">
+            <label class="form-label d-flex justify-content-between" for="inp-scor"><span>Scor minim de performanță</span><output id="valoare-scor" for="inp-scor"><%= filtre.scorMinim %></output></label>
+            <!-- Etapa 6 - cerinta 6b: min/max si valoarea selectata sunt generate din date. -->
+            <input class="form-range" type="range" id="inp-scor" min="<%= filtre.scorMinim %>" max="<%= filtre.scorMaxim %>" value="<%= filtre.scorMinim %>" />
+            <div class="range-limite"><span><%= filtre.scorMinim %></span><span><%= filtre.scorMaxim %></span></div>
+          </div>
+
+          <div class="col-12 col-md-6 col-xl-4">
+            <label class="form-label" for="inp-culoare">Culoare</label>
+            <input class="form-control" type="text" id="inp-culoare" list="lista-culori" placeholder="Orice culoare" autocomplete="off" />
+            <datalist id="lista-culori"><% filtre.culori.forEach(function(culoare) { %><option value="<%= culoare %>"></option><% }); %></datalist>
+            <div class="invalid-feedback">Alege o culoare existentă din listă.</div>
+          </div>
+
+          <fieldset class="col-12 col-md-6 col-xl-4">
+            <legend class="form-label">Disponibilitate</legend>
+            <!-- Etapa 6 - task Bootstrap 0.3c: radio buttons ca toggle buttons. -->
+            <div class="btn-group w-100" role="group" aria-label="Disponibilitate">
+              <input class="btn-check" type="radio" name="stoc" id="stoc-toate" value="toate" checked /><label class="btn btn-outline-primary" for="stoc-toate">Toate</label>
+              <input class="btn-check" type="radio" name="stoc" id="stoc-da" value="da" /><label class="btn btn-outline-primary" for="stoc-da">În stoc</label>
+              <input class="btn-check" type="radio" name="stoc" id="stoc-nu" value="nu" /><label class="btn btn-outline-primary" for="stoc-nu">Indisponibil</label>
+            </div>
+          </fieldset>
+
+          <fieldset class="col-12 col-md-6 col-xl-4">
+            <legend class="form-label">Categorii</legend>
+            <div class="filtre-check">
+              <% filtre.categorii.forEach(function(categorie, index) { %>
+                <div class="form-check"><input class="form-check-input filtru-categorie" type="checkbox" value="<%= categorie %>" id="categorie-<%= index %>" /><label class="form-check-label" for="categorie-<%= index %>"><%= categorie.replaceAll("_", " ") %></label></div>
+              <% }); %>
+            </div>
+          </fieldset>
+
+          <div class="col-12 col-md-6 col-xl-4">
+            <!-- Etapa 6 - task Bootstrap 0.3b: textarea cu floating label si is-invalid din JS. -->
+            <div class="form-floating textarea-filtru"><textarea class="form-control" id="inp-descriere" placeholder="Cuvinte din descriere" maxlength="120"></textarea><label for="inp-descriere">Cuvinte din descriere</label><div class="invalid-feedback">Introdu minimum 3 caractere sau lasă câmpul gol.</div></div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <label class="form-label" for="select-subcategorie">Subcategorie</label>
+            <select class="form-select" id="select-subcategorie"><option value="" selected>Orice subcategorie</option><% filtre.subcategorii.forEach(function(subcategorie) { %><option value="<%= subcategorie %>"><%= subcategorie.replaceAll("-", " ") %></option><% }); %></select>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <label class="form-label" for="select-conectivitate">Conectivitate (selecție multiplă)</label>
+            <select class="form-select" id="select-conectivitate" multiple size="3"><% filtre.conexiuni.forEach(function(conexiune) { %><option value="<%= conexiune %>"><%= conexiune %></option><% }); %></select>
+            <div class="form-text">Fără selecție înseamnă orice conectivitate.</div>
+          </div>
+        </div>
+
+        <!-- Etapa 6 - cerinta individuala, punctul 8: operatiile pe produse. -->
+        <div class="operatii-produse mt-4">
+          <!-- Etapa 7 - Bonus 3: utilizatorul decide explicit daca filtrele se pastreaza. -->
+          <div class="form-check form-switch salvare-filtre">
+            <input class="form-check-input" type="checkbox" role="switch" id="salveaza-filtre" />
+            <label class="form-check-label" for="salveaza-filtre">Salvează filtrele</label>
+          </div>
+          <button class="btn btn-primary" type="button" id="btn-filtrare"><i class="bi bi-funnel-fill" aria-hidden="true"></i><span class="text-buton">Filtrează</span></button>
+          <%# Etapa 6 - Bonus 10a/10b: demonstrarea filtrarii pe server prin fetch. %><button class="btn btn-outline-primary" type="button" id="btn-filtrare-server" title="Filtrare executată în PostgreSQL"><i class="bi bi-server"></i><span class="text-buton">Filtrare server</span></button>
+          <!-- Etapa 6 - Bonus 8: utilizatorul alege doua chei din minimum trei. -->
+          <label class="visually-hidden" for="cheie-sortare-1">Prima cheie de sortare</label>
+          <select class="form-select form-select-sm select-operatie" id="cheie-sortare-1"><option value="raport" selected>Raport scor/preț</option><option value="pret">Preț</option><option value="scor">Scor</option><option value="nume">Nume</option><option value="subcategorie">Subcategorie</option></select>
+          <label class="visually-hidden" for="cheie-sortare-2">A doua cheie de sortare</label>
+          <select class="form-select form-select-sm select-operatie" id="cheie-sortare-2"><option value="subcategorie" selected>Subcategorie</option><option value="nume">Nume</option><option value="pret">Preț</option><option value="scor">Scor</option><option value="raport">Raport scor/preț</option></select>
+          <button class="btn btn-secondary" type="button" id="btn-sortare-crescator"><i class="bi bi-sort-up" aria-hidden="true"></i><span class="text-buton">Crescător</span></button>
+          <button class="btn btn-secondary" type="button" id="btn-sortare-descrescator"><i class="bi bi-sort-down" aria-hidden="true"></i><span class="text-buton">Descrescător</span></button>
+          <label class="visually-hidden" for="tip-calcul">Tipul calculului</label>
+          <select class="form-select form-select-sm select-operatie" id="tip-calcul"><option value="suma">Suma prețurilor</option><option value="medie">Media prețurilor</option><option value="minim">Prețul minim</option><option value="maxim">Prețul maxim</option></select>
+          <button class="btn btn-primary" type="button" id="btn-calcul"><i class="bi bi-calculator-fill" aria-hidden="true"></i><span class="text-buton">Calculează</span></button>
+          <button class="btn btn-outline-danger" type="button" id="btn-resetare"><i class="bi bi-arrow-counterclockwise" aria-hidden="true"></i><span class="text-buton">Resetează</span></button>
+        </div>
+      </section>
+
+      <!-- Etapa 6 - cerinta individuala, punctul 5: afisare prin loop EJS. -->
+      <section class="zona-lista-produse" aria-labelledby="titlu-lista-produse">
+        <h2 id="titlu-lista-produse">Selecția PC Forge</h2>
+        <!-- Etapa 6 - Bonus 3: mesaj in lipsa rezultatelor. -->
+        <p id="mesaj-fara-produse" class="alert alert-light" hidden>Nu există produse conform filtrării curente.</p>
+        <div class="grid-produse" id="lista-produse">
+          <% produse.forEach(function(produs, index) { %>
+            <%# Etapa 7 - cerinta 16: acestea sunt carduri Bootstrap reale, animate din JS. %>
+            <article class="card produs-card <%= produs.categorie %> <%= produs.subcategorie %>" id="elem_<%= produs.id %>" data-produs-id="<%= produs.id %>" data-index-initial="<%= index %>" data-nume="<%= produs.nume %>" data-descriere="<%= produs.descriere %>" data-imagine="<%= produs.imagine %>" data-categorie="<%= produs.categorie %>" data-subcategorie="<%= produs.subcategorie %>" data-pret="<%= produs.pret %>" data-scor="<%= produs.scor_performanta %>" data-culoare="<%= produs.culoare %>" data-conectivitate='<%- JSON.stringify(produs.conectivitate) %>' data-stoc="<%= produs.in_stoc %>">
+              <div class="produs-card__imagine">
+                <img src="<%= produs.imagine %>" alt="<%= produs.nume %> - <%= produs.descriere %>" loading="lazy" />
+                <div class="produs-card__badge-uri"><% if (produs.esteNou) { %><span class="badge text-bg-primary">NOU</span><% } %><% if (produs.esteCelMaiIeftin) { %><span class="badge text-bg-success">Cel mai ieftin din categorie</span><% } %></div>
+              </div>
+              <div class="card-body">
+                <%# Etapa 6 - Bonus 6: fixare, ascundere temporara si ascundere pe durata tabului. %>
+                <div class="produs-card__actiuni" role="group" aria-label="Acțiuni pentru <%= produs.nume %>">
+                  <%# Etapa 8 - Bonus 13: buton vizibil numai utilizatorului logat. %>
+                  <% if (typeof utilizatorCurent !== 'undefined' && utilizatorCurent) { %><button class="btn btn-sm <%= produs.este_favorit ? 'btn-danger' : 'btn-outline-danger' %> actiune-favorit" type="button" title="Adaugă sau elimină din favorite" aria-pressed="<%= produs.este_favorit %>"><i class="bi bi-heart<%= produs.este_favorit ? '-fill' : '' %>"></i></button><% } %>
+                  <button class="btn btn-sm btn-outline-primary actiune-fixare" type="button" title="Păstrează produsul la orice filtrare" aria-label="Păstrează produsul"><i class="bi bi-pin-angle-fill"></i></button>
+                  <button class="btn btn-sm btn-outline-secondary actiune-ascundere" type="button" title="Ascunde produsul până la următoarea filtrare" aria-label="Ascunde temporar"><i class="bi bi-eye-slash"></i></button>
+                  <button class="btn btn-sm btn-outline-danger actiune-sesiune" type="button" title="Ascunde produsul în acest tab" aria-label="Ascunde în acest tab"><i class="bi bi-x-circle"></i></button>
+                  <%# Etapa 6 - Bonus 20: selectarea produsului pentru comparație. %>
+                  <button class="btn btn-sm btn-outline-dark actiune-comparare" type="button" title="Adaugă produsul la comparație"><i class="bi bi-columns-gap"></i><span class="visually-hidden">Compară</span></button>
+                </div>
+                <p class="produs-card__categorie"><%= produs.categorie %> · <%= produs.subcategorie.replaceAll("-", " ") %></p>
+                <p class="produs-favorite" data-favorite-id="<%= produs.id %>"><i class="bi bi-heart-fill"></i> <span><%= produs.numar_favorite %></span> utilizatori îl preferă</p>
+                <h3 class="card-title"><a href="/produs/<%= produs.id %>"><%= produs.nume %></a></h3>
+                <p class="card-text"><%= produs.descriere %></p>
+                <table class="table table-sm produs-specificatii"><tbody><tr><th>Scor</th><td><%= produs.scor_performanta %>/100</td></tr><tr><th>Culoare</th><td><%= produs.culoare %></td></tr><tr><th>Conectivitate</th><td><%= produs.conectivitate.join(", ") %></td></tr><tr><th>Adăugat</th><td><time datetime="<%= produs.data_adaugare %>"><%= produs.data_adaugare %></time></td></tr><tr><th>Disponibil</th><td><%= produs.in_stoc ? "Da" : "Nu" %></td></tr></tbody></table>
+              </div>
+              <div class="card-footer produs-card__footer"><strong class="produs-pret"><% if (produs.oferta) { %><s><%= produs.pret.toFixed(2) %></s> <ins><%= produs.pretRedus.toFixed(2) %> lei</ins><span class="badge text-bg-danger">-<%= produs.oferta.reducere %>%</span><% } else { %><%= produs.pret.toFixed(2) %> lei<% } %></strong><a class="btn btn-primary" href="/produs/<%= produs.id %>">Detalii <i class="bi bi-arrow-right" aria-hidden="true"></i></a></div>
+            </article>
+          <% }); %>
+        </div>
+        <%# Etapa 6 - Bonus 5: paginarea se genereaza dinamic dupa filtrare. %>
+        <nav class="paginare-produse" aria-label="Paginarea produselor"><ul class="pagination justify-content-center" id="paginare-produse"></ul></nav>
+      </section>
+    </main>
+    <%# Etapa 6 - Bonus 11: un singur modal Bootstrap reutilizat pentru toate cardurile. %>
+    <div class="modal fade" id="modal-produs" tabindex="-1" aria-labelledby="modal-produs-titlu" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header"><h2 class="modal-title fs-4" id="modal-produs-titlu"></h2><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Închide"></button></div><div class="modal-body" id="modal-produs-continut"></div><div class="modal-footer"><a class="btn btn-primary" id="modal-produs-link" href="#">Pagina produsului</a><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Închide</button></div></div></div>
+    </div>
+    <%# Etapa 6 - Bonus 20: container persistent pentru maximum doua produse. %>
+    <aside id="container-comparare" class="container-comparare" hidden aria-live="polite"><div><strong>Compară produse</strong><div id="lista-comparare"></div></div><div class="container-comparare__butoane"><button class="btn btn-sm btn-light" id="afiseaza-comparatie" type="button" hidden>Afișează</button><button class="btn-close btn-close-white" id="goleste-comparatie" type="button" aria-label="Golește comparația"></button></div></aside>
+    <%- include("../fragmente/footer") %>
+    <script src="/resurse/js/produse.js"></script>
+    <script src="/resurse/js/favorite.js"></script>
+  </body>
+</html>

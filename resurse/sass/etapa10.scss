@@ -1,0 +1,54 @@
+/* Etapa 10 - aspect: finisare discreta, fara schimbarea identitatii PC Forge. */
+:root {
+  --forge-rosu: #e1012f;
+  --forge-visiniu: #83001c;
+  --forge-suprafata: #ffffff;
+  --forge-raza: 1.15rem;
+  --forge-umbra-soft: 0 .8rem 2.2rem rgba(35, 0, 8, .16);
+}
+
+html { scroll-behavior: smooth; }
+body { line-height: 1.55; background-image: radial-gradient(circle at 8% 6%, rgba(225,1,47,.055), transparent 25rem); }
+header { position: relative; isolation: isolate; box-shadow: 0 .45rem 1.4rem rgba(35,0,8,.18); }
+header::after { content: ""; position: absolute; z-index: -1; inset: auto 4vw 0; height: 1px; background: linear-gradient(90deg,transparent,rgba(255,255,255,.75),transparent); }
+header > h1 { letter-spacing: .025em; text-shadow: 0 .15rem .45rem rgba(0,0,0,.22); }
+
+/* Navigatia ramane aceeasi, dar primeste o separare si focus mai clar. */
+.meniu-principal { backdrop-filter: blur(9px); }
+.meniu-principal__link, .meniu-principal__sub a { transition: color .2s ease, background-color .2s ease, transform .2s ease; }
+.meniu-principal__link:focus-visible, .meniu-principal__sub a:focus-visible, .btn:focus-visible, .form-control:focus-visible, .form-select:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+.meniu-principal__sub { border: 1px solid rgba(255,255,255,.2); box-shadow: 0 .85rem 2rem rgba(0,0,0,.3); }
+
+/* Suprafetele deja existente primesc aceeasi raza si aceeasi umbra. */
+.zona, .cont-card, .panou-filtre, .zona-lista-produse, .produs-detaliu, .produse-similare, #bootstrap-custom { border-radius: var(--forge-raza); }
+.zona, .cont-card, .panou-filtre, .produs-detaliu { box-shadow: var(--forge-umbra-soft); }
+.card { transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease; }
+.card:hover { transform: translateY(-3px); box-shadow: 0 1rem 2rem rgba(35,0,8,.2); }
+.btn { font-weight: 700; letter-spacing: .01em; box-shadow: 0 .2rem .55rem rgba(35,0,8,.08); }
+.btn:hover { transform: translateY(-1px); }
+.form-control, .form-select { box-shadow: inset 0 1px 2px rgba(35,0,8,.045); }
+.form-control:focus, .form-select:focus { box-shadow: 0 0 0 .22rem rgba(225,1,47,.16); }
+
+footer { border-top: 3px solid rgba(255,255,255,.3); box-shadow: 0 -1rem 2.5rem rgba(35,0,8,.12); }
+footer a { text-underline-offset: .2em; }
+::selection { background: #2b2b31; color: #fff; }
+
+html[data-tema="dark"] body, html[data-tema="contrast"] body { background-image: radial-gradient(circle at 8% 6%, rgba(225,1,47,.13), transparent 27rem); }
+html[data-tema="dark"] .card:hover, html[data-tema="contrast"] .card:hover { box-shadow: 0 1rem 2.2rem rgba(0,0,0,.5); }
+
+/* Etapa 10 - responsive desktop: tema si autentificarea pot mari meniul, deci acesta se poate aseza pe doua randuri fara scroll orizontal. */
+@media (min-width: 1101px) and (max-width: 1450px) {
+  .meniu-principal__lista { flex-wrap: wrap !important; justify-content: center; }
+  .tema-meniu { margin-inline: auto; }
+}
+
+@media (max-width: 759px) {
+  header { box-shadow: 0 .3rem 1rem rgba(35,0,8,.16); }
+  .card:hover { transform: none; }
+  .zona, .cont-card, .panou-filtre, .zona-lista-produse, .produs-detaliu, .produse-similare { border-radius: .9rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .card, .btn, .meniu-principal__link, .meniu-principal__sub a { transition: none; transform: none !important; }
+}

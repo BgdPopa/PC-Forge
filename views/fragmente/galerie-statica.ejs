@@ -1,0 +1,31 @@
+<% const intervaleSfert = ["00–14", "15–29", "30–44", "45–59"]; %>
+<section id="galerie-statica" class="zona galerie-statica" aria-labelledby="titlu-galerie-statica">
+  <div class="galerie-statica__intro">
+    <span class="galerie-eticheta"><i class="fa-solid fa-camera-retro" aria-hidden="true"></i> Selecție dinamică</span>
+    <h2 id="titlu-galerie-statica">Galeria atelierului PC Forge</h2>
+    <p>Componentele și perifericele sunt selectate de server în funcție de sfertul orei curente. Miniaturile au fost decupate automat pentru o prezentare uniformă.</p>
+  </div>
+
+  <% if (imaginiGalerie.length) { %>
+    <div class="galerie-grid">
+      <% imaginiGalerie.forEach(function(imagine) { %>
+        <figure class="galerie-card">
+          <a class="galerie-card__imagine" href="<%= imagine.cale_original %>" target="_blank" rel="noopener noreferrer">
+            <img src="<%= imagine.cale_thumbnail %>" alt="<%= imagine.descriere %>" width="720" height="480" loading="lazy" />
+          </a>
+          <figcaption>
+            <strong><%= imagine.titlu %></strong>
+            <span><%= imagine.descriere %></span>
+            <small>Afișată în intervalul **:<%= intervaleSfert[imagine.sfert_ora - 1] %>.</small>
+            <small class="galerie-credit">
+              Foto: <a href="<%= imagine.sursa %>" target="_blank" rel="noopener noreferrer"><%= imagine.autor %></a>
+              · <a href="<%= imagine.url_licenta %>" target="_blank" rel="license noopener noreferrer"><%= imagine.licenta %></a>
+            </small>
+          </figcaption>
+        </figure>
+      <% }); %>
+    </div>
+  <% } else { %>
+    <p class="galerie-mesaj">Selecția pentru acest interval este în curs de pregătire.</p>
+  <% } %>
+</section>

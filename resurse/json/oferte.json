@@ -1,0 +1,28 @@
+{
+  "oferte": [
+    {
+      "categorie": "componente",
+      "data-incepere": "2026-08-27T22:26:43.238Z",
+      "data-finalizare": "2026-08-27T22:31:43.238Z",
+      "reducere": 25
+    },
+    {
+      "categorie": "monitoare",
+      "data-incepere": "2026-08-27T22:21:43.236Z",
+      "data-finalizare": "2026-08-27T22:26:43.236Z",
+      "reducere": 50
+    },
+    {
+      "categorie": "stocare",
+      "data-incepere": "2026-08-27T22:16:43.225Z",
+      "data-finalizare": "2026-08-27T22:21:43.225Z",
+      "reducere": 5
+    },
+    {
+      "categorie": "periferice",
+      "data-incepere": "2026-08-27T22:11:43.204Z",
+      "data-finalizare": "2026-08-27T22:16:43.204Z",
+      "reducere": 25
+    }
+  ]
+}

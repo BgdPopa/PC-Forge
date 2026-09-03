@@ -842,7 +842,6 @@ footer a:not(#link-top):hover {
 
 /* 5. La click apare border in jurul linkului */
 main section a:not(.tab-video):not(#link-top):not(.btn):active,
-,
 footer a:not(#link-top):active {
   border: 2px solid var(--culoare-link-activ);
   border-radius: 0.35rem;
@@ -910,30 +909,100 @@ footer a:not(#link-top):active {
   grid-column: 1 / -1;
 }
 
-/* Etapa 5 - corectii vizuale pentru sectiunea Bootstrap customizat */
-#bootstrap-custom .card,
-#bootstrap-custom .alert {
-  border: 2px solid var(--culoare-bordura);
-  box-shadow: 0 6px 14px var(--culoare-umbra);
+/* Etapa 5 - integrarea componentelor Bootstrap in tema PC Forge */
+#bootstrap-custom {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 48%),
+    var(--culoare-zona);
+  overflow: hidden;
+}
+
+#bootstrap-custom .bootstrap-intro {
+  max-width: 54rem;
+  margin-bottom: 1.25rem;
+}
+
+#bootstrap-custom .bootstrap-intro .badge {
+  margin-bottom: 0.65rem;
+  color: var(--culoare-highlight);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+#bootstrap-custom .bootstrap-intro h2 {
+  margin-bottom: 0.35rem;
+}
+
+#bootstrap-custom .card {
+  margin: 0;
+  padding: 0;
+  border: 2px solid rgba(224, 47, 53, 0.35);
+  box-shadow: 0 8px 20px rgba(87, 87, 87, 0.28);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+#bootstrap-custom .card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 26px rgba(87, 87, 87, 0.38);
+}
+
+#bootstrap-custom .card-body {
+  padding: 1.35rem;
+}
+
+#bootstrap-custom .bootstrap-card-icon {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-bottom: 1rem;
+  border-radius: 0.8rem;
+  background-color: rgba(225, 1, 47, 0.1);
+  color: var(--culoare-zona);
+  font-size: 1.25rem;
 }
 
 #bootstrap-custom .card-title {
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.6rem;
   color: var(--culoare-text-inchis);
+  font-weight: 700;
 }
 
 #bootstrap-custom .card-text {
+  margin-bottom: 1.25rem;
   color: var(--culoare-text-inchis);
 }
 
 #bootstrap-custom .alert,
 #bootstrap-custom .alert strong {
-  color: var(--culoare-text-inchis);
+  color: #681322;
+}
+
+#bootstrap-custom .alert {
+  width: 100%;
+  border-width: 1px;
+  box-shadow: none;
 }
 
 #bootstrap-custom .btn {
   font-weight: 700;
   text-decoration: none;
+}
+
+#bootstrap-custom .btn-outline-primary:hover {
+  color: var(--culoare-text-deschis);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #bootstrap-custom .card {
+    transition: none;
+  }
+
+  #bootstrap-custom .card:hover {
+    transform: none;
+  }
 }
 
 /* Etapa 5 - efect-css-stilizare-hr:
@@ -992,7 +1061,7 @@ footer a:not(#link-top):active {
   border: 2px solid var(--culoare-text-deschis);
   border-radius: 14px;
   overflow: hidden;
-  background-image: url("/resurse/imagini/galerie/componente-pc-1.jpg");
+  background-image: url("/resurse/imagini/galerie/originale/placa-baza-desktop.jpg");
   background-size: cover;
   background-position: center;
   filter: grayscale(0);

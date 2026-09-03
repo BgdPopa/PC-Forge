@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ro">
+  <%- include("../fragmente/head", { titlu: "PC Forge - Roluri" }) %>
+  <body id="top"><%- include("../fragmente/header") %>
+    <main class="main-cont"><section class="cont-card cont-card--lat">
+      <span class="badge text-bg-danger">Etapa 8 · Bonus 11</span><h2>Roluri și perioade de valabilitate</h2>
+      <% if (mesaj) { %><p class="alert alert-info"><%= mesaj %></p><% } %>
+      <%# Etapa 8 - Bonus 11h: formularul poate crea o alocare cu limite sau NULL. %>
+      <form method="post" class="row g-3 align-items-end">
+        <div class="col-md-4"><label class="form-label">Utilizator</label><select class="form-select" name="id_utilizator" required><% utilizatori.forEach(function(u) { %><option value="<%= u.id %>"><%= u.username %> · <%= u.prenume %> <%= u.nume %></option><% }); %></select></div>
+        <div class="col-md-3"><label class="form-label">Rol</label><select class="form-select" name="id_rol" required><% roluri.forEach(function(r) { %><option value="<%= r.id %>"><%= r.nume %></option><% }); %></select></div>
+        <div class="col-md-2"><label class="form-label">Început</label><input class="form-control" type="date" name="data_inceput" /><label class="form-check"><input class="form-check-input" type="checkbox" name="nedeterminat_inceput" value="da" /> Nedeterminat</label></div>
+        <div class="col-md-2"><label class="form-label">Final</label><input class="form-control" type="date" name="data_expirare" /><label class="form-check"><input class="form-check-input" type="checkbox" name="nedeterminat_final" value="da" /> Nedeterminat</label></div>
+        <div class="col-md-1"><button class="btn btn-primary" type="submit">Alocă</button></div>
+      </form>
+      <div class="table-responsive mt-4"><table class="table table-striped align-middle"><thead><tr><th>Utilizator</th><th>Rol</th><th>Perioadă și editare</th><th>Ștergere</th></tr></thead><tbody>
+        <% alocari.forEach(function(a) { %><tr><td><%= a.username %></td><td><%= a.rol %></td><td>
+          <%# Etapa 8 - Bonus 11h: editarea datelor aceleiasi alocari. %>
+          <form class="row g-2" method="post" action="/administrare-roluri/<%= a.id %>/editare">
+            <div class="col-md-5"><input class="form-control form-control-sm" type="date" name="data_inceput" value="<%= a.data_inceput ? String(a.data_inceput).slice(0,10) : '' %>" /><label class="form-check small"><input class="form-check-input" type="checkbox" name="nedeterminat_inceput" value="da" <%= a.data_inceput ? '' : 'checked' %> /> Început nedeterminat</label></div>
+            <div class="col-md-5"><input class="form-control form-control-sm" type="date" name="data_expirare" value="<%= a.data_expirare ? String(a.data_expirare).slice(0,10) : '' %>" /><label class="form-check small"><input class="form-check-input" type="checkbox" name="nedeterminat_final" value="da" <%= a.data_expirare ? '' : 'checked' %> /> Final nedeterminat</label></div>
+            <div class="col-md-2"><button class="btn btn-sm btn-outline-primary" type="submit">Actualizează</button></div>
+          </form>
+        </td><td><form method="post" action="/administrare-roluri/<%= a.id %>/stergere"><button class="btn btn-sm btn-outline-danger">Șterge</button></form></td></tr><% }); %>
+      </tbody></table></div>
+    </section></main><%- include("../fragmente/footer") %>
+  </body>
+</html>

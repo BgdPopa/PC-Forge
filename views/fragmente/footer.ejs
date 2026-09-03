@@ -42,7 +42,10 @@
          Copyright si time cu datetime -->
     <small>&copy; 2026 PC Forge. Toate drepturile rezervate.</small>
     <br>
-    <small>Ultima actualizare: <time datetime="2026-03-23">23 martie 2026</time></small>
+    <%# Etapa 8 - Bonus 12: data se calculeaza din EJS-uri si produsele bazei de date. %>
+    <% const dataAfisata = typeof dataUltimaModificare !== "undefined" ? new Date(dataUltimaModificare) : new Date(); %>
+    <small>Ultima actualizare: <time datetime="<%= dataAfisata.toISOString() %>"><%= dataAfisata.toLocaleDateString("ro-RO", { day: "numeric", month: "long", year: "numeric" }) %></time></small>
+    <p><a href="/politica-confidentialitate">Politica de confidențialitate și termenii site-ului</a></p>
 
 
     <div class="watermark-print">Popa Bogdan</div>
@@ -52,6 +55,16 @@
         <a href="/#top">Inapoi la inceputul paginii</a>
     </p>
 </footer>
+
+<% if (typeof mesajGlobal !== "undefined" && mesajGlobal) { %><div class="alert alert-info mesaj-site-actualizat"><%= mesajGlobal %></div><% } %>
+<% if (typeof siteModificat !== "undefined" && siteModificat) { %><div id="mesaj-site-actualizat" class="alert alert-warning mesaj-site-actualizat">Au survenit modificări asupra site-ului de la ultima accesare.</div><% } %>
+
+<%# Etapa 6 - Bonus 19: programul saptamanal este disponibil pe orice pagina
+    deoarece fragmentul este inclus in footerul comun. %>
+<%- include("orar") %>
+
+<%# Etapa 7 - bannerul cookie este fragment comun, disponibil pe toate paginile. %>
+<%- include("banner-cookies") %>
 
 <!-- Etapa 2 - task link-top:
      buton fix, fara imagini, care duce la inceputul paginii -->
@@ -64,3 +77,15 @@
 <script>
     document.addEventListener("DOMContentLoaded", function () { var n = document.querySelector(".meniu-principal"); var b = document.getElementById("meniu-hamburger-btn"); var mq = window.matchMedia("(max-width: 700px)"); if (b && n) { b.addEventListener("click", function (e) { e.stopPropagation(); var o = n.classList.toggle("meniu-principal--deschis"); b.classList.toggle("meniu-hamburger--activ", o); b.setAttribute("aria-expanded", o ? "true" : "false"); }); } if (n) { n.querySelectorAll(".meniu-principal__item--has-sub > .meniu-principal__link--subdeclansator").forEach(function (btn) { btn.addEventListener("click", function () { if (!mq.matches) return; var li = btn.closest(".meniu-principal__item--has-sub"); var open = !li.classList.contains("meniu-principal__item--sub-deschis"); n.querySelectorAll(".meniu-principal__item--sub-deschis").forEach(function (x) { if (x !== li) x.classList.remove("meniu-principal__item--sub-deschis"); }); li.classList.toggle("meniu-principal__item--sub-deschis", open); btn.setAttribute("aria-expanded", open ? "true" : "false"); }); }); } });
 </script>
+
+<!-- Etapa 6 - task tema: tema este aplicata si memorata pe toate paginile. -->
+<script src="/resurse/js/tema.js"></script>
+<!-- Etapa 6 - Bonus 19: deschiderea, marcarea zilei curente si inchiderea automata. -->
+<script src="/resurse/js/orar.js?v=etapa6"></script>
+<!-- Etapa 7 - componenta JavaScript oficiala Bootstrap si gestionarea cookie-urilor. -->
+<script src="/resurse/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/resurse/js/cookies.js?v=etapa7"></script>
+<!-- Etapa 8 - Bonus 12: ascunderea automata a notificarii de actualizare. -->
+<script src="/resurse/js/site-actualizat.js?v=etapa8"></script>
+<!-- Etapa 8 - cerinta 12: lista administratorilor activi se actualizeaza periodic. -->
+<script src="/resurse/js/utilizatori-online.js?v=etapa8"></script>

@@ -1,0 +1,31 @@
+<%# Etapa 6 - Bonus 19: orar complet, usor de modificat direct in tabel. %>
+<button id="btn-orar" class="btn btn-dark buton-orar" type="button"
+        aria-controls="panou-orar" aria-expanded="false">
+  <i class="bi bi-clock" aria-hidden="true"></i>
+  <span>Program</span>
+</button>
+
+<aside id="panou-orar" class="panou-orar" aria-labelledby="titlu-orar" hidden>
+  <div class="panou-orar__antet">
+    <div>
+      <span class="eyebrow">Suport PC Forge</span>
+      <h2 id="titlu-orar">Program saptamanal</h2>
+    </div>
+    <button id="inchide-orar" class="btn-close" type="button" aria-label="Inchide programul"></button>
+  </div>
+  <p id="stare-orar" class="alert mb-3" role="status"></p>
+  <div class="table-responsive">
+    <table class="table table-sm table-striped align-middle mb-0">
+      <thead><tr><th>Zi</th><th>Interval</th></tr></thead>
+      <tbody>
+        <tr data-zi="1" data-deschidere="09:00" data-inchidere="18:00"><td>Luni</td><td>09:00–18:00</td></tr>
+        <tr data-zi="2" data-deschidere="09:00" data-inchidere="18:00"><td>Marti</td><td>09:00–18:00</td></tr>
+        <tr data-zi="3" data-deschidere="09:00" data-inchidere="18:00"><td>Miercuri</td><td>09:00–18:00</td></tr>
+        <tr data-zi="4" data-deschidere="09:00" data-inchidere="18:00"><td>Joi</td><td>09:00–18:00</td></tr>
+        <tr data-zi="5" data-deschidere="09:00" data-inchidere="18:00"><td>Vineri</td><td>09:00–18:00</td></tr>
+        <tr data-zi="6" data-deschidere="10:00" data-inchidere="14:00"><td>Sambata</td><td>10:00–14:00</td></tr>
+        <tr data-zi="0" data-inchis="true"><td>Duminica</td><td>Inchis</td></tr>
+      </tbody>
+    </table>
+  </div>
+</aside>

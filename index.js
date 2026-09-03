@@ -4,23 +4,64 @@ const express = require("express");
 const path = require("path");
 const fs = require("fs");
 
+// Etapa 6 - incarcarea configuratiei locale si accesul la PostgreSQL.
+require("dotenv").config({ path: path.join(__dirname, ".env") });
+const accesProduse = require("./module/acces-produse");
+const oferte = require("./module/oferte");
+const curatareBackup = require("./module/curatare-backup");
+const imaginiProduse = require("./module/imagini-produse");
+
+// Etapa 8 - sesiuni si rutele sistemului de utilizatori.
+const session = require("express-session");
+const AccesBD = require("./module/acces-bd");
+const { creeazaRouterUtilizatori } = require("./module/rute-utilizatori");
+
 //Etapa 5 - compilare scss
 const sass = require("sass");
+const sharp = require("sharp");
 
 // Etapa 4 - task 2:
 // Crearea obiectului server express si setarea portului 8080
 const app = express();
 const port = 8080;
+const caleOptiuniServer = path.join(__dirname, "resurse", "json", "optiuni-server.json");
+const optiuniServerInitiale = JSON.parse(fs.readFileSync(caleOptiuniServer, "utf8"));
 
 // Etapa 4 - task 4:
 // Setarea EJS ca view engine si a folderului "views" pentru template-uri
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+// Etapa 8 - cerintele 2, 6 si Bonus 9: formulare, JSON si sesiune configurabila.
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(session({
+  secret: process.env.SESSION_SECRET || "pc-forge-etapa-8-secret-local",
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: Number(optiuniServerInitiale.minuteSesiune || 30) * 60 * 1000,
+    httpOnly: true,
+    sameSite: "lax",
+  },
+}));
+
 // Etapa 4 - task 6:
 // Definirea folderului "resurse" ca folder static.
 // Astfel, in pagini se folosesc cai de tip /resurse/... (cereri catre server)
 app.use("/resurse", express.static(path.join(__dirname, "resurse")));
+
+// Etapa 6 - task stilizare Bootstrap: pachetul oficial Bootstrap Icons.
+app.use(
+  "/resurse/bootstrap-icons",
+  express.static(path.join(__dirname, "node_modules", "bootstrap-icons", "font")),
+);
+
+// Etapa 7 - task bootstrap_js: bundle-ul oficial Bootstrap este servit local.
+app.use(
+  "/resurse/bootstrap/js",
+  express.static(path.join(__dirname, "node_modules", "bootstrap", "dist", "js")),
+);
 
 // Etapa 4 - task 17:
 // Cererile catre o cale din /resurse fara fisier specificat (catre un folder,
@@ -73,9 +114,96 @@ let obGlobal = {
 
   // Etapa 5 - folderul in care salvam backupurile CSS vechi
   folderBackup: path.join(__dirname, "backup"),
+
+  // Etapa 5 - datele galeriei sunt citite o singura data la pornire
+  obGalerie: null,
+
+  // Etapa 6 - categoriile generate din ENUM-ul bazei de date
+  categoriiProduse: [],
+
+  // Etapa 8 - Bonus 12: cea mai recenta modificare EJS sau din tabela produse.
+  dataUltimaModificare: new Date(0),
 };
 
+// Etapa 6 - task meniu: etichete de prezentare pentru valorile ENUM.
+const eticheteCategorii = {
+  componente: "Componente",
+  stocare: "Stocare",
+  racire: "Răcire",
+  periferice: "Periferice",
+  monitoare: "Monitoare",
+};
+
+/**
+ * Testeaza baza si publica in app.locals categoriile produselor.
+ * @returns {Promise<void>} Promise rezolvat dupa initializarea meniului.
+ */
+async function initProduse() {
+  const conexiune = await accesProduse.testeazaConexiune();
+  const valori = await accesProduse.obtineCategorii();
+  obGlobal.categoriiProduse = valori.map(function (valoare) {
+    return {
+      valoare: valoare,
+      eticheta: eticheteCategorii[valoare] || valoare,
+    };
+  });
+  app.locals.categoriiProduse = obGlobal.categoriiProduse;
+  const rezultatData = await AccesBD.getInstanta().getClient().query(
+    "SELECT MAX(data_adaugare) AS data FROM produse",
+  );
+  const dataProduse = rezultatData.rows[0].data ? new Date(rezultatData.rows[0].data) : new Date(0);
+  const dataEjs = obtineCeaMaiNouaDataFisier(path.join(__dirname, "views"), ".ejs");
+  obGlobal.dataUltimaModificare = new Date(Math.max(dataProduse.getTime(), dataEjs.getTime()));
+  app.locals.dataUltimaModificare = obGlobal.dataUltimaModificare;
+  console.log(
+    "PostgreSQL conectat: " + conexiune.baza + " / " + conexiune.utilizator,
+  );
+}
+
+/**
+ * Etapa 8 - Bonus 12: gaseste recursiv cea mai noua data a fisierelor dorite.
+ * @param {string} folder Folderul analizat.
+ * @param {string} extensie Extensia filtrata.
+ * @returns {Date} Cea mai recenta data gasita.
+ */
+function obtineCeaMaiNouaDataFisier(folder, extensie) {
+  let dataMaxima = new Date(0);
+  for (const intrare of fs.readdirSync(folder, { withFileTypes: true })) {
+    const cale = path.join(folder, intrare.name);
+    if (intrare.isDirectory()) {
+      const dataSubfolder = obtineCeaMaiNouaDataFisier(cale, extensie);
+      if (dataSubfolder > dataMaxima) dataMaxima = dataSubfolder;
+    } else if (intrare.name.endsWith(extensie)) {
+      const dataFisier = fs.statSync(cale).mtime;
+      if (dataFisier > dataMaxima) dataMaxima = dataFisier;
+    }
+  }
+  return dataMaxima;
+}
+
+/**
+ * Etapa 8 - Bonus 8: transforma un moment anterior intr-o durata usor de prezentat.
+ * @param {string|Date|null} data Momentul ultimei autentificari.
+ * @returns {string|null} Durata exprimata in zile, ore si minute.
+ */
+function formateazaTimpTrecut(data) {
+  if (!data) return null;
+  let minute = Math.max(0, Math.floor((Date.now() - new Date(data).getTime()) / 60000));
+  const zile = Math.floor(minute / 1440);
+  minute -= zile * 1440;
+  const ore = Math.floor(minute / 60);
+  minute -= ore * 60;
+  return [zile ? `${zile} zile` : "", ore ? `${ore} ore` : "", `${minute} minute`]
+    .filter(Boolean)
+    .join(", ");
+}
+
 // Etapa 5 - functie auxiliara pentru crearea folderelor necesare
+/**
+ * Creeaza recursiv un folder numai daca acesta lipseste.
+ * @param {string} caleFolder Calea absoluta a folderului.
+ * @returns {void}
+ */
 function creeazaFolderDacaNuExista(caleFolder) {
   if (!fs.existsSync(caleFolder)) {
     fs.mkdirSync(caleFolder, { recursive: true });
@@ -84,6 +212,12 @@ function creeazaFolderDacaNuExista(caleFolder) {
 }
 
 // Etapa 5 - compilare automata SCSS
+/**
+ * Compileaza un fisier SCSS si salveaza mai intai un backup al CSS-ului existent.
+ * @param {string} caleScss Cale SCSS absoluta sau relativa la folderul Sass.
+ * @param {string} [caleCss] Cale CSS optionala; implicit este dedusa din sursa.
+ * @returns {void}
+ */
 function compileazaScss(caleScss, caleCss) {
   let caleScssAbs;
   let caleCssAbs;
@@ -144,6 +278,15 @@ function compileazaScss(caleScss, caleCss) {
   try {
     const rezultat = sass.compile(caleScssAbs, {
       style: "expanded",
+      quietDeps: true,
+      // Bootstrap 5 foloseste inca API-uri Sass marcate pentru o versiune
+      // viitoare; avertismentele sunt ascunse, fara a ascunde erorile reale.
+      silenceDeprecations: [
+        "import",
+        "global-builtin",
+        "color-functions",
+        "if-function",
+      ],
     });
 
     fs.writeFileSync(caleCssAbs, rezultat.css);
@@ -156,6 +299,10 @@ function compileazaScss(caleScss, caleCss) {
 }
 
 // Etapa 5 - compilarea tuturor fisierelor SCSS la pornirea serverului
+/**
+ * Parcurge recursiv folderul Sass si compileaza toate fisierele principale.
+ * @returns {void}
+ */
 function compileazaToateScss() {
   if (!fs.existsSync(obGlobal.folderScss)) {
     console.warn("Folderul SCSS nu exista: " + obGlobal.folderScss);
@@ -185,6 +332,10 @@ function compileazaToateScss() {
 }
 
 // Etapa 5 - urmarirea modificarilor din folderul SCSS
+/**
+ * Porneste monitorizarea SCSS si recompilarea cu debounce de 500 ms.
+ * @returns {void}
+ */
 function urmaresteScss() {
   if (!fs.existsSync(obGlobal.folderScss)) {
     console.warn(
@@ -228,13 +379,257 @@ function urmaresteScss() {
   );
 }
 
+// Etapa 5 - galerie statica si galerie animata
+// Datele descriptive, intervalul de afisare si atribuirile imaginilor sunt
+// pastrate separat de template-uri, in fisierul galerie.json.
+/**
+ * Citeste o singura data configuratia galeriei din JSON.
+ * @returns {void}
+ */
+function initGalerie() {
+  const caleJson = path.join(__dirname, "resurse", "json", "galerie.json");
+  const continut = fs.readFileSync(caleJson, "utf8");
+  obGlobal.obGalerie = JSON.parse(continut);
+  valideazaGalerie();
+}
+
+/**
+ * Etapa 5 - Bonus 5: valideaza folderul si fiecare imagine declarata in JSON.
+ * Mesajele contin calea exacta, astfel incat problema sa poata fi reparata rapid.
+ * @returns {boolean} True daca toate resursele galeriei exista.
+ */
+function valideazaGalerie() {
+  const erori = [];
+  const caleGalerie = path.join(__dirname, String(obGlobal.obGalerie.cale_galerie || "").replace(/^\//, ""));
+  if (!fs.existsSync(caleGalerie) || !fs.statSync(caleGalerie).isDirectory()) {
+    erori.push(`Folderul cale_galerie nu exista: ${caleGalerie}`);
+  } else {
+    for (const imagine of obGlobal.obGalerie.imagini || []) {
+      const caleImagine = path.join(caleGalerie, imagine.cale_imagine || "");
+      if (!imagine.cale_imagine || !fs.existsSync(caleImagine)) {
+        erori.push(`Imagine declarata in galerie.json, dar absenta de pe disc: ${caleImagine}`);
+      }
+    }
+  }
+  if (erori.length) erori.forEach((mesaj) => console.error(`[Etapa 5 - Bonus 5] ${mesaj}`));
+  else console.log("[Etapa 5 - Bonus 5] Datele galeriei au fost validate cu succes.");
+  return erori.length === 0;
+}
+
+// Miniaturile au aceeasi dimensiune si sunt decupate automat cu Sharp. Un fisier
+// este refacut numai daca lipseste sau daca imaginea originala este mai noua.
+/**
+ * Genereaza miniaturile WebP lipsa sau invechite cu Sharp.
+ * @returns {Promise<void>} Promise rezolvat dupa procesarea imaginilor.
+ */
+async function pregatesteMiniaturiGalerie() {
+  const folderOriginale = path.join(
+    __dirname,
+    "resurse",
+    "imagini",
+    "galerie",
+    "originale",
+  );
+  const folderMiniaturi = path.join(
+    __dirname,
+    "resurse",
+    "imagini",
+    "galerie",
+    "thumbnails",
+  );
+
+  creeazaFolderDacaNuExista(folderMiniaturi);
+
+  for (const imagine of obGlobal.obGalerie.imagini) {
+    const caleOriginal = path.join(folderOriginale, imagine.cale_imagine);
+    const numeMiniatura = path.parse(imagine.cale_imagine).name + ".webp";
+    const caleMiniatura = path.join(folderMiniaturi, numeMiniatura);
+
+    if (!fs.existsSync(caleOriginal)) {
+      console.warn("Imagine lipsa din galerie: " + caleOriginal);
+      continue;
+    }
+
+    const trebuieGenerata =
+      !fs.existsSync(caleMiniatura) ||
+      fs.statSync(caleOriginal).mtimeMs > fs.statSync(caleMiniatura).mtimeMs;
+
+    if (trebuieGenerata) {
+      await sharp(caleOriginal)
+        .resize(720, 480, {
+          fit: "cover",
+          position: "attention",
+        })
+        .webp({ quality: 84 })
+        .toFile(caleMiniatura);
+      console.log("Miniatura generata: " + caleMiniatura);
+    }
+
+    imagine.cale_original =
+      obGlobal.obGalerie.cale_galerie + "/" + imagine.cale_imagine;
+    imagine.cale_thumbnail =
+      obGlobal.obGalerie.cale_thumbnails + "/" + numeMiniatura;
+  }
+}
+
+/**
+ * Selecteaza imaginile aferente sfertului de ora curent.
+ * @returns {object[]} Maximum zece obiecte-imagine pentru EJS.
+ */
+function obtineImaginiGalerieStatica() {
+  const sfertOraCurent = Math.floor(new Date().getMinutes() / 15) + 1;
+
+  return obGlobal.obGalerie.imagini
+    .filter(function (imagine) {
+      return imagine.sfert_ora === sfertOraCurent && imagine.cale_thumbnail;
+    })
+    .slice(0, 10);
+}
+
+/**
+ * Alege aleator un grup consecutiv de imagini pentru galeria animata.
+ * @returns {{imagini: object[], numarImagini: number}} Datele galeriei animate.
+ */
+function obtineGalerieAnimata() {
+  const imaginiDisponibile = obGlobal.obGalerie.imagini.filter(function (imagine) {
+    return imagine.cale_thumbnail;
+  });
+  const numerePermise = [3, 6, 9, 12].filter(function (numar) {
+    return numar < 16 && numar <= imaginiDisponibile.length;
+  });
+  const numarImagini =
+    numerePermise[Math.floor(Math.random() * numerePermise.length)];
+  const offset = Math.floor(Math.random() * imaginiDisponibile.length);
+  const imagini = [];
+
+  for (let index = 0; index < numarImagini; index++) {
+    imagini.push(imaginiDisponibile[(offset + index) % imaginiDisponibile.length]);
+  }
+
+  return { imagini: imagini, numarImagini: numarImagini };
+}
+
 // Etapa 4 - task 13:
 // initErori() citeste si parseaza erori.json, seteaza calea absoluta (servita de
 // server) pentru fiecare imagine folosind cale_baza si salveaza obiectul in obGlobal.obErori
+/**
+ * Etapa 4 - Bonus: cauta proprietati JSON repetate direct in textul fisierului,
+ * inainte ca JSON.parse() sa pastreze numai ultima lor valoare.
+ * @param {string} continut Textul JSON original.
+ * @returns {string[]} Cheile duplicate si pozitiile aproximative din fisier.
+ */
+function gasesteCheiDuplicateJson(continut) {
+  const stiva = [];
+  const duplicate = [];
+
+  for (let index = 0; index < continut.length; index++) {
+    const caracter = continut[index];
+    if (caracter === "{") {
+      stiva.push({ tip: "obiect", chei: new Set() });
+    } else if (caracter === "[") {
+      stiva.push({ tip: "vector" });
+    } else if (caracter === "}" || caracter === "]") {
+      stiva.pop();
+    } else if (caracter === '"') {
+      const inceput = index;
+      index++;
+      let escapare = false;
+      while (index < continut.length) {
+        if (!escapare && continut[index] === '"') break;
+        if (!escapare && continut[index] === "\\") escapare = true;
+        else escapare = false;
+        index++;
+      }
+      const literal = continut.slice(inceput, index + 1);
+      let urmator = index + 1;
+      while (/\s/.test(continut[urmator] || "")) urmator++;
+      const context = stiva[stiva.length - 1];
+      if (continut[urmator] === ":" && context?.tip === "obiect") {
+        const cheie = JSON.parse(literal);
+        if (context.chei.has(cheie)) {
+          const linie = continut.slice(0, inceput).split(/\r?\n/).length;
+          duplicate.push(`proprietatea "${cheie}" repetata in jurul liniei ${linie}`);
+        }
+        context.chei.add(cheie);
+      }
+    }
+  }
+  return duplicate;
+}
+
+/**
+ * Etapa 4 - Bonus: verifica structura, imaginile si identificatorii din erori.json.
+ * @param {string} caleErori Calea absoluta a fisierului JSON.
+ * @returns {object} Obiectul validat, pregatit pentru initializare.
+ */
+function valideazaDateErori(caleErori) {
+  if (!fs.existsSync(caleErori)) {
+    console.error(`[Etapa 4 - Bonus] Lipseste fisierul obligatoriu: ${caleErori}`);
+    process.exit(1);
+  }
+
+  const continut = fs.readFileSync(caleErori, "utf8");
+  const probleme = gasesteCheiDuplicateJson(continut);
+  let obErori;
+  try {
+    obErori = JSON.parse(continut);
+  } catch (eroare) {
+    console.error(`[Etapa 4 - Bonus] erori.json nu este JSON valid: ${eroare.message}`);
+    process.exit(1);
+  }
+
+  for (const proprietate of ["info_erori", "cale_baza", "eroare_default"]) {
+    if (!(proprietate in obErori)) probleme.push(`lipseste proprietatea principala "${proprietate}"`);
+  }
+  for (const proprietate of ["titlu", "text", "imagine"]) {
+    if (!(proprietate in (obErori.eroare_default || {}))) {
+      probleme.push(`eroare_default nu are proprietatea "${proprietate}"`);
+    }
+  }
+
+  const caleFolderImagini = path.join(
+    __dirname,
+    String(obErori.cale_baza || "").replace(/^[/\\]+/, ""),
+  );
+  if (!fs.existsSync(caleFolderImagini) || !fs.statSync(caleFolderImagini).isDirectory()) {
+    probleme.push(`folderul cale_baza nu exista: ${caleFolderImagini}`);
+  } else {
+    const toateErorile = [obErori.eroare_default, ...(obErori.info_erori || [])];
+    for (const eroare of toateErorile) {
+      if (eroare?.imagine && !fs.existsSync(path.join(caleFolderImagini, eroare.imagine))) {
+        probleme.push(`imagine inexistenta pentru eroarea ${eroare.identificator || "default"}: ${eroare.imagine}`);
+      }
+    }
+  }
+
+  const grupuriIdentificatori = new Map();
+  for (const eroare of obErori.info_erori || []) {
+    const grup = grupuriIdentificatori.get(eroare.identificator) || [];
+    grup.push(eroare);
+    grupuriIdentificatori.set(eroare.identificator, grup);
+  }
+  for (const [identificator, erori] of grupuriIdentificatori) {
+    if (erori.length > 1) {
+      const detalii = erori.map(({ identificator: _, ...rest }) => JSON.stringify(rest)).join(" | ");
+      probleme.push(`identificator duplicat ${identificator}: ${detalii}`);
+    }
+  }
+
+  if (probleme.length) {
+    probleme.forEach((problema) => console.error(`[Etapa 4 - Bonus] ${problema}`));
+  } else {
+    console.log("[Etapa 4 - Bonus] erori.json si toate imaginile sale sunt valide.");
+  }
+  return obErori;
+}
+
+/**
+ * Citeste configuratia validata a erorilor si completeaza caile imaginilor.
+ * @returns {void}
+ */
 function initErori() {
   const caleErori = path.join(__dirname, "resurse", "json", "erori.json");
-  const continut = fs.readFileSync(caleErori, "utf8");
-  const obErori = JSON.parse(continut);
+  const obErori = valideazaDateErori(caleErori);
 
   // setarea caii imaginilor pentru fiecare eroare din vector
   for (let eroare of obErori.info_erori) {
@@ -253,6 +648,15 @@ function initErori() {
 // dar argumentele titlu/text/imagine au prioritate daca sunt precizate.
 // Daca identificatorul lipseste sau nu este gasit, se foloseste eroarea default.
 // Statusul HTTP se seteaza doar daca eroarea are status: true.
+/**
+ * Randeaza pagina unei erori configurate sau eroarea implicita.
+ * @param {import("express").Response} res Raspunsul Express.
+ * @param {number|null} identificator Codul erorii cautate.
+ * @param {string} [titlu] Titlu care suprascrie configuratia.
+ * @param {string} [text] Mesaj care suprascrie configuratia.
+ * @param {string} [imagine] Cale imagine care suprascrie configuratia.
+ * @returns {void}
+ */
 function afisareEroare(res, identificator, titlu, text, imagine) {
   let eroareInfo = null;
 
@@ -282,9 +686,60 @@ function afisareEroare(res, identificator, titlu, text, imagine) {
 // Etapa 4 - task 13:
 // Incarcarea datelor despre erori la pornirea aplicatiei
 initErori();
+initGalerie();
+// Etapa 6 - Bonus 12: generatorul periodic de oferte.
+oferte.porneste();
 // Etapa 5 - compilare automata SCSS
 compileazaToateScss();
 urmaresteScss();
+// Etapa 6 - Bonus 13: backupurile CSS expirate sunt verificate la pornire si apoi periodic.
+curatareBackup.porneste({
+  folderBackup: obGlobal.folderBackup,
+  caleOptiuniServer: caleOptiuniServer,
+});
+
+// Etapa 8 - Bonus 7: modul de mentenanta este controlat din fisierul JSON.
+app.use(function verificaMentenanta(req, res, next) {
+  const optiuni = JSON.parse(fs.readFileSync(caleOptiuniServer, "utf8"));
+  if (optiuni.mentenanta && req.path !== "/favicon.ico") {
+    return res.status(503).render("pagini/mentenanta", { mesaj: optiuni.mesaj });
+  }
+  next();
+});
+
+// Etapa 8 - date comune pentru header, footer si activitatea utilizatorului.
+app.use(async function pregatesteUtilizatorCurent(req, res, next) {
+  res.locals.utilizatorCurent = req.session.utilizator || null;
+  res.locals.timpUltimaLogare = formateazaTimpTrecut(
+    req.session.utilizator?.ultimaLogareAnterioara,
+  );
+  res.locals.eroareLogin = req.session.eroareLogin || null;
+  res.locals.mesajGlobal = req.query.mesaj || null;
+  delete req.session.eroareLogin;
+  const ultimaVizita = req.session.ultimaVizita ? new Date(req.session.ultimaVizita) : null;
+  res.locals.siteModificat = Boolean(ultimaVizita && ultimaVizita < obGlobal.dataUltimaModificare);
+  req.session.ultimaVizita = new Date().toISOString();
+
+  if (req.session.utilizator) {
+    const acum = Date.now();
+    const ultimaActualizare = req.session.activitateActualizataLa || 0;
+    if (acum - ultimaActualizare > 60 * 1000) {
+      try {
+        await AccesBD.getInstanta().getClient().query(
+          "UPDATE utilizatori SET ultima_activitate=NOW(), ip_ultima_accesare=$1 WHERE id=$2",
+          [req.ip, req.session.utilizator.id],
+        );
+        req.session.activitateActualizataLa = acum;
+      } catch (eroare) {
+        console.error("Activitatea utilizatorului nu a putut fi actualizata: " + eroare.message);
+      }
+    }
+  }
+  next();
+});
+
+// Etapa 8 - toate rutele de cont si administrare sunt montate inaintea rutelor generale.
+app.use(creeazaRouterUtilizatori());
 
 // Etapa 4 - task 19:
 // Ruta pentru /favicon.ico. Browserele cer faviconul pentru diverse raspunsuri,
@@ -303,8 +758,161 @@ app.get(/\.ejs$/, function (req, res) {
 // Etapa 4 - task 8:
 // Prima pagina (index) este accesibila prin "/", "/index" si "/home",
 // folosind un vector de cai in apelul app.get(). Se transmite ip-ul utilizatorului.
-app.get(["/", "/index", "/home"], function (req, res) {
-  res.render("pagini/index", { ip: req.ip });
+app.get(["/", "/index", "/home"], async function (req, res) {
+  try {
+    // Etapa 6 - Bonus 18: sectiunea de noutati este alimentata din PostgreSQL.
+    const produseNoi = await accesProduse.obtineProduseNoi(4);
+    const ofertaCurenta = oferte.obtineOfertaCurenta();
+    res.render("pagini/index", {
+      ip: req.ip,
+      imaginiGalerie: obtineImaginiGalerieStatica(),
+      galerieAnimata: obtineGalerieAnimata(),
+      produseNoi: produseNoi,
+      ofertaCurenta: ofertaCurenta,
+    });
+  } catch (eroare) {
+    console.error("Eroare la incarcarea noutatilor: " + eroare.message);
+    afisareEroare(res, null, "Eroare produse", "Noutatile nu au putut fi incarcate.");
+  }
+});
+
+// Etapa 5 - aceeasi galerie statica apare si pe pagina dedicata, prin fragment EJS
+app.get("/galerie-componente", function (req, res) {
+  res.render("pagini/galerie-componente", {
+    ip: req.ip,
+    imaginiGalerie: obtineImaginiGalerieStatica(),
+  });
+});
+
+// Etapa 6 - cerinta individuala, punctele 1, 4 si 5:
+// lista produselor, optional filtrata pe server dupa categoria din meniu.
+app.get("/produse", async function (req, res) {
+  try {
+    const categorieCeruta =
+      typeof req.query.categorie === "string" ? req.query.categorie : "";
+    const categorieValida = obGlobal.categoriiProduse.some(function (categorie) {
+      return categorie.valoare === categorieCeruta;
+    });
+    const categorie = categorieValida ? categorieCeruta : "";
+    const produse = await accesProduse.obtineProduse(categorie);
+    // Etapa 8 - Bonus 13: marcajul si totalul favorit sunt atasate datelor EJS.
+    const dateFavorite = await accesProduse.obtineDateFavorite(produse.map((produs) => produs.id), req.session.utilizator?.id);
+    produse.forEach((produs) => Object.assign(produs, dateFavorite.get(produs.id) || { numar_favorite: 0, este_favorit: false }));
+
+    // Etapa 6 - Bonus 14 si Bonus 18: marcaje calculate prin program.
+    const pretMinimPeCategorie = new Map();
+    produse.forEach(function (produs) {
+      const minimCurent = pretMinimPeCategorie.get(produs.categorie);
+      if (minimCurent === undefined || produs.pret < minimCurent) {
+        pretMinimPeCategorie.set(produs.categorie, produs.pret);
+      }
+    });
+    // Etapa 6 - Bonus 12d: pret redus calculat fara modificarea bazei.
+    const ofertaCurenta = oferte.obtineOfertaCurenta();
+    produse.forEach((produs) => {
+      if (ofertaCurenta && produs.categorie === ofertaCurenta.categorie) {
+        produs.oferta = ofertaCurenta;
+        produs.pretRedus = produs.pret * (1 - ofertaCurenta.reducere / 100);
+      }
+    });
+    const acum = Date.now();
+    const intervalProdusNou = 120 * 24 * 60 * 60 * 1000;
+    produse.forEach(function (produs) {
+      produs.esteCelMaiIeftin =
+        produs.pret === pretMinimPeCategorie.get(produs.categorie);
+      produs.esteNou =
+        acum - new Date(produs.data_adaugare + "T00:00:00").getTime() <=
+        intervalProdusNou;
+    });
+
+    // Etapa 6 - Bonus 1: limitele si optiunile filtrelor se genereaza din date.
+    const scoruri = produse.map((produs) => produs.scor_performanta);
+    const subcategorii = [...new Set(produse.map((produs) => produs.subcategorie))].sort();
+    const culori = [...new Set(produse.map((produs) => produs.culoare))].sort();
+    const conexiuni = [
+      ...new Set(produse.flatMap((produs) => produs.conectivitate)),
+    ].sort();
+
+    res.render("pagini/produse", {
+      ip: req.ip,
+      produse: produse,
+      categorieCurenta: categorie,
+      etichetaCategorie: categorie
+        ? eticheteCategorii[categorie]
+        : "Toate produsele",
+      filtre: {
+        scorMinim: scoruri.length ? Math.min(...scoruri) : 1,
+        scorMaxim: scoruri.length ? Math.max(...scoruri) : 100,
+        subcategorii: subcategorii,
+        culori: culori,
+        conexiuni: conexiuni,
+        categorii: [
+          ...new Set(produse.map((produs) => produs.categorie)),
+        ].sort(),
+      },
+    });
+  } catch (eroare) {
+    console.error("Eroare la afisarea produselor: " + eroare.message);
+    afisareEroare(res, null, "Eroare produse", "Produsele nu au putut fi încărcate.");
+  }
+});
+
+// Etapa 6 - cerinta individuala, punctul 2: pagina dinamica a produsului unic.
+app.get("/produs/:id", async function (req, res) {
+  const id = Number.parseInt(req.params.id, 10);
+  if (!Number.isInteger(id) || id <= 0) {
+    afisareEroare(res, 404);
+    return;
+  }
+
+  try {
+    const produs = await accesProduse.obtineProdusDupaId(id);
+    if (!produs) {
+      afisareEroare(res, 404);
+      return;
+    }
+    // Etapa 6 - Bonusurile 9 si 16: imagini multiple si produse similare.
+    const produseSimilare = await accesProduse.obtineProduseSimilare(produs, 4);
+    const dateFavorite = await accesProduse.obtineDateFavorite([produs.id], req.session.utilizator?.id);
+    Object.assign(produs, dateFavorite.get(produs.id) || { numar_favorite: 0, este_favorit: false });
+    // Etapa 6 - Bonus 9: variantele sunt imagini reale derivate din imaginea
+    // produsului curent; nu mai folosim fotografiile altor produse similare.
+    produs.imagini = imaginiProduse.obtineImaginiProdus(produs.imagine);
+    const seturi = await accesProduse.obtineSeturi(produs.id);
+    res.render("pagini/produs", { ip: req.ip, produs: produs, produseSimilare: produseSimilare, seturi: seturi });
+  } catch (eroare) {
+    console.error("Eroare la afisarea produsului: " + eroare.message);
+    afisareEroare(res);
+  }
+});
+
+// Etapa 6 - Bonus 17: pagina tuturor seturilor PC Forge.
+app.get("/seturi", async function (req, res) {
+  try { res.render("pagini/seturi", { ip: req.ip, seturi: await accesProduse.obtineSeturi() }); }
+  catch (eroare) { console.error("Eroare seturi: " + eroare.message); afisareEroare(res); }
+});
+
+// Etapa 6 - Bonus 10a/10b: aceleasi date pot fi filtrate pe server prin fetch.
+app.get("/api/produse-filtrate", async function (req, res) {
+  try {
+    const categorie = obGlobal.categoriiProduse.some((item) => item.valoare === req.query.categorie) ? req.query.categorie : "";
+    const randuri = await accesProduse.obtineProduseFiltrate({ nume: String(req.query.nume || "").slice(0, 120), scor: req.query.scor, categorie, cheie1: req.query.cheie1, cheie2: req.query.cheie2, sens: req.query.sens });
+    res.json({ ids: randuri.map((rand) => rand.id) });
+  } catch (eroare) { res.status(400).json({ eroare: eroare.message }); }
+});
+
+// Etapa 6 - Bonus 20: fereastra separata cu specificatiile in paralel.
+app.get("/comparare", async function (req, res) {
+  const ids = String(req.query.ids || "").split(",").map((valoare) => Number.parseInt(valoare, 10)).filter((id) => Number.isInteger(id) && id > 0).slice(0, 2);
+  if (ids.length !== 2) return afisareEroare(res, 400, "Comparație incompletă", "Selectează exact două produse.");
+  try {
+    const produse = await accesProduse.obtineProduseDupaIduri(ids);
+    if (produse.length !== 2) return afisareEroare(res, 404);
+    res.render("pagini/comparare", { ip: req.ip, produse: produse });
+  } catch (eroare) {
+    console.error("Eroare comparatie: " + eroare.message);
+    afisareEroare(res);
+  }
 });
 
 // Etapa 4 - task 15:
@@ -346,6 +954,13 @@ app.get("/*", function (req, res) {
 
 // Etapa 4 - task 2:
 // Pornirea serverului pe portul setat
-app.listen(port, function () {
-  console.log("Serverul PC Forge ruleaza la adresa http://localhost:" + port);
-});
+Promise.all([pregatesteMiniaturiGalerie(), imaginiProduse.pregatesteVariante(), initProduse()])
+  .then(function () {
+    app.listen(port, function () {
+      console.log("Serverul PC Forge ruleaza la adresa http://localhost:" + port);
+    });
+  })
+  .catch(function (eroare) {
+    console.error("Aplicatia nu a putut fi initializata: " + eroare.message);
+    process.exitCode = 1;
+  });
