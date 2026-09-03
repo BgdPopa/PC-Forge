@@ -250,15 +250,26 @@ html[data-tema=dark] .produs-specificatii, html[data-tema=dark] .produs-detaliu_
   display: none !important;
 }
 
+.produs-card__detalii {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 100px;
+  align-items: start;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+/* Etapa 6 - cerinta individuala, punctul 5: imagine mica, uniforma, asezata in dreapta tabelului. */
 .produs-card__imagine {
   position: relative;
   overflow: hidden;
+  align-self: start;
+  border-radius: 0.75rem;
 }
 
 .produs-card__imagine img {
   display: block;
   width: 100%;
-  aspect-ratio: 3/2;
+  aspect-ratio: 1/1;
   object-fit: cover;
   transition: transform 0.45s ease;
 }
@@ -294,7 +305,9 @@ html[data-tema=dark] .produs-specificatii, html[data-tema=dark] .produs-detaliu_
   display: flex;
   justify-content: flex-end;
   gap: 0.35rem;
-  margin: -0.35rem 0 0.65rem;
+  margin: 0.7rem 0 0;
+  padding-top: 0.65rem;
+  border-top: 1px solid rgba(225, 1, 47, 0.15);
 }
 
 .produs-card__actiuni .btn {
@@ -334,23 +347,37 @@ html[data-tema=dark] .produs-specificatii, html[data-tema=dark] .produs-detaliu_
   background: transparent !important;
 }
 
+/* Etapa 6 - cerinta individuala, punctul 5: descrierea ramane lizibila sub tabel. */
+.produs-card .card-text {
+  color: #3d3d42;
+}
+
+html[data-tema=dark] .produs-card .card-text,
+html[data-tema=contrast] .produs-card .card-text {
+  color: #f3f3f4;
+}
+
 /* Etapa 10 - finisaj responsive: suprascrie min-width-ul global al tabelelor doar in cardurile de produs. */
 .produs-specificatii {
   width: 100%;
   min-width: 0;
   margin-bottom: 0;
-  font-size: 0.9rem;
+  font-size: 0.78rem;
 }
 
 .produs-specificatii th {
-  width: 40%;
+  width: 38%;
 }
 
 .produs-specificatii {
   table-layout: fixed;
 }
 
+/* Etapa 6 - cerinta individuala, punctul 5: suprascrie nowrap-ul tabelului general,
+   astfel etichetele, data romaneasca si valorile multiple incap langa imagine. */
+.produs-specificatii th,
 .produs-specificatii td {
+  white-space: normal;
   overflow-wrap: anywhere;
   word-break: break-word;
 }

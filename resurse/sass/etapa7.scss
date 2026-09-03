@@ -21,16 +21,18 @@
   opacity: 0;
   transform: scale(0);
   transform-origin: left bottom;
+  /* Etapa 7 - animatie-banner: tranzitia ramane pentru inchiderea prin buton. */
   transition: opacity 0.45s ease, transform 0.45s ease;
 }
 
 #banner.banner--vizibil {
-  opacity: 0.75;
-  transform: scale(1);
-  animation: etapa7-culoare-banner 5s linear both;
+  /* Etapa 7 - animatie-banner, cerinta individuala:
+     scalarea, opacitatea si culoarea evolueaza impreuna timp de 5 secunde. */
+  animation: etapa7-aparitie-banner 5s linear both;
 }
 
 #banner.banner--inchis {
+  animation: none;
   opacity: 0;
   transform: scale(0);
 }
@@ -81,13 +83,43 @@
   background: rgba(225, 1, 47, 0.06);
 }
 
-@keyframes etapa7-culoare-banner {
-  from { background-color: #83001c; }
-  to { background-color: #e1012f; }
+/* Etapa 7 - animatie-banner: starea finala ramane aplicata prin `both`. */
+@keyframes etapa7-aparitie-banner {
+  from {
+    opacity: 0;
+    transform: scale(0);
+    background-color: #83001c;
+  }
+
+  to {
+    opacity: 0.75;
+    transform: scale(1);
+    background-color: #e1012f;
+  }
+}
+
+/* Etapa 7 - animatie-banner: pe ecran mediu si mic bannerul este static. */
+@media screen and (max-width: 1100px) {
+  #banner,
+  #banner.banner--vizibil {
+    animation: none;
+    transition: none;
+    opacity: 0.75;
+    transform: scale(1);
+    background-color: #e1012f;
+  }
+
+  #banner.banner--inchis {
+    opacity: 0;
+    transform: scale(0);
+  }
 }
 
 @media screen and (max-width: 700px) {
-  #banner { width: 52vw; min-width: 230px; }
+  #banner {
+    width: 52vw;
+    min-width: 230px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

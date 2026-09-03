@@ -22,8 +22,9 @@
         <!-- Etapa 6 - task Bootstrap 0.3d: inputurile sunt asezate in grid Bootstrap. -->
         <div class="row g-3" id="zona-filtre">
           <div class="col-12 col-md-6 col-xl-4">
-            <label class="form-label" for="inp-nume">Numele produsului</label>
-            <input class="form-control" type="text" id="inp-nume" placeholder="Exemplu: Forge" autocomplete="off" />
+            <%# Etapa 6 - Bonus 1, input text: maxlength si exemplul provin din produsele bazei de date. %>
+            <label class="form-label" for="inp-nume">Numele produsului (maximum <%= filtre.lungimeMaximaNume %> caractere)</label>
+            <input class="form-control" type="text" id="inp-nume" maxlength="<%= filtre.lungimeMaximaNume %>" placeholder="Exemplu: <%= filtre.exempluNume %>" autocomplete="off" />
             <div class="invalid-feedback">Folosește numai litere, spații și cratimă.</div>
           </div>
 
@@ -44,10 +45,11 @@
           <fieldset class="col-12 col-md-6 col-xl-4">
             <legend class="form-label">Disponibilitate</legend>
             <!-- Etapa 6 - task Bootstrap 0.3c: radio buttons ca toggle buttons. -->
+            <%# Etapa 6 - Bonus 1, radio: optiunile sunt construite din valorile booleene existente in baza. %>
             <div class="btn-group w-100" role="group" aria-label="Disponibilitate">
-              <input class="btn-check" type="radio" name="stoc" id="stoc-toate" value="toate" checked /><label class="btn btn-outline-primary" for="stoc-toate">Toate</label>
-              <input class="btn-check" type="radio" name="stoc" id="stoc-da" value="da" /><label class="btn btn-outline-primary" for="stoc-da">În stoc</label>
-              <input class="btn-check" type="radio" name="stoc" id="stoc-nu" value="nu" /><label class="btn btn-outline-primary" for="stoc-nu">Indisponibil</label>
+              <% filtre.optiuniStoc.forEach(function(optiune, index) { %>
+                <input class="btn-check" type="radio" name="stoc" id="stoc-<%= optiune.valoare %>" value="<%= optiune.valoare %>" <%= index === 0 ? "checked" : "" %> /><label class="btn btn-outline-primary" for="stoc-<%= optiune.valoare %>"><%= optiune.eticheta %></label>
+              <% }); %>
             </div>
           </fieldset>
 
@@ -62,7 +64,8 @@
 
           <div class="col-12 col-md-6 col-xl-4">
             <!-- Etapa 6 - task Bootstrap 0.3b: textarea cu floating label si is-invalid din JS. -->
-            <div class="form-floating textarea-filtru"><textarea class="form-control" id="inp-descriere" placeholder="Cuvinte din descriere" maxlength="120"></textarea><label for="inp-descriere">Cuvinte din descriere</label><div class="invalid-feedback">Introdu minimum 3 caractere sau lasă câmpul gol.</div></div>
+            <%# Etapa 6 - Bonus 1, textarea: maxlength este lungimea maxima gasita in descrierile produselor. %>
+            <div class="form-floating textarea-filtru"><textarea class="form-control" id="inp-descriere" placeholder="Cuvinte din descriere" maxlength="<%= filtre.lungimeMaximaDescriere %>"></textarea><label for="inp-descriere">Descriere (maximum <%= filtre.lungimeMaximaDescriere %> caractere)</label><div class="invalid-feedback">Introdu minimum 3 caractere sau lasă câmpul gol.</div></div>
           </div>
 
           <div class="col-12 col-md-6">
@@ -109,11 +112,24 @@
           <% produse.forEach(function(produs, index) { %>
             <%# Etapa 7 - cerinta 16: acestea sunt carduri Bootstrap reale, animate din JS. %>
             <article class="card produs-card <%= produs.categorie %> <%= produs.subcategorie %>" id="elem_<%= produs.id %>" data-produs-id="<%= produs.id %>" data-index-initial="<%= index %>" data-nume="<%= produs.nume %>" data-descriere="<%= produs.descriere %>" data-imagine="<%= produs.imagine %>" data-categorie="<%= produs.categorie %>" data-subcategorie="<%= produs.subcategorie %>" data-pret="<%= produs.pret %>" data-scor="<%= produs.scor_performanta %>" data-culoare="<%= produs.culoare %>" data-conectivitate='<%- JSON.stringify(produs.conectivitate) %>' data-stoc="<%= produs.in_stoc %>">
-              <div class="produs-card__imagine">
-                <img src="<%= produs.imagine %>" alt="<%= produs.nume %> - <%= produs.descriere %>" loading="lazy" />
-                <div class="produs-card__badge-uri"><% if (produs.esteNou) { %><span class="badge text-bg-primary">NOU</span><% } %><% if (produs.esteCelMaiIeftin) { %><span class="badge text-bg-success">Cel mai ieftin din categorie</span><% } %></div>
-              </div>
               <div class="card-body">
+                <%# Etapa 6 - cerinta individuala, punctul 5: numele este primul continut al entitatii. %>
+                <h3 class="card-title"><a href="/produs/<%= produs.id %>"><%= produs.nume %></a></h3>
+
+                <%# Etapa 6 - cerinta individuala, punctul 5: tabelul are exact cele cinci tipuri cerute, iar imaginea este in dreapta lui. %>
+                <div class="produs-card__detalii">
+                  <table class="table table-sm produs-specificatii"><tbody><tr><th>Scor</th><td><%= produs.scor_performanta %>/100</td></tr><tr><th>Culoare</th><td><%= produs.culoare %></td></tr><tr><th>Conexiuni</th><td><%= produs.conectivitate.join(", ") %></td></tr><tr><th>Adăugat</th><td><time datetime="<%= produs.data_adaugare %>"><%= formateazaDataProdus(produs.data_adaugare) %></time></td></tr><tr><th>Disponibil</th><td><%= produs.in_stoc ? "Da" : "Nu" %></td></tr></tbody></table>
+                  <div class="produs-card__imagine">
+                    <img src="<%= produs.imagine %>" alt="<%= produs.nume %> - <%= produs.descriere %>" loading="lazy" />
+                    <div class="produs-card__badge-uri"><% if (produs.esteNou) { %><span class="badge text-bg-primary">NOU</span><% } %><% if (produs.esteCelMaiIeftin) { %><span class="badge text-bg-success">Cel mai ieftin din categorie</span><% } %></div>
+                  </div>
+                </div>
+
+                <%# Etapa 6 - cerinta individuala, punctul 5: descrierea si categoria urmeaza sub tabel. %>
+                <p class="card-text"><%= produs.descriere %></p>
+                <p class="produs-card__categorie">Categorie: <span><%= produs.categorie %></span> · <span><%= produs.subcategorie.replaceAll("-", " ") %></span></p>
+                <p class="produs-favorite" data-favorite-id="<%= produs.id %>"><i class="bi bi-heart-fill"></i> <span><%= produs.numar_favorite %></span> utilizatori îl preferă</p>
+
                 <%# Etapa 6 - Bonus 6: fixare, ascundere temporara si ascundere pe durata tabului. %>
                 <div class="produs-card__actiuni" role="group" aria-label="Acțiuni pentru <%= produs.nume %>">
                   <%# Etapa 8 - Bonus 13: buton vizibil numai utilizatorului logat. %>
@@ -124,11 +140,6 @@
                   <%# Etapa 6 - Bonus 20: selectarea produsului pentru comparație. %>
                   <button class="btn btn-sm btn-outline-dark actiune-comparare" type="button" title="Adaugă produsul la comparație"><i class="bi bi-columns-gap"></i><span class="visually-hidden">Compară</span></button>
                 </div>
-                <p class="produs-card__categorie"><%= produs.categorie %> · <%= produs.subcategorie.replaceAll("-", " ") %></p>
-                <p class="produs-favorite" data-favorite-id="<%= produs.id %>"><i class="bi bi-heart-fill"></i> <span><%= produs.numar_favorite %></span> utilizatori îl preferă</p>
-                <h3 class="card-title"><a href="/produs/<%= produs.id %>"><%= produs.nume %></a></h3>
-                <p class="card-text"><%= produs.descriere %></p>
-                <table class="table table-sm produs-specificatii"><tbody><tr><th>Scor</th><td><%= produs.scor_performanta %>/100</td></tr><tr><th>Culoare</th><td><%= produs.culoare %></td></tr><tr><th>Conectivitate</th><td><%= produs.conectivitate.join(", ") %></td></tr><tr><th>Adăugat</th><td><time datetime="<%= produs.data_adaugare %>"><%= produs.data_adaugare %></time></td></tr><tr><th>Disponibil</th><td><%= produs.in_stoc ? "Da" : "Nu" %></td></tr></tbody></table>
               </div>
               <div class="card-footer produs-card__footer"><strong class="produs-pret"><% if (produs.oferta) { %><s><%= produs.pret.toFixed(2) %></s> <ins><%= produs.pretRedus.toFixed(2) %> lei</ins><span class="badge text-bg-danger">-<%= produs.oferta.reducere %>%</span><% } else { %><%= produs.pret.toFixed(2) %> lei<% } %></strong><a class="btn btn-primary" href="/produs/<%= produs.id %>">Detalii <i class="bi bi-arrow-right" aria-hidden="true"></i></a></div>
             </article>

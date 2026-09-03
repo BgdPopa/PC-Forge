@@ -61,23 +61,32 @@ html[data-tema="dark"] .produs-specificatii, html[data-tema="dark"] .produs-deta
 .grid-produse { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.15rem; }
 .produs-card { position: relative; overflow: hidden; border: 1px solid rgba(225, 1, 47, 0.25); background: #fff; color: #3d3d42; box-shadow: 0 0.75rem 1.5rem rgba(54, 0, 12, 0.22); }
 .produs-card[hidden] { display: none !important; }
-.produs-card__imagine { position: relative; overflow: hidden; }
-.produs-card__imagine img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; transition: transform 0.45s ease; }
+.produs-card__detalii { display: grid; grid-template-columns: minmax(0, 1fr) 100px; align-items: start; gap: .75rem; margin-bottom: .85rem; }
+/* Etapa 6 - cerinta individuala, punctul 5: imagine mica, uniforma, asezata in dreapta tabelului. */
+.produs-card__imagine { position: relative; overflow: hidden; align-self: start; border-radius: .75rem; }
+.produs-card__imagine img { display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; transition: transform 0.45s ease; }
 .produs-card:hover .produs-card__imagine img { transform: scale(1.05); }
 .produs-card__badge-uri { position: absolute; inset: 0.7rem 0.7rem auto; display: flex; flex-wrap: wrap; gap: 0.35rem; }
 .produs-card__categorie { margin-bottom: 0.25rem; color: #777982; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
 .produs-favorite { color: #b80027; font-size: .86rem; font-weight: 700; }
-.produs-card__actiuni { display: flex; justify-content: flex-end; gap: 0.35rem; margin: -0.35rem 0 0.65rem; }
+.produs-card__actiuni { display: flex; justify-content: flex-end; gap: 0.35rem; margin: .7rem 0 0; padding-top: .65rem; border-top: 1px solid rgba(225,1,47,.15); }
 .produs-card__actiuni .btn { width: 2.1rem; height: 2.1rem; padding: 0; border-radius: 50%; }
 .produs-card--fixat { border-color: #e1012f; box-shadow: 0 0 0 3px rgba(225,1,47,.2), 0 .9rem 1.8rem rgba(54,0,12,.25); }
 .produs-card--fixat::after { content: "FIXAT"; position: absolute; z-index: 2; top: .7rem; right: .7rem; padding: .2rem .5rem; border-radius: 999px; background: #e1012f; color: #fff; font-size: .7rem; font-weight: 700; }
 .produs-card .card-title a { padding: 0 !important; color: #b80027 !important; text-decoration: none !important; }
 .produs-card .card-title a:hover { color: #e1012f !important; background: transparent !important; }
+/* Etapa 6 - cerinta individuala, punctul 5: descrierea ramane lizibila sub tabel. */
+.produs-card .card-text { color: #3d3d42; }
+html[data-tema="dark"] .produs-card .card-text,
+html[data-tema="contrast"] .produs-card .card-text { color: #f3f3f4; }
 /* Etapa 10 - finisaj responsive: suprascrie min-width-ul global al tabelelor doar in cardurile de produs. */
-.produs-specificatii { width: 100%; min-width: 0; margin-bottom: 0; font-size: 0.9rem; }
-.produs-specificatii th { width: 40%; }
+.produs-specificatii { width: 100%; min-width: 0; margin-bottom: 0; font-size: 0.78rem; }
+.produs-specificatii th { width: 38%; }
 .produs-specificatii { table-layout: fixed; }
-.produs-specificatii td { overflow-wrap: anywhere; word-break: break-word; }
+/* Etapa 6 - cerinta individuala, punctul 5: suprascrie nowrap-ul tabelului general,
+   astfel etichetele, data romaneasca si valorile multiple incap langa imagine. */
+.produs-specificatii th,
+.produs-specificatii td { white-space: normal; overflow-wrap: anywhere; word-break: break-word; }
 .produs-card__footer { display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; padding: 1rem; background: rgba(225, 1, 47, 0.06); }
 .produs-pret, .produs-detaliu__pret { color: #b80027; font-size: 1.35rem; }
 .rezultat-calcul { position: fixed; z-index: 2000; right: 1.2rem; bottom: 1.2rem; max-width: min(420px, calc(100% - 2.4rem)); border: 2px solid #e1012f; box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.28); }

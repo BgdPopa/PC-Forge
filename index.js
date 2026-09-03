@@ -198,6 +198,37 @@ function formateazaTimpTrecut(data) {
     .join(", ");
 }
 
+/**
+ * Etapa 6 - cerinta individuala, punctul 5:
+ * transforma data ISO a produsului in forma romaneasca ceruta in card.
+ * @param {string|Date|null} data Data calendaristica primita din PostgreSQL.
+ * @returns {string} Data de forma "2 Mai 2026 (Sambata)".
+ */
+function formateazaDataProdus(data) {
+  const valoareIso = data instanceof Date
+    ? data.toISOString().slice(0, 10)
+    : String(data || "").slice(0, 10);
+  const componente = valoareIso.split("-").map(Number);
+  if (componente.length !== 3 || componente.some((valoare) => !Number.isInteger(valoare))) {
+    return valoareIso;
+  }
+
+  const [an, luna, zi] = componente;
+  const dataLocala = new Date(an, luna - 1, zi);
+  const luni = [
+    "Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie",
+    "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie",
+  ];
+  const zile = [
+    "Duminică", "Luni", "Marți", "Miercuri", "Joi", "Vineri", "Sâmbătă",
+  ];
+
+  return `${zi} ${luni[luna - 1]} ${an} (${zile[dataLocala.getDay()]})`;
+}
+
+// Etapa 6 - cerinta individuala: helperul este disponibil in toate template-urile EJS.
+app.locals.formateazaDataProdus = formateazaDataProdus;
+
 // Etapa 5 - functie auxiliara pentru crearea folderelor necesare
 /**
  * Creeaza recursiv un folder numai daca acesta lipseste.
@@ -825,13 +856,31 @@ app.get("/produse", async function (req, res) {
         intervalProdusNou;
     });
 
-    // Etapa 6 - Bonus 1: limitele si optiunile filtrelor se genereaza din date.
+    // Etapa 6 - Bonus 1: atributele si optiunile celor opt tipuri de control
+    // se genereaza din produsele citite din PostgreSQL.
     const scoruri = produse.map((produs) => produs.scor_performanta);
     const subcategorii = [...new Set(produse.map((produs) => produs.subcategorie))].sort();
     const culori = [...new Set(produse.map((produs) => produs.culoare))].sort();
     const conexiuni = [
       ...new Set(produse.flatMap((produs) => produs.conectivitate)),
     ].sort();
+    const lungimeMaximaNume = Math.max(
+      1,
+      ...produse.map((produs) => produs.nume.length),
+    );
+    const lungimeMaximaDescriere = Math.max(
+      3,
+      ...produse.map((produs) => produs.descriere.length),
+    );
+    const optiuniStoc = [
+      { valoare: "toate", eticheta: "Toate" },
+      ...[...new Set(produse.map((produs) => Boolean(produs.in_stoc)))]
+        .sort((a, b) => Number(b) - Number(a))
+        .map((inStoc) => ({
+          valoare: inStoc ? "da" : "nu",
+          eticheta: inStoc ? "In stoc" : "Indisponibil",
+        })),
+    ];
 
     res.render("pagini/produse", {
       ip: req.ip,
@@ -846,6 +895,10 @@ app.get("/produse", async function (req, res) {
         subcategorii: subcategorii,
         culori: culori,
         conexiuni: conexiuni,
+        lungimeMaximaNume: lungimeMaximaNume,
+        lungimeMaximaDescriere: lungimeMaximaDescriere,
+        exempluNume: produse[0]?.nume || "Produs PC Forge",
+        optiuniStoc: optiuniStoc,
         categorii: [
           ...new Set(produse.map((produs) => produs.categorie)),
         ].sort(),
