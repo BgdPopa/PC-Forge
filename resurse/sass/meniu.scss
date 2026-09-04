@@ -161,7 +161,7 @@ $latime-min-submeniu: 12rem;
     box-shadow: 0 8px 16px var(--culoare-umbra);
     z-index: 50;
     transform: scale(0);
-    transform-origin: center center;
+    transform-origin: top left;
     transition: transform $duratie-submeniu-scale ease;
     pointer-events: none;
 
@@ -211,13 +211,16 @@ $latime-min-submeniu: 12rem;
 // Desktop + mediu: submeniu la hover (scalare)
 @media screen and (min-width: 701px) {
   .meniu-principal {
-    .meniu-principal__item--has-sub:hover > .meniu-principal__sub {
+    .meniu-principal__item--has-sub:hover > .meniu-principal__sub,
+    .meniu-principal__item--has-sub:focus-within > .meniu-principal__sub {
       transform: scale(1);
       pointer-events: auto;
     }
   }
 
   header {
+    position: relative;
+    z-index: 1000;
     overflow: visible;
   }
 }

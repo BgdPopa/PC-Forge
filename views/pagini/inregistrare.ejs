@@ -5,11 +5,11 @@
     <%- include("../fragmente/header") %>
     <main class="main-cont">
       <section class="cont-card">
-        <span class="badge text-bg-primary">Etapa 8 · Sistem utilizatori</span>
+        <span class="badge text-bg-primary">Cont PC Forge</span>
         <h2>Creează cont PC Forge</h2>
         <p>Salvează configurațiile preferate și administrează-ți profilul în siguranță.</p>
         <% if (erori.length) { %><div class="alert alert-danger"><strong>Înregistrarea nu a fost acceptată:</strong><ul><% erori.forEach(e => { %><li><%= e %></li><% }) %></ul><% if (sugestii.length) { %><p>Sugestii disponibile: <strong><%= sugestii.join(", ") %></strong></p><% } %></div><% } %>
-        <% if (linkConfirmare) { %><div class="alert alert-success"><h3>Cont creat</h3><p>În modul demonstrativ, e-mailul este salvat în <code>logs/emailuri-etapa8.log</code>.</p><a class="btn btn-primary" href="<%= linkConfirmare %>">Confirmă acum adresa</a></div><% } %>
+        <% if (linkConfirmare) { %><div class="alert alert-success"><h3>Cont creat</h3><p>În modul demonstrativ, e-mailul este salvat în <code>jurnalul local al aplicației</code>.</p><a class="btn btn-primary" href="<%= linkConfirmare %>">Confirmă acum adresa</a></div><% } %>
         <% if (!linkConfirmare) { %>
         <!-- Etapa 8 – Cerințele 2 și 3: Formularul de înregistrare. -->
         <form id="formular-inregistrare" method="post" enctype="multipart/form-data" novalidate>

@@ -14,11 +14,14 @@ html[data-tema=contrast] body {
   --culoare-zona: #ff174b;
   --culoare-zona-secundara: #3b0010;
   --culoare-text-inchis: #fff;
-  --culoare-umbra: rgba(0,0,0,.65);
+  --culoare-umbra: rgba(0, 0, 0, 0.65);
   background: #08090b;
 }
 
-html[data-tema=contrast] .panou-filtre, html[data-tema=contrast] .produs-card, html[data-tema=contrast] .produs-detaliu, html[data-tema=contrast] .cont-card {
+html[data-tema=contrast] .panou-filtre,
+html[data-tema=contrast] .produs-card,
+html[data-tema=contrast] .produs-detaliu,
+html[data-tema=contrast] .cont-card {
   background: #111318;
   color: #fff;
   border-color: #ff174b;
@@ -28,10 +31,16 @@ html[data-tema=contrast] .table {
   --bs-table-bg: transparent;
   --bs-table-color: #fff;
   --bs-table-striped-color: #fff;
-  --bs-table-striped-bg: rgba(255,255,255,.08);
+  --bs-table-striped-bg: rgba(255, 255, 255, 0.08);
 }
 
-body, header, footer, .zona, .panou-filtre, .produs-card, .produs-detaliu {
+body,
+header,
+footer,
+.zona,
+.panou-filtre,
+.produs-card,
+.produs-detaliu {
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
@@ -55,7 +64,8 @@ body, header, footer, .zona, .panou-filtre, .produs-card, .produs-detaliu {
   padding-left: 2.7rem;
 }
 
-.tema-switch .form-check-input, .tema-switch .form-check-label {
+.tema-switch .form-check-input,
+.tema-switch .form-check-label {
   cursor: pointer;
 }
 
@@ -63,7 +73,8 @@ body, header, footer, .zona, .panou-filtre, .produs-card, .produs-detaliu {
   color: #fff;
 }
 
-.tema-icon-luna, html[data-tema=dark] .tema-icon-soare {
+.tema-icon-luna,
+html[data-tema=dark] .tema-icon-soare {
   display: none;
 }
 
@@ -78,7 +89,9 @@ html[data-tema=dark] .tema-icon-luna {
   padding: 1.25rem 0 3rem;
 }
 
-.produse-hero, .panou-filtre, .zona-lista-produse {
+.produse-hero,
+.panou-filtre,
+.zona-lista-produse {
   margin-bottom: 1.25rem;
   border-radius: 1.2rem;
 }
@@ -122,7 +135,8 @@ html[data-tema=dark] .tema-icon-luna {
   flex: 1;
 }
 
-.oferta-curenta h2, .oferta-curenta p {
+.oferta-curenta h2,
+.oferta-curenta p {
   margin: 0.2rem 0;
   color: #fff;
 }
@@ -150,16 +164,20 @@ html[data-tema=dark] .tema-icon-luna {
   box-shadow: 0 0.8rem 2rem var(--culoare-umbra);
 }
 
-html[data-tema=dark] .panou-filtre, html[data-tema=dark] .produs-card, html[data-tema=dark] .produs-detaliu {
+html[data-tema=dark] .panou-filtre,
+html[data-tema=dark] .produs-card,
+html[data-tema=dark] .produs-detaliu {
   background: #25262b;
   color: #f3f3f4;
 }
 
-html[data-tema=dark] .panou-filtre .form-text, html[data-tema=dark] .produs-card__categorie {
+html[data-tema=dark] .panou-filtre .form-text,
+html[data-tema=dark] .produs-card__categorie {
   color: #c3c4ca;
 }
 
-html[data-tema=dark] .produs-specificatii, html[data-tema=dark] .produs-detaliu__tabel {
+html[data-tema=dark] .produs-specificatii,
+html[data-tema=dark] .produs-detaliu__tabel {
   --bs-table-bg: transparent;
   --bs-table-color: #f3f3f4;
   --bs-table-striped-color: #f3f3f4;
@@ -253,7 +271,7 @@ html[data-tema=dark] .produs-specificatii, html[data-tema=dark] .produs-detaliu_
 
 .produs-card__detalii {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 100px;
+  grid-template-columns: minmax(0, 1fr) 120px;
   align-items: start;
   gap: 0.75rem;
   margin-bottom: 0.85rem;
@@ -270,6 +288,9 @@ html[data-tema=dark] .produs-specificatii, html[data-tema=dark] .produs-detaliu_
 .produs-card__imagine img {
   display: block;
   width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  margin: 0;
   aspect-ratio: 1/1;
   object-fit: cover;
   transition: transform 0.45s ease;
@@ -391,7 +412,8 @@ html[data-tema=contrast] .produs-card .card-text {
   background: rgba(225, 1, 47, 0.06);
 }
 
-.produs-pret, .produs-detaliu__pret {
+.produs-pret,
+.produs-detaliu__pret {
   color: #b80027;
   font-size: 1.35rem;
 }
@@ -446,7 +468,8 @@ html[data-tema=contrast] .produs-card .card-text {
   flex: 1;
 }
 
-.container-comparare__butoane, .comparatie-produs {
+.container-comparare__butoane,
+.comparatie-produs {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -690,7 +713,8 @@ html[data-tema=dark] .panou-orar .table {
   object-fit: cover;
 }
 
-.produse-similare__grid h3, .produse-similare__grid p {
+.produse-similare__grid h3,
+.produse-similare__grid p {
   margin: 0.65rem 1rem;
 }
 
@@ -698,6 +722,18 @@ html[data-tema=dark] .panou-orar .table {
   padding: 0 !important;
   color: #b80027 !important;
   text-decoration: none !important;
+}
+
+.produse-similare__grid h3 {
+  color: #b80027;
+}
+
+.produse-similare__grid p {
+  color: #3d3d42;
+}
+
+.produse-similare__grid a:hover h3 {
+  color: #e1012f;
 }
 
 .seturi-produs {
@@ -724,8 +760,17 @@ html[data-tema=dark] .panou-orar .table {
   box-shadow: 0 0.6rem 1.3rem rgba(54, 0, 12, 0.13);
 }
 
-.set-card h2, .set-card h3 {
+.set-card h2,
+.set-card h3 {
   color: #b80027;
+}
+
+.seturi-produs .set-card a {
+  color: #83001c !important;
+}
+
+.seturi-produs .set-card a:hover {
+  color: #e1012f !important;
 }
 
 .set-produse {
@@ -756,7 +801,10 @@ html[data-tema=dark] .panou-orar .table {
   font-weight: 700;
 }
 
-html[data-tema=dark] .set-card, html[data-tema=dark] .seturi-produs, html[data-tema=contrast] .set-card, html[data-tema=contrast] .seturi-produs {
+html[data-tema=dark] .set-card,
+html[data-tema=dark] .seturi-produs,
+html[data-tema=contrast] .set-card,
+html[data-tema=contrast] .seturi-produs {
   background: #25262b;
   color: #fff;
 }
@@ -826,7 +874,11 @@ html[data-tema=dark] .set-card, html[data-tema=dark] .seturi-produs, html[data-t
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  body, header, footer, .zona, .produs-card__imagine img {
+  body,
+  header,
+  footer,
+  .zona,
+  .produs-card__imagine img {
     transition: none;
   }
 }

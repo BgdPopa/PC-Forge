@@ -2,9 +2,81 @@
   "oferte": [
     {
       "categorie": "stocare",
-      "data-incepere": "2026-09-04T14:29:11.179Z",
-      "data-finalizare": "2026-09-04T14:34:11.179Z",
-      "reducere": 45
+      "data-incepere": "2026-09-04T17:04:04.916Z",
+      "data-finalizare": "2026-09-04T17:09:04.916Z",
+      "reducere": 50
+    },
+    {
+      "categorie": "periferice",
+      "data-incepere": "2026-09-04T16:56:30.949Z",
+      "data-finalizare": "2026-09-04T17:01:30.949Z",
+      "reducere": 5
+    },
+    {
+      "categorie": "stocare",
+      "data-incepere": "2026-09-04T16:51:30.939Z",
+      "data-finalizare": "2026-09-04T16:56:30.939Z",
+      "reducere": 20
+    },
+    {
+      "categorie": "componente",
+      "data-incepere": "2026-09-04T16:46:30.933Z",
+      "data-finalizare": "2026-09-04T16:51:30.933Z",
+      "reducere": 30
+    },
+    {
+      "categorie": "racire",
+      "data-incepere": "2026-09-04T16:41:30.927Z",
+      "data-finalizare": "2026-09-04T16:46:30.927Z",
+      "reducere": 5
+    },
+    {
+      "categorie": "periferice",
+      "data-incepere": "2026-09-04T16:36:30.922Z",
+      "data-finalizare": "2026-09-04T16:41:30.922Z",
+      "reducere": 15
+    },
+    {
+      "categorie": "componente",
+      "data-incepere": "2026-09-04T16:31:30.914Z",
+      "data-finalizare": "2026-09-04T16:36:30.914Z",
+      "reducere": 30
+    },
+    {
+      "categorie": "stocare",
+      "data-incepere": "2026-09-04T16:26:30.903Z",
+      "data-finalizare": "2026-09-04T16:31:30.903Z",
+      "reducere": 25
+    },
+    {
+      "categorie": "periferice",
+      "data-incepere": "2026-09-04T16:21:30.901Z",
+      "data-finalizare": "2026-09-04T16:26:30.901Z",
+      "reducere": 50
+    },
+    {
+      "categorie": "racire",
+      "data-incepere": "2026-09-04T16:16:30.895Z",
+      "data-finalizare": "2026-09-04T16:21:30.895Z",
+      "reducere": 35
+    },
+    {
+      "categorie": "monitoare",
+      "data-incepere": "2026-09-04T16:11:30.887Z",
+      "data-finalizare": "2026-09-04T16:16:30.887Z",
+      "reducere": 15
+    },
+    {
+      "categorie": "periferice",
+      "data-incepere": "2026-09-04T16:06:30.874Z",
+      "data-finalizare": "2026-09-04T16:11:30.874Z",
+      "reducere": 25
+    },
+    {
+      "categorie": "monitoare",
+      "data-incepere": "2026-09-04T16:01:30.872Z",
+      "data-finalizare": "2026-09-04T16:06:30.872Z",
+      "reducere": 40
     }
   ]
 }

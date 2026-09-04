@@ -5,7 +5,7 @@
     <main class="main-cont">
       <%# Etapa 6 – Bonus 20: Compararea produselor. %>
       <section class="cont-card cont-card--lat comparare-pagina">
-        <span class="eyebrow">Etapa 6 · Bonus 20</span><h1>Comparație directă</h1>
+        <span class="eyebrow">Comparație produse</span><h1>Comparație directă</h1>
         <div class="table-responsive"><table class="table table-striped table-bordered align-middle"><thead><tr><th>Caracteristică</th><% produse.forEach(function(produs) { %><th><img class="comparare-imagine" src="<%= produs.imagine %>" alt="" /><a href="/produs/<%= produs.id %>"><%= produs.nume %></a></th><% }); %></tr></thead><tbody>
           <% const randuri = [['Categorie', p => p.categorie], ['Subcategorie', p => p.subcategorie.replaceAll('-', ' ')], ['Preț', p => p.pret.toFixed(2) + ' lei'], ['Scor', p => p.scor_performanta + '/100'], ['Culoare', p => p.culoare], ['Conectivitate', p => p.conectivitate.join(', ')], ['Disponibilitate', p => p.in_stoc ? 'În stoc' : 'Indisponibil']]; %>
           <% randuri.forEach(function(rand) { %><tr><th><%= rand[0] %></th><% produse.forEach(function(produs) { %><td><%= rand[1](produs) %></td><% }); %></tr><% }); %>
