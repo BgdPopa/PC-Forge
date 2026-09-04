@@ -1,4 +1,4 @@
-// Etapa 8 - cont local de administrator pentru prezentarea si testarea proiectului.
+// Etapa 8 – Cerință: Funcția creeazaAdministrator.
 const path = require("path");
 require("dotenv").config({ path: path.join(__dirname, "..", ".env") });
 const AccesBD = require("../module/acces-bd");

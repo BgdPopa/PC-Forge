@@ -3,7 +3,7 @@
   <%- include("../fragmente/head", { titlu: "PC Forge - Coș" }) %>
   <body id="top"><%- include("../fragmente/header") %>
     <main class="main-produse">
-      <%# Etapa 8 - Bonus 13f: pagina tinta a linkului din e-mailul de stoc redus. %>
+      <%# Etapa 8 – Bonus 13f: Coșul din sesiune. %>
       <section class="produse-hero"><span class="badge text-bg-light">Etapa 8 · Bonus 13f</span><h2>Coșul sesiunii</h2><p>Produsele adăugate din notificările PC Forge sunt păstrate în sesiunea utilizatorului.</p></section>
       <section class="grid-produse"><% produse.forEach(function(produs) { %><article class="card produs-card"><img class="card-img-top" src="<%= produs.imagine %>" alt="<%= produs.nume %>" /><div class="card-body"><h3><a href="/produs/<%= produs.id %>"><%= produs.nume %></a></h3><strong><%= produs.pret.toFixed(2) %> lei</strong></div></article><% }); %></section>
       <% if (!produse.length) { %><p class="alert alert-light">Coșul este momentan gol.</p><% } %>

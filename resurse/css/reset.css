@@ -1,5 +1,4 @@
-/* Etapa 2 - bonus reset:
-   Variabile CSS pentru valorile care se repeta si depind logic unele de altele */
+/* Etapa 2 – Cerință: Stilizarea selectorului :root. */
 :root {
     --reset-spacing: 0;
     --reset-font-size: 1rem;
@@ -12,9 +11,7 @@
     --reset-font-size-sub-sup: 0.75em;
 }
 
-/* Etapa 2 - bonus reset:
-   html si body primesc dimensiuni in unitati fixe (conform cerintei).
-   line-height fix asigura coerenta de baza inainte de cel al stilului principal */
+/* Etapa 2 – Cerință: Acces ORM cu Sequelize. */
 html {
     font-size: 16px;
     line-height: 1.5;
@@ -29,15 +26,12 @@ body {
     padding: var(--reset-spacing);
 }
 
-/* Etapa 2 - bonus reset:
-   Resetarea box-model pentru toate elementele */
+/* Etapa 2 – Cerință: Stilizarea selectorului *, *::before, *::after. */
 *, *::before, *::after {
     box-sizing: border-box;
 }
 
-/* Etapa 2 - bonus reset:
-   Resetarea marginilor si spatierii implicite ale browserului
-   pe toate elementele de bloc si inline-block relevante */
+/* Etapa 2 – Cerință: Stilizarea selectorului header, footer, main, details, summary. */
 h1, h2, h3, h4, h5, h6,
 p, ul, ol, dl, dt, dd,
 blockquote, figure, figcaption,
@@ -49,8 +43,7 @@ header, footer, main, details, summary {
     padding: var(--reset-spacing);
 }
 
-/* Etapa 2 - bonus reset:
-   Dimensiunile headingurilor in unitati relative */
+/* Etapa 2 – Cerință: Titlurile paginii. */
 h1 { font-size: 2rem; }
 h2 { font-size: 1.6rem; }
 h3 { font-size: 1.3rem; }
@@ -63,40 +56,35 @@ h1, h2, h3, h4, h5, h6 {
     line-height: var(--reset-line-height);
 }
 
-/* Etapa 2 - bonus reset:
-   Dimensiune si line-height uniforma pentru elementele de text */
+/* Etapa 2 – Cerință: Acces ORM cu Sequelize. */
 p, li, td, th, dt, dd,
 summary, figcaption, caption, a {
     font-size: var(--reset-font-size);
     line-height: var(--reset-line-height);
 }
 
-/* Etapa 2 - bonus reset:
-   Redefinirea stilului bold - greutate explicita */
+/* Etapa 2 – Cerință: Stilizarea selectorului b, strong. */
 b, strong {
     font-weight: var(--reset-font-weight-bold);
     font-style: var(--reset-font-style-normal);
     font-size: inherit;
 }
 
-/* Etapa 2 - bonus reset:
-   Redefinirea stilului italic - stil explicit */
+/* Etapa 2 – Cerință: Stilizarea selectorului i, em. */
 i, em {
     font-style: var(--reset-font-style-italic);
     font-weight: var(--reset-font-weight-normal);
     font-size: inherit;
 }
 
-/* Etapa 2 - bonus reset:
-   Redefinirea dfn, cite si var (text idiomatic/italic) */
+/* Etapa 2 – Cerință: Stilizarea selectorului dfn, cite, var. */
 dfn, cite, var {
     font-style: var(--reset-font-style-italic);
     font-weight: var(--reset-font-weight-normal);
     font-size: inherit;
 }
 
-/* Etapa 2 - bonus reset:
-   Eliminarea bulleturilor si a indicilor impliciti din liste */
+/* Etapa 2 – Cerință: Stilizarea selectorului ul, ol. */
 ul, ol {
     list-style: none;
     padding-left: var(--reset-spacing);
@@ -107,16 +95,14 @@ dl, dt, dd {
     line-height: var(--reset-line-height);
 }
 
-/* Etapa 2 - bonus reset:
-   Resetarea culorilor si decoratiei implicite ale linkurilor */
+/* Etapa 2 – Cerință: Stilizarea selectorului a. */
 a {
     color: inherit;
     text-decoration: none;
     font-size: inherit;
 }
 
-/* Etapa 2 - bonus reset:
-   Resetarea completa a stilului implicit al tabelelor */
+/* Etapa 2 – Cerință: Stilizarea selectorului table. */
 table {
     border-collapse: collapse;
     border-spacing: var(--reset-spacing);
@@ -139,8 +125,7 @@ caption {
     caption-side: bottom;
 }
 
-/* Etapa 2 - bonus reset:
-   Resetarea elementelor media - responsive by default */
+/* Etapa 2 – Cerință: Stilizarea și aspectul responsive. */
 img {
     display: block;
     max-width: 100%;
@@ -152,8 +137,7 @@ video, iframe, embed, object {
     max-width: 100%;
 }
 
-/* Etapa 2 - bonus reset:
-   Elementele small, sub si sup in unitati relative */
+/* Etapa 2 – Cerință: Stilizarea selectorului small. */
 small {
     font-size: var(--reset-font-size-small);
 }
@@ -168,23 +152,20 @@ sub, sup {
 sup { top: -0.5em; }
 sub { bottom: -0.25em; }
 
-/* Etapa 2 - bonus reset:
-   Resetarea elementelor de cod */
+/* Etapa 2 – Cerință: Stilizarea selectorului code, pre, kbd, samp. */
 code, pre, kbd, samp {
     font-family: monospace, monospace;
     font-size: 1em;
 }
 
-/* Etapa 2 - bonus reset:
-   Linie orizontala fara stil implicit */
+/* Etapa 2 – Cerință: Stilizarea selectorului hr. */
 hr {
     border: none;
     border-top: 1px solid currentColor;
     margin: var(--reset-spacing);
 }
 
-/* Etapa 2 - bonus reset:
-   Resetarea stilului implicit al citatelor */
+/* Etapa 2 – Cerință: Stilizarea selectorului blockquote, q. */
 blockquote, q {
     quotes: none;
     font-size: var(--reset-font-size);
@@ -196,8 +177,7 @@ q::before, q::after {
     content: none;
 }
 
-/* Etapa 2 - bonus reset:
-   Resetarea formularelor - mostenesc fontul si dimensiunea de la parinte */
+/* Etapa 2 – Cerință: Acces ORM cu Sequelize. */
 button, input, select, textarea {
     font-family: inherit;
     font-size: var(--reset-font-size);
@@ -207,8 +187,7 @@ button, input, select, textarea {
     margin: var(--reset-spacing);
 }
 
-/* Etapa 2 - bonus reset:
-   Resetarea elementelor cu mark si abrevieri */
+/* Etapa 2 – Cerință: Stilizarea selectorului mark. */
 mark {
     background: transparent;
     color: inherit;
@@ -219,8 +198,7 @@ abbr[title] {
     cursor: help;
 }
 
-/* Etapa 2 - bonus reset:
-   Resetarea elementului ins si s */
+/* Etapa 2 – Cerință: Stilizarea selectorului ins. */
 ins {
     text-decoration: underline;
 }
@@ -229,10 +207,7 @@ s {
     text-decoration: line-through;
 }
 
-/* Etapa 2 - bonus reset:
-   Exceptie pentru elementele MathML: box-sizing-ul implicit (content-box) este restaurat
-   deoarece motorul de formatare al MathML foloseste propriul model de layout
-   si poate fi perturbat de box-sizing: border-box */
+/* Etapa 2 – Cerință: Acces ORM cu Sequelize. */
 math,
 math * {
     box-sizing: content-box;

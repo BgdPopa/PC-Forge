@@ -1,4 +1,5 @@
-/* Etapa 8 - paginile sistemului de utilizatori, integrate in tema PC Forge. */
+@charset "UTF-8";
+/* Etapa 8 – Cerință: Stilizarea sistemului de utilizatori. */
 .main-cont {
   width: min(1180px, 100% - 2rem);
   margin: 0 auto;

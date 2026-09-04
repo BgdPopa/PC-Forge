@@ -1,4 +1,4 @@
-// Etapa 8 - serviciu unic pentru e-mailurile de confirmare si administrare.
+// Etapa 8 – Cerință: Configurarea fs.
 const fs = require("fs");
 const path = require("path");
 const nodemailer = require("nodemailer");

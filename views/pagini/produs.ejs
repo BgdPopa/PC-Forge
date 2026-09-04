@@ -4,9 +4,9 @@
   <body id="top" data-pagina="produs" data-produs-nume="<%= produs.nume %>">
     <%- include("../fragmente/header") %>
     <main class="main-produse">
-      <!-- Etapa 6 - cerinta individuala, punctul 2: pagina produsului unic. -->
+      <!-- Etapa 6 – Cerința 2: Pagina individuală a produsului. -->
       <article class="produs-detaliu">
-        <%# Etapa 6 - Bonus 9: carusel Bootstrap pentru imaginile produsului. %>
+        <%# Etapa 6 – Bonus 9: Imagini multiple pentru produs. %>
         <div id="carusel-produs" class="carousel slide produs-detaliu__imagine">
           <div class="carousel-inner"><% produs.imagini.forEach(function(imagine, index) { %><div class="carousel-item <%= index === 0 ? 'active' : '' %>"><img src="<%= imagine %>" class="d-block w-100" alt="<%= produs.nume %> - imaginea <%= index + 1 %>" /></div><% }); %></div>
           <% if (produs.imagini.length > 1) { %><button class="carousel-control-prev" type="button" data-bs-target="#carusel-produs" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span><span class="visually-hidden">Imaginea precedentă</span></button><button class="carousel-control-next" type="button" data-bs-target="#carusel-produs" data-bs-slide="next"><span class="carousel-control-next-icon"></span><span class="visually-hidden">Imaginea următoare</span></button><% } %>
@@ -15,13 +15,13 @@
           <a class="produs-inapoi" href="/produse?categorie=<%= produs.categorie %>"><i class="bi bi-arrow-left" aria-hidden="true"></i> Înapoi la <%= produs.categorie %></a>
           <p class="produs-card__categorie"><%= produs.categorie %> · <%= produs.subcategorie.replaceAll("-", " ") %></p>
           <h2><%= produs.nume %></h2><p class="produs-detaliu__descriere"><%= produs.descriere %></p><strong class="produs-detaliu__pret"><%= produs.pret.toFixed(2) %> lei</strong>
-          <%# Etapa 8 - Bonus 13: marcaj si actiune favorite pe pagina proprie. %><p class="produs-favorite" data-favorite-id="<%= produs.id %>"><i class="bi bi-heart-fill"></i> <span><%= produs.numar_favorite %></span> utilizatori îl preferă</p><% if (typeof utilizatorCurent !== 'undefined' && utilizatorCurent) { %><button class="btn <%= produs.este_favorit ? 'btn-danger' : 'btn-outline-danger' %> actiune-favorit" data-produs-id="<%= produs.id %>" type="button" aria-pressed="<%= produs.este_favorit %>"><i class="bi bi-heart<%= produs.este_favorit ? '-fill' : '' %>"></i> Favorite</button><% } %>
+          <%# Etapa 8 – Bonus 13: Produsul favorit. %><p class="produs-favorite" data-favorite-id="<%= produs.id %>"><i class="bi bi-heart-fill"></i> <span><%= produs.numar_favorite %></span> utilizatori îl preferă</p><% if (typeof utilizatorCurent !== 'undefined' && utilizatorCurent) { %><button class="btn <%= produs.este_favorit ? 'btn-danger' : 'btn-outline-danger' %> actiune-favorit" data-produs-id="<%= produs.id %>" type="button" aria-pressed="<%= produs.este_favorit %>"><i class="bi bi-heart<%= produs.este_favorit ? '-fill' : '' %>"></i> Favorite</button><% } %>
           <table class="table table-striped produs-detaliu__tabel"><tbody><tr><th>Scor de performanță</th><td><%= produs.scor_performanta %>/100</td></tr><tr><th>Subcategorie</th><td><%= produs.subcategorie.replaceAll("-", " ") %></td></tr><tr><th>Culoare</th><td><%= produs.culoare %></td></tr><tr><th>Conectivitate</th><td><%= produs.conectivitate.join(", ") %></td></tr><tr><th>Data adăugării</th><td><time datetime="<%= produs.data_adaugare %>"><%= produs.data_adaugare %></time></td></tr><tr><th>Disponibilitate</th><td><%= produs.in_stoc ? "În stoc" : "Indisponibil momentan" %></td></tr></tbody></table>
         </div>
       </article>
-      <%# Etapa 6 - Bonus 16: selectia este calculata in PostgreSQL. %>
+      <%# Etapa 6 – Bonus 16: Produse similare. %>
       <section class="produse-similare" aria-labelledby="titlu-produse-similare"><div class="produse-similare__antet"><span class="eyebrow">Continuă configurația</span><h2 id="titlu-produse-similare">Produse similare</h2></div><div class="produse-similare__grid"><% produseSimilare.forEach(function(similar) { %><article><a href="/produs/<%= similar.id %>"><img src="<%= similar.imagine %>" alt="<%= similar.nume %>" /><h3><%= similar.nume %></h3></a><p><%= similar.pret.toFixed(2) %> lei · scor <%= similar.scor_performanta %>/100</p></article><% }); %></div></section>
-      <%# Etapa 6 - Bonus 17d: toate seturile din care face parte produsul. %><section class="seturi-produs"><span class="eyebrow">Pachete compatibile</span><h2>Seturi care includ produsul</h2><div class="seturi-grid"><% seturi.forEach(function(set) { %><article class="set-card"><h3><%= set.nume_set %></h3><p><%= set.descriere_set %></p><ul><% set.produse.forEach(function(item) { %><li><a href="/produs/<%= item.id %>"><%= item.nume %></a></li><% }); %></ul><strong><%= set.pret_redus.toFixed(2) %> lei (-<%= set.reducere %>%)</strong></article><% }); %></div></section>
+      <%# Etapa 6 – Bonus 17d: Seturi de produse și reducere. %><section class="seturi-produs"><span class="eyebrow">Pachete compatibile</span><h2>Seturi care includ produsul</h2><div class="seturi-grid"><% seturi.forEach(function(set) { %><article class="set-card"><h3><%= set.nume_set %></h3><p><%= set.descriere_set %></p><ul><% set.produse.forEach(function(item) { %><li><a href="/produs/<%= item.id %>"><%= item.nume %></a></li><% }); %></ul><strong><%= set.pret_redus.toFixed(2) %> lei (-<%= set.reducere %>%)</strong></article><% }); %></div></section>
     </main>
     <%- include("../fragmente/footer") %><script src="/resurse/js/favorite.js"></script>
   </body>

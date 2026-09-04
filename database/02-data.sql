@@ -1,5 +1,4 @@
--- Etapa 6 - cerinta individuala, punctul 3:
--- minimum 15-20 de produse suficient de diverse pentru toate filtrele si sortarile.
+-- Etapa 6 – Cerința 3: Definirea produse.
 INSERT INTO produse
   (nume, descriere, imagine, categorie, subcategorie, pret, scor_performanta, data_adaugare, culoare, conectivitate, in_stoc)
 VALUES

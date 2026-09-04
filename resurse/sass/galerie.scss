@@ -1,6 +1,6 @@
 @use "sass:math";
 
-/* Etapa 5 - galeria statica, afisata pe prima pagina si pe pagina dedicata. */
+/* Etapa 5 – Cerință: Galeria statică. */
 .galerie-statica,
 .galerie-animata-sectiune {
   grid-column: 1 / -1;
@@ -53,8 +53,7 @@
   color: #3b3b3b;
   box-shadow: 0 0.75rem 1.8rem rgba(31, 31, 31, 0.2);
   transform-origin: center;
-  /* Etapa 5 - galerie statica, cerinta individuala:
-     toate proprietatile efectului de hover se modifica in exact o secunda. */
+  /* Etapa 5 – Cerință: Galeria statică. */
   transition: transform 1s ease, border-width 1s ease, box-shadow 1s ease;
 }
 
@@ -147,7 +146,7 @@
   }
 }
 
-/* Etapa 5 bonus - galerie animata generata prin SASS pentru 3, 6, 9 sau 12 imagini. */
+/* Etapa 5 – Cerință: Galeria animată. */
 .galerie-animata {
   display: grid;
   width: min(100%, 900px);

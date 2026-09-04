@@ -1,6 +1,4 @@
-<%# Etapa 4 - task 5: Prima pagina a site-ului, fosta index.html, transformata
-in template EJS. Foloseste fragmentele comune head, header si footer prin
-include(). %>
+<%# Etapa 4 – Cerința 5: Paginare dinamică. %>
 <!DOCTYPE html>
 <html lang="ro">
   <%- include("../fragmente/head") %>
@@ -8,14 +6,12 @@ include(). %>
   <body id="top">
     <%- include("../fragmente/header") %>
 
-    <!-- Etapa 2 - task layout:
-         Main reorganizat intr-un grid cu 8 zone -->
+    <!-- Etapa 2 – Cerința layout: Structura elementului main. -->
     <main>
       <div class="grid-pagina">
-        <%# Etapa 6 - Bonus 12b/c: oferta curenta si temporizatorul. %>
+        <%# Etapa 6 – Bonus 12b/c: Oferte periodice. %>
         <% if (typeof ofertaCurenta !== 'undefined' && ofertaCurenta) { %><section class="oferta-curenta" id="oferta-curenta" data-expira="<%= ofertaCurenta['data-finalizare'] %>"><div><span class="badge text-bg-light">Oferta atelierului</span><h2>-<%= ofertaCurenta.reducere %>% la categoria <%= ofertaCurenta.categorie %></h2><p>Prețurile reduse sunt afișate direct în lista de produse.</p></div><strong id="temporizator-oferta">--:--</strong><a class="btn btn-light" href="/produse?categorie=<%= ofertaCurenta.categorie %>">Vezi produsele</a></section><% } %>
-        <!-- Etapa 2 - task layout:
-                 Zona 1 - prezentare principala -->
+        <!-- Etapa 2 – Cerința layout: Structura elementului section zona. -->
         <section class="zona zona1" id="prezentare">
           <h2>Bine ai venit la PC Forge</h2>
           <p>
@@ -44,12 +40,8 @@ include(). %>
           </p>
         </section>
 
-        <!-- Etapa 1 - task 15:
-                 Tabel cu thead, tbody, tfoot, caption, rowspan si colspan
-                 Etapa 2 - task layout:
-                 Zona 2 - tabelul este plasat central in grid -->
-        <!-- Etapa 2 - task stilizare tabel:
-                 tabelul este pus intr-un container separat pentru overflow orizontal -->
+        <!-- Etapele 1 și 2 – Cerințele 15; layout: Structura elementului section zona. -->
+        <!-- Etapa 2 – Cerință: Structura elementului section zona. -->
         <section class="zona zona2" id="tabel-oferte">
           <h2>Tabel cu produse populare</h2>
 
@@ -114,10 +106,7 @@ include(). %>
           </div>
         </section>
 
-        <!-- Etapa 1 - task 10:
-                 Sectiune de evenimente cu time
-                 Etapa 2 - task layout:
-                 Zona 3 - calendar / evenimente -->
+        <!-- Etapele 1 și 2 – Cerințele 10; layout: Structura elementului section zona. -->
         <section class="zona zona3" id="oferte">
           <h2>Calendar de evenimente</h2>
           <ol>
@@ -140,8 +129,7 @@ include(). %>
           </ol>
         </section>
 
-        <!-- Etapa 2 - task layout:
-                 Zona 4 - anunturi importante -->
+        <!-- Etapa 2 – Cerința layout: Structura elementului section zona. -->
         <section class="zona zona4" id="anunturi">
           <h2>Anunturi importante</h2>
           <p>
@@ -157,7 +145,7 @@ include(). %>
           </p>
         </section>
 
-        <!-- Etapa 8 - cerintele 7 si 12: profilul curent si administratorii online. -->
+        <!-- Etapa 8 – Cerință: Sistemul de utilizatori. -->
         <section class="zona zona5" id="utilizatori-online">
           <% if (typeof utilizatorCurent !== "undefined" && utilizatorCurent) { %>
             <div class="profil-acasa">
@@ -172,10 +160,7 @@ include(). %>
           <ul id="lista-admini-online"><li>Se verifică disponibilitatea...</li></ul>
         </section>
 
-        <!-- Etapa 1 - task 17:
-                 Utilizarea tagului meter
-                 Etapa 2 - task layout:
-                 Zona 6 - statistici -->
+        <!-- Etapele 1 și 2 – Cerințele 17; layout: Structura elementului section zona. -->
         <section class="zona zona6" id="evaluari">
           <h2><i class="fas fa-gear fa-spin"></i> Statistici rapide</h2>
           <p>
@@ -192,9 +177,7 @@ include(). %>
           <p>Produse cele mai cautate: GPU, SSD, RAM</p>
         </section>
 
-        <!-- Etapa 1 - bonus 1:
-                 Formula scrisa in MathML relevanta pentru tema site-ului;
-                 calculeaza eficienta cost-performanta a unui component -->
+        <!-- Etapa 1 – Bonus 1: Teme persistente. -->
         <section id="formula-mathml">
           <h3>Formula cost-performanta</h3>
           <p>
@@ -221,27 +204,22 @@ include(). %>
           </p>
         </section>
 
-        <!-- Etapa 2 - task layout:
-                 Zona 7 - date despre site si server -->
+        <!-- Etapa 2 – Cerința layout: Structura elementului section zona. -->
         <section class="zona zona7" id="date-site">
           <h2>Date despre site si server</h2>
           <p>Versiune site: 1.0</p>
           <p>Status server: online</p>
           <p>Timp mediu de raspuns: 0.8 secunde</p>
           <p>Actualizare continut: zilnica</p>
-          <!-- Etapa 4 - task 16:
-                     Afisarea ip-ului utilizatorului (transmis din server).
-                     Local fiind, se vede ip-ul de localhost (::1) -->
+          <!-- Etapa 4 – Cerința 16: Sistemul de utilizatori. -->
           <p>IP utilizator: <%= ip %></p>
         </section>
 
-        <!-- Etapa 2 - task layout:
-                 Zona 8 - continut mixt / util -->
+        <!-- Etapa 2 – Cerința layout: Structura elementului section zona. -->
         <section class="zona zona8" id="continut-divers">
           <h2>Resurse si continut util</h2>
 
-          <!-- Etapa 1 - task 3, 5, 6 si 12:
-                     Cuvinte-cheie relevante in continut, section/article, marcaje text -->
+          <!-- Etapa 1 – Cerința 3, 5, 6 și 12: Structura elementului section categorii. -->
           <section id="categorii">
             <h3>Categorii principale</h3>
 
@@ -291,8 +269,7 @@ include(). %>
             </article>
           </section>
 
-          <!-- Etapa 1 - task 11 si 13d:
-                     Imagine cu figure, figcaption, picture si link pe imagine -->
+          <!-- Etapa 1 – Cerința 11 și 13d: Structura elementului section imagine-reprezentativa. -->
           <section id="imagine-reprezentativa">
             <h3>Imagine reprezentativa</h3>
             <figure>
@@ -323,9 +300,7 @@ include(). %>
               </figcaption>
             </figure>
           </section>
-          <!-- Etapa 1 - bonus 3:
-                     Harta de imagini cu tagurile map si area; zone clicabile cu forme
-                     diferite (rect, circle, poly) care duc catre sectiuni din pagina -->
+          <!-- Etapa 1 – Bonus 3: Harta interactivă. -->
           <section id="harta-componente">
             <h3>Harta interactiva</h3>
             <p>
@@ -371,8 +346,7 @@ include(). %>
             </map>
           </section>
         </section>
-        <!-- Etapa 1 - task 13:
-                 Link extern, link intern, link cu wbr si link de download -->
+        <!-- Etapa 1 – Cerința 13: Structura elementului section linkuri. -->
         <section id="linkuri">
           <h3>Linkuri utile</h3>
           <p>
@@ -406,8 +380,7 @@ include(). %>
             >
           </p>
         </section>
-        <!-- Etapa 1 - bonus 2:
-                 Afisarea unui PDF in pagina cu tagul embed -->
+        <!-- Etapa 1 – Bonus 2: Paginare dinamică. -->
         <section id="pdf-ghid">
           <h3>Previzualizare ghid PC Forge</h3>
           <p>
@@ -422,10 +395,8 @@ include(). %>
           />
         </section>
 
-        <!-- Etapa 1 - task 14:
-                 Iframe YouTube si linkuri care schimba videoclipul -->
-        <!-- Etapa 2 - task stilizare taburi:
-                 linkurile catre iframe sunt reorganizate in taburi stilizate -->
+        <!-- Etapa 1 – Cerința 14: Conținut încorporat. -->
+        <!-- Etapa 2 – Cerință: Conținut încorporat. -->
         <section id="video">
           <h3>Videoclipuri recomandate</h3>
 
@@ -471,9 +442,7 @@ include(). %>
           </div>
         </section>
 
-        <!-- Etapa 1 - bonus 5:
-                 Iframe cu playlist YouTube care se reda automat si se reia de la inceput,
-                 cu butoane de control vizibile, rezolvat doar din parametri URL -->
+        <!-- Etapa 1 – Bonus 5: Playlist audio. -->
         <section id="playlist-video">
           <h3>Playlist recomandat</h3>
           <p>
@@ -499,8 +468,7 @@ include(). %>
           </div>
         </section>
 
-        <!-- Etapa 1 - task 16:
-                 Details si summary pentru intrebari frecvente -->
+        <!-- Etapa 1 – Cerința 16: Secțiuni extensibile. -->
         <section id="faq">
           <h3>Intrebari frecvente</h3>
 
@@ -531,10 +499,7 @@ include(). %>
           </details>
         </section>
 
-        <!-- Etapa 4 - task video-vtt:
-                 Videoclip local HTML5 cu poster, controale, responsive,
-                 doua surse (mp4 + webm), preload="metadata" si doua track-uri
-                 de subtitrare (romana default + engleza) -->
+        <!-- Etapa 4 – Cerința video-vtt: Stilizarea și aspectul responsive. -->
         <section id="video-local" class="zona-video-local">
           <h2>Prezentare video PC Forge</h2>
           <p>Videoclip local cu subtitrari in romana si engleza.</p>
@@ -573,7 +538,7 @@ include(). %>
           </video>
         </section>
 
-        <!-- Etapa 5 - Demonstratie Bootstrap customizat prin SCSS -->
+        <!-- Etapa 5 – Cerință: Bootstrap personalizat prin SCSS. -->
         <section id="bootstrap-custom" class="zona">
           <div class="bootstrap-intro">
             <span class="badge text-bg-light">Etapa 5 · Bootstrap customizat</span>
@@ -637,27 +602,19 @@ include(). %>
           </div>
         </section>
 
-        <!-- Etapa 5 - galeria statica este refolosita si pe pagina dedicata. -->
+        <!-- Etapa 5 – Cerință: Galeria statică. -->
         <%- include("../fragmente/galerie-statica", { imaginiGalerie: imaginiGalerie }) %>
 
-        <!-- Etapa 5 bonus - galerie animata cu numar aleator multiplu de trei. -->
+        <!-- Etapa 5 – Cerință: Galeria animată. -->
         <%- include("../fragmente/galerie-animata", { galerieAnimata: galerieAnimata }) %>
 
-        <%# Etapa 6 - Bonus 18: fragment reutilizabil cu cele mai noi produse. %>
+        <%# Etapa 6 – Bonus 18: Produse noi. %>
         <%- include("../fragmente/produse-noi", { produseNoi: produseNoi }) %>
 
-        <!-- Etapa 5 - efect-css-stilizare-hr:
-                 hr stilizat din 2 gradienturi liniare identice, unul la 45deg si
-                 unul la -45deg, fiecare ocupand jumatate din inaltimea elementului,
-                 al doilea pozitionat in jumatatea de jos, repetate doar orizontal
-                 pentru a sugera niste sageti -->
+        <!-- Etapa 5 – Cerință: Stilizarea separatorului. -->
         <hr class="hr-sageata" />
 
-        <!-- Etapa 5 - efect-css-duotone:
-                 div cu imagine de fundal peste care se aplica un efect duotone
-                 folosind pseudo-elementele ::before si ::after cu mix-blend-mode.
-                 La hover straturile colorate dispar treptat si imaginea trece in
-                 grayscale. Se foloseste o imagine deja existenta din galerie -->
+        <!-- Etapa 5 – Cerință: Efectul duotone. -->
         <section id="efect-duotone" class="zona zona-efect-duotone">
           <h2>Componente in prim-plan</h2>
           <p>
@@ -672,11 +629,7 @@ include(). %>
           ></div>
         </section>
 
-        <!-- Etapa 5 - efect-css-reflexie-text:
-                 heading cu reflexie generata prin pseudo-elementul ::after, care
-                 copiaza textul din atributul data-text, il intoarce vertical cu
-                 scaleY(-1) si il estompeaza cu filter: blur si mask-image.
-                 La hover reflexia se alungeste -->
+        <!-- Etapa 5 – Cerință: Reflexia textului. -->
         <section id="efect-reflexie" class="zona zona-efect-reflexie">
           <h2 class="titlu-reflexie" data-text="PC Forge">PC Forge</h2>
           <p>
@@ -684,10 +637,7 @@ include(). %>
           </p>
         </section>
 
-        <!-- Etapa 5 - efect-css-coloane:
-                 sectiune cu mai mult text pe care se aplica column-count; pe ecran
-                 mediu si mic se afiseaza o singura coloana, iar intre coloane apare
-                 o linie despartitoare prin column-rule -->
+        <!-- Etapa 5 – Cerință: Text pe coloane. -->
         <section id="efect-coloane" class="zona zona-efect-coloane">
           <h2>Ghid rapid de configurare</h2>
           <div class="text-coloane">
@@ -714,9 +664,7 @@ include(). %>
           </div>
         </section>
 
-        <!-- Etapa 5 - efect-css-text-animat:
-                 text care se plimba orizontal printr-o animatie recurenta (keyframes).
-                 Containerul are overflow ascuns ca sa nu apara scrollbar orizontal pe pagina -->
+        <!-- Etapa 5 – Cerință: Text animat. -->
         <section id="efect-text-animat" class="zona zona-efect-text-animat">
           <h2>Anunt in miscare</h2>
           <div class="banda-animata">

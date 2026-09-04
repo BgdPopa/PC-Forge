@@ -1,4 +1,4 @@
-// Etapa 6 - Bonus 12c: temporizator actualizat la fiecare secunda.
+// Etapa 6 – Bonus 12c: Oferte periodice.
 document.addEventListener("DOMContentLoaded", function () {
   const oferta = document.getElementById("oferta-curenta"); if (!oferta) return;
   const output = document.getElementById("temporizator-oferta");

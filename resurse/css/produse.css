@@ -1,4 +1,5 @@
-/* Etapa 6 - tema light/dark cu variabile CSS, aplicata pe toate paginile. */
+@charset "UTF-8";
+/* Etapa 6 – Cerință: Stilizarea paginii de produse. */
 html[data-tema=dark] body {
   --culoare-fundal: #17181b;
   --culoare-zona: #a90024;
@@ -7,7 +8,7 @@ html[data-tema=dark] body {
   --culoare-umbra: rgba(0, 0, 0, 0.48);
 }
 
-/* Etapa 6 - Bonus 2: a treia tema pastreaza rosul PC Forge, dar creste contrastul. */
+/* Etapa 6 – Bonus 2: Trei teme persistente. */
 html[data-tema=contrast] body {
   --culoare-fundal: #08090b;
   --culoare-zona: #ff174b;
@@ -70,7 +71,7 @@ html[data-tema=dark] .tema-icon-luna {
   display: inline-block;
 }
 
-/* Etapa 6 - pagina de produse, integrata in identitatea vizuala PC Forge. */
+/* Etapa 6 – Cerință: Stilizarea paginii de produse. */
 .main-produse {
   width: min(1500px, 100% - 2rem);
   margin: 0 auto;
@@ -102,7 +103,7 @@ html[data-tema=dark] .tema-icon-luna {
   font-size: 1.08rem;
 }
 
-/* Etapa 6 - Bonus 12: anuntul ofertei si ultimele zece secunde. */
+/* Etapa 6 – Bonus 12: Oferte periodice. */
 .oferta-curenta {
   grid-column: 1/-1;
   display: flex;
@@ -258,7 +259,7 @@ html[data-tema=dark] .produs-specificatii, html[data-tema=dark] .produs-detaliu_
   margin-bottom: 0.85rem;
 }
 
-/* Etapa 6 - cerinta individuala, punctul 5: imagine mica, uniforma, asezata in dreapta tabelului. */
+/* Etapa 6 – Cerința 5: Imaginea cardului de produs. */
 .produs-card__imagine {
   position: relative;
   overflow: hidden;
@@ -347,7 +348,7 @@ html[data-tema=dark] .produs-specificatii, html[data-tema=dark] .produs-detaliu_
   background: transparent !important;
 }
 
-/* Etapa 6 - cerinta individuala, punctul 5: descrierea ramane lizibila sub tabel. */
+/* Etapa 6 – Cerința 5: Stilizarea selectorului .produs-card .card-text. */
 .produs-card .card-text {
   color: #3d3d42;
 }
@@ -357,7 +358,7 @@ html[data-tema=contrast] .produs-card .card-text {
   color: #f3f3f4;
 }
 
-/* Etapa 10 - finisaj responsive: suprascrie min-width-ul global al tabelelor doar in cardurile de produs. */
+/* Etapa 10 – Cerință: Stilizarea și aspectul responsive. */
 .produs-specificatii {
   width: 100%;
   min-width: 0;
@@ -373,8 +374,7 @@ html[data-tema=contrast] .produs-card .card-text {
   table-layout: fixed;
 }
 
-/* Etapa 6 - cerinta individuala, punctul 5: suprascrie nowrap-ul tabelului general,
-   astfel etichetele, data romaneasca si valorile multiple incap langa imagine. */
+/* Etapa 6 – Cerința 5: Stilizarea selectorului .produs-specificatii td. */
 .produs-specificatii th,
 .produs-specificatii td {
   white-space: normal;
@@ -475,7 +475,7 @@ html[data-tema=contrast] .produs-card .card-text {
   border-radius: 0.6rem;
 }
 
-/* Etapa 6 - Bonus 18: prezentarea produselor noi pe prima pagina. */
+/* Etapa 6 – Bonus 18: Produse noi. */
 .zona-produse-noi {
   grid-column: 1/-1;
   padding: clamp(1rem, 2.8vw, 2rem);
@@ -545,7 +545,7 @@ html[data-tema=dark] .produse-noi__card {
   color: #f3f3f4;
 }
 
-/* Etapa 6 - Bonus 19: buton si panou fix pentru programul saptamanal. */
+/* Etapa 6 – Bonus 19: Programul magazinului. */
 .buton-orar {
   position: fixed;
   z-index: 1500;
@@ -607,7 +607,7 @@ html[data-tema=dark] .panou-orar .table {
   --bs-table-striped-bg: rgba(255, 255, 255, 0.05);
 }
 
-/* Etapa 6 - pagina dinamica a unui singur produs. */
+/* Etapa 6 – Cerință: Stilizarea paginii de produse. */
 .produs-detaliu {
   display: grid;
   grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr);
@@ -807,7 +807,7 @@ html[data-tema=dark] .set-card, html[data-tema=dark] .seturi-produs, html[data-t
     width: min(100% - 1rem, 720px);
   }
 }
-/* Etapa 6 - task Bootstrap 0.3a: pe ecran mic raman doar iconurile. */
+/* Etapa 6 – Cerință: Stilizarea selectorului .text-buton. */
 @media screen and (max-width: 575px) {
   .text-buton {
     display: none;

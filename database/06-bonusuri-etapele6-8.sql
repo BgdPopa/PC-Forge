@@ -1,4 +1,4 @@
--- Etapa 6 si Etapa 8 - tabelele bonusurilor care necesita persistenta.
+-- Etapele 6 și 8 – Cerință: Definirea utilizatori.
 ALTER TABLE utilizatori
   ADD COLUMN IF NOT EXISTS notificare_confirmare_trimisa TIMESTAMPTZ,
   ADD COLUMN IF NOT EXISTS token_resetare VARCHAR(100),
@@ -6,9 +6,9 @@ ALTER TABLE utilizatori
   ADD COLUMN IF NOT EXISTS incercari_login SMALLINT NOT NULL DEFAULT 0,
   ADD COLUMN IF NOT EXISTS prima_incercare_esuat TIMESTAMPTZ,
   ADD COLUMN IF NOT EXISTS blocat_login_pana TIMESTAMPTZ,
-  -- Etapa 8 - Bonus 9: preferinta persistenta setata din profil.
+  -- Etapa 8 – Bonus 9: Autentificare persistentă.
   ADD COLUMN IF NOT EXISTS ramai_conectat BOOLEAN NOT NULL DEFAULT FALSE;
--- Etapa 8 - Bonus 13e/f: cantitatea permite pragul STOC_MIN si reumplerea.
+-- Etapa 8 – Bonus 13e/f: Favorite și notificări de stoc.
 ALTER TABLE produse ADD COLUMN IF NOT EXISTS stoc INTEGER NOT NULL DEFAULT 10 CHECK (stoc >= 0);
 UPDATE produse SET stoc=0 WHERE in_stoc=FALSE AND stoc<>0;
 ALTER TABLE utilizatori ADD COLUMN IF NOT EXISTS ultima_promotie TIMESTAMPTZ;
@@ -61,8 +61,7 @@ INSERT INTO drepturi(nume,descriere) VALUES ('vizualizare_utilizatori','Vizualiz
 INSERT INTO roluri_drepturi(id_rol,id_drept)
 SELECT r.id,d.id FROM roluri r CROSS JOIN drepturi d WHERE r.nume='admin' OR (r.nume='manager_produse' AND d.nume LIKE '%produse') OR (r.nume='moderator' AND d.nume LIKE '%utilizatori') OR (r.nume='comun' AND d.nume='cumparare') ON CONFLICT DO NOTHING;
 
--- Etapa 8 - Bonus 11: utilizatorii existenti primesc asocierea many-to-many
--- aferenta rolului principal, cu perioada nedeterminata.
+-- Etapa 8 – Bonus 11: Roluri cu perioadă de valabilitate.
 INSERT INTO utilizatori_roluri(id_utilizator,id_rol,data_inceput,data_expirare)
 SELECT u.id,r.id,NULL,NULL
 FROM utilizatori u JOIN roluri r ON r.nume=u.rol::text

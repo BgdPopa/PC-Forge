@@ -1,5 +1,4 @@
-// Etapa 7 - clasa Utilizator (cerinta 0.7p):
-// modelul viitorului sistem de conturi si metodele sale de acces la baza de date.
+// Etapa 7 – Cerință: Sistemul de utilizatori.
 const AccesBD = require("./acces-bd");
 const { RolFactory } = require("./roluri");
 const email = require("./email");
@@ -29,7 +28,7 @@ class Utilizator {
     this.ultima_logare = date.ultima_logare ?? null;
     this.ultima_activitate = date.ultima_activitate ?? null;
     this.ip_ultima_accesare = date.ip_ultima_accesare ?? null;
-    // Etapa 8 - Bonusurile 3, 4 si 6: starea mecanismelor de securitate.
+    // Etapa 8 – Bonus 3: Validarea datelor utilizatorului.
     this.notificare_confirmare_trimisa = date.notificare_confirmare_trimisa ?? null;
     this.token_resetare = date.token_resetare ?? null;
     this.expirare_token_resetare = date.expirare_token_resetare ?? null;
@@ -37,7 +36,7 @@ class Utilizator {
     this.prima_incercare_esuat = date.prima_incercare_esuat ?? null;
     this.blocat_login_pana = date.blocat_login_pana ?? null;
     this.ultima_promotie = date.ultima_promotie ?? null;
-    // Etapa 8 - Bonus 9: preferinta ramane asociata contului.
+    // Etapa 8 – Bonus 9: Autentificare persistentă.
     this.ramai_conectat = Boolean(date.ramai_conectat);
   }
 
@@ -153,12 +152,7 @@ class Utilizator {
     return Utilizator.cauta(obParam);
   }
 
-  /**
-   * Etapa 8 - Bonus 11e: verifica numele/id-ul dreptului prin rolurile active.
-   * Simbolurile Etapei 7 raman verificate local pentru compatibilitate.
-   * @param {symbol|string|number} drept Dreptul cerut.
-   * @returns {boolean|Promise<boolean>} Rezultatul autorizarii.
-   */
+  /* Etapa 8 – Bonus 11e: Roluri cu perioadă de valabilitate. */
   areDreptul(drept) {
     if (typeof drept === "symbol") return this.rol.areDreptul(drept);
     if (!this.id) return Promise.resolve(false);

@@ -1,5 +1,4 @@
-// Etapa 6 - Bonus 19: panou de program fara navigare, cu stare calculata dupa
-// ziua si ora curenta, evidentierea zilei si inchidere automata.
+// Etapa 6 – Bonus 19: Programul magazinului.
 function initializeazaOrar() {
   const buton = document.getElementById("btn-orar");
   const panou = document.getElementById("panou-orar");
@@ -52,8 +51,7 @@ function initializeazaOrar() {
   inchide.addEventListener("click", ascundePanou);
 }
 
-// Etapa 6 - Bonus 19: initializarea functioneaza si daca fisierul este incarcat
-// dupa evenimentul DOMContentLoaded (de exemplu din cache sau dintr-un fragment).
+// Etapa 6 – Bonus 19: Programul magazinului.
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initializeazaOrar);
 } else {

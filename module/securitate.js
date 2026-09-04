@@ -1,4 +1,4 @@
-// Etapa 8 - Bonus 1: fiecare parola foloseste un salt aleator propriu.
+// Etapa 8 – Bonus 1: Parole cu salt individual.
 const crypto = require("crypto");
 
 /**

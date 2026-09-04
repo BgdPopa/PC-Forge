@@ -5,7 +5,7 @@
     <main class="main-cont"><section class="cont-card">
       <div class="profil-antet"><img src="<%= utilizator.imagine %>" alt="Avatar <%= utilizator.username %>" /><div><span class="badge text-bg-primary"><%= utilizator.rol.cod %></span><h2>Profilul <%= utilizator.username %></h2></div></div>
       <% if (erori.length) { %><div class="alert alert-danger"><ul><% erori.forEach(e=>{ %><li><%= e %></li><% }) %></ul></div><% } %><% if (mesaj) { %><div class="alert alert-success"><%= mesaj %></div><% } %>
-      <!-- Etapa 8 - cerinta 8 si Bonus 9: profil, avatar, parola si preferinta sesiunii. -->
+      <!-- Etapa 8 – Cerința 8; Bonus 9: Sistemul de utilizatori. -->
       <form method="post" enctype="multipart/form-data"><div class="row g-3">
         <div class="col-md-6"><label class="form-label">Username</label><input class="form-control" value="<%= utilizator.username %>" readonly /></div>
         <div class="col-md-6"><label class="form-label" for="email">E-mail</label><input class="form-control" type="email" id="email" name="email" required value="<%= utilizator.email %>" /></div>

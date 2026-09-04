@@ -1,4 +1,4 @@
-// Etapa 8 - rutele pentru inregistrare, login, profil si administrare.
+// Etapa 8 – Cerință: Sistemul de utilizatori.
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
@@ -17,7 +17,7 @@ const upload = multer({
     destination: folderAvataruri,
     filename(req, fisier, callback) {
       const extensie = path.extname(fisier.originalname).toLowerCase();
-      // Etapa 8 - cerinta 8: la profil, poza noua are numele stabil poza2-username.
+      // Etapa 8 – Cerința 8: Sistemul de utilizatori.
       const username = req.session?.utilizator?.username;
       const nume = username
         ? `poza2-${username.replace(/[^A-Za-z0-9_-]/g, "")}${extensie}`
@@ -70,15 +70,14 @@ function dateSesiune(rand) {
   return { id: rand.id, username: rand.username, nume: rand.nume, prenume: rand.prenume, email: rand.email, rol: rand.rol?.cod || rand.rol, imagine: rand.imagine, tema: rand.tema, ultimaLogareAnterioara: rand.ultima_logare || null };
 }
 
-/** Creeaza routerul complet al sistemului de utilizatori Etapa 8. */
+/* Etapa 8 – Cerință: Sistemul de utilizatori. */
 function creeazaRouterUtilizatori() {
   const router = express.Router();
   const pool = AccesBD.getInstanta().getClient();
 
   router.get("/inregistrare", (req, res) => res.render("pagini/inregistrare", { erori: [], date: {}, sugestii: [], linkConfirmare: null }));
 
-  // Etapa 8 - Bonus 3: notificare dupa t1; stergerea dupa t1+t2 este
-  // disponibila doar cand optiunea explicita din JSON este activata.
+  // Etapa 8 – Bonus 3: Gestionarea conturilor neconfirmate.
   async function verificaConturiNeconfirmate() {
     const optiuni = JSON.parse(fs.readFileSync(caleOptiuni, "utf8"));
     const t1 = Number(optiuni.minutePanaNotificareConfirmare || 60);
@@ -95,7 +94,7 @@ function creeazaRouterUtilizatori() {
   verificaConturiNeconfirmate().catch((eroare) => console.error("Verificare conturi neconfirmate: " + eroare.message));
   setInterval(() => verificaConturiNeconfirmate().catch((eroare) => console.error("Verificare conturi neconfirmate: " + eroare.message)), 10 * 60 * 1000).unref();
 
-  // Etapa 8 - Bonus 10: utilizatorii inactivi primesc cel mult o promotie/luna.
+  // Etapa 8 – Bonus 10: Promoții pentru utilizatorii inactivi.
   async function trimitePromotiiInactivitate() {
     const rezultat = await pool.query(`SELECT id,prenume,email FROM utilizatori WHERE confirmat_mail=TRUE AND COALESCE(ultima_logare,data_inregistrare)<NOW()-INTERVAL '90 days' AND (ultima_promotie IS NULL OR ultima_promotie<NOW()-INTERVAL '30 days') LIMIT 20`);
     const imagine = path.join(__dirname, "..", "resurse", "imagini", "galerie", "originale", "placa-baza-desktop.jpg");
@@ -134,8 +133,7 @@ function creeazaRouterUtilizatori() {
       token_confirmare_2: token2,
     });
     await utilizator.salvareUtilizator();
-    // Etapa 8 - Bonus 11d: contul nou primeste rolul comun in tabela de legatura,
-    // cu perioada nedeterminata la ambele capete.
+    // Etapa 8 – Bonus 11d: Roluri cu perioadă de valabilitate.
     await pool.query(
       `INSERT INTO utilizatori_roluri(id_utilizator,id_rol,data_inceput,data_expirare)
        SELECT $1,id,NULL,NULL FROM roluri WHERE nume='comun'`,
@@ -161,7 +159,7 @@ function creeazaRouterUtilizatori() {
     const username = textSigur(req.body.username);
     const utilizator = await Utilizator.cautaDupaUsername(username);
     let eroare = "Username sau parolă incorectă.";
-    // Etapa 8 - Bonus 6: blocare temporara separata de blocarea administratorului.
+    // Etapa 8 – Bonus 6: Blocarea temporară a autentificării.
     if (utilizator?.blocat_login_pana && new Date(utilizator.blocat_login_pana) > new Date()) {
       req.session.eroareLogin = `Autentificarea este blocată temporar până la ${new Date(utilizator.blocat_login_pana).toLocaleTimeString("ro-RO")}.`;
       return res.redirect("/");
@@ -174,8 +172,7 @@ function creeazaRouterUtilizatori() {
         await utilizator.modifica({ ultima_logare: new Date(), ultima_activitate: new Date(), ip_ultima_accesare: req.ip, incercari_login: 0, prima_incercare_esuat: null, blocat_login_pana: null });
         utilizator.ultima_logare = ultimaLogare;
         req.session.utilizator = dateSesiune(utilizator);
-        // Etapa 8 - Bonus 9: preferinta din profil este persistenta;
-        // checkboxul de login poate activa optiunea si pentru sesiunea curenta.
+        // Etapa 8 – Bonus 9: Autentificare persistentă.
         if (utilizator.ramai_conectat || req.body.ramai_conectat === "da") {
           req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000;
         }
@@ -198,7 +195,7 @@ function creeazaRouterUtilizatori() {
     res.redirect("/");
   });
 
-  // Etapa 8 - Bonus 4: cerere de recuperare si resetare cu token aleator expirat.
+  // Etapa 8 – Bonus 4: Recuperarea parolei.
   router.get("/recuperare-parola", (req, res) => res.render("pagini/recuperare-parola", { mesaj: null, linkResetare: null }));
   router.post("/recuperare-parola", async function (req, res) {
     const emailCerut = textSigur(req.body.email);
@@ -248,7 +245,7 @@ function creeazaRouterUtilizatori() {
     const dateNoi = {
       nume: textSigur(req.body.nume), prenume: textSigur(req.body.prenume), email: textSigur(req.body.email),
       data_nasterii: req.body.data_nasterii || null, culoare_chat: req.body.culoare_chat || "#000000",
-      // Etapa 8 - Bonus 9: checkboxul din profil este salvat in PostgreSQL.
+      // Etapa 8 – Bonus 9: Autentificare persistentă.
       ramai_conectat: req.body.ramai_conectat === "da",
     };
     if (req.file) dateNoi.imagine = `/resurse/imagini/utilizatori/${req.file.filename}`;
@@ -270,7 +267,7 @@ function creeazaRouterUtilizatori() {
     req.session.destroy(() => res.redirect("/?mesaj=Contul+a+fost+șters."));
   });
 
-  // Etapa 8 - Bonus 13f: linkul din e-mail adauga produsul in cosul sesiunii.
+  // Etapa 8 – Bonus 13f: Favorite și notificări de stoc.
   router.get("/cos/adauga/:id", necesitaAutentificare, async function (req, res) {
     const id = Number(req.params.id);
     if (!Number.isInteger(id) || id <= 0) return res.status(400).send("Produs invalid.");
@@ -290,7 +287,7 @@ function creeazaRouterUtilizatori() {
   });
 
   router.post("/api/tema", necesitaAutentificare, async function (req, res) {
-    // Etapa 6 - Bonus 2 si Etapa 8 - Bonus 2: cele trei teme sunt validate si salvate.
+    // Etapele 6 și 8 – Bonus 2: Trei teme persistente.
     const tema = ["light", "dark", "contrast"].includes(req.body.tema) ? req.body.tema : "light";
     await pool.query("UPDATE utilizatori SET tema=$1 WHERE id=$2", [tema, req.session.utilizator.id]);
     req.session.utilizator.tema = tema;
@@ -307,7 +304,7 @@ function creeazaRouterUtilizatori() {
     res.render("pagini/administrare-utilizatori", { utilizatori: rezultat.rows });
   });
 
-  // Etapa 8 - Bonus 11h: alocarea rolurilor si a perioadei de valabilitate.
+  // Etapa 8 – Bonus 11h: Roluri cu perioadă de valabilitate.
   router.get("/administrare-roluri", necesitaAdmin, async function (req, res) {
     const [utilizatori, roluri, alocari] = await Promise.all([
       pool.query("SELECT id,username,nume,prenume FROM utilizatori ORDER BY username"),
@@ -325,7 +322,7 @@ function creeazaRouterUtilizatori() {
     if (rol.rows[0]) await pool.query("UPDATE utilizatori SET rol=$1::rol_utilizator WHERE id=$2", [rol.rows[0].nume, Number(req.body.id_utilizator)]);
     res.redirect("/administrare-roluri?mesaj=Rol+alocat");
   });
-  // Etapa 8 - Bonus 11h: editarea perioadei unei alocari existente.
+  // Etapa 8 – Bonus 11h: Roluri cu perioadă de valabilitate.
   router.post("/administrare-roluri/:id/editare", necesitaAdmin, async function (req, res) {
     const inceput = req.body.nedeterminat_inceput ? null : (req.body.data_inceput || null);
     const expirare = req.body.nedeterminat_final ? null : (req.body.data_expirare || null);
@@ -363,7 +360,7 @@ function creeazaRouterUtilizatori() {
     const rezultat = id
       ? await pool.query("UPDATE produse SET nume=$1,descriere=$2,imagine=$3,categorie=$4::categorie_produs,subcategorie=$5,pret=$6,scor_performanta=$7,culoare=$8::culoare_produs,conectivitate=$9,in_stoc=$10,stoc=$11 WHERE id=$12 RETURNING id,nume,descriere,imagine,pret::float8,stoc", [...valori, id])
       : await pool.query("INSERT INTO produse(nume,descriere,imagine,categorie,subcategorie,pret,scor_performanta,culoare,conectivitate,in_stoc,stoc) VALUES($1,$2,$3,$4::categorie_produs,$5,$6,$7,$8::culoare_produs,$9,$10,$11) RETURNING id,nume,descriere,imagine,pret::float8,stoc", valori);
-    // Etapa 8 - Bonus 13f: avertizare cand produsul favorit scade sub STOC_MIN=5.
+    // Etapa 8 – Bonus 13f: Favorite și notificări de stoc.
     const produs = rezultat.rows[0];
     if (produs && produs.stoc < 5) {
       const utilizatori = await pool.query("SELECT DISTINCT u.email,u.prenume FROM favorite f JOIN utilizatori u ON u.id=f.id_utilizator WHERE f.id_produs=$1", [produs.id]);
@@ -385,7 +382,7 @@ function creeazaRouterUtilizatori() {
     res.redirect("/administrare-produse?mesaj=Produs+șters");
   });
 
-  // Etapa 8 - Bonus 13a-d: adaugare/eliminare, pagina si numere actualizate prin fetch.
+  // Etapa 8 – Bonus 13a: Adăugarea produselor la favorite.
   router.post("/api/favorite/:id", necesitaAutentificare, async function (req, res) {
     const idProdus = Number(req.params.id);
     const existent = await pool.query("SELECT id FROM favorite WHERE id_produs=$1 AND id_utilizator=$2", [idProdus, req.session.utilizator.id]);
@@ -407,7 +404,7 @@ function creeazaRouterUtilizatori() {
     res.render("pagini/favorite", { produse: rezultat.rows });
   });
 
-  // Etapa 8 - Bonus 13e/f: clasament pentru admin si reumplere de stoc.
+  // Etapa 8 – Bonus 13e/f: Favorite și notificări de stoc.
   router.get("/top-favorite", necesitaAdmin, async function (req, res) {
     const rezultat = await pool.query(`SELECT p.id,p.nume,p.stoc,COUNT(f.id)::int AS numar_favorite FROM produse p LEFT JOIN favorite f ON f.id_produs=p.id GROUP BY p.id ORDER BY numar_favorite DESC,p.nume LIMIT 20`);
     res.render("pagini/top-favorite", { produse: rezultat.rows });

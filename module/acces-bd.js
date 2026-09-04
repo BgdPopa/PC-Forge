@@ -1,5 +1,4 @@
-// Etapa 7 - Clasa AccesBD (cerinta 0.5p):
-// singleton pentru accesul centralizat la PostgreSQL, cu operatii CRUD generice.
+// Etapa 7 – Cerință: Clasa AccesBD.
 const { Pool } = require("pg");
 
 /**
@@ -74,13 +73,7 @@ class AccesBD {
     return promisiune;
   }
 
-  /**
-   * Etapa 7 - Bonus 1: construieste grupurile parametrizate AND si OR.
-   * @param {object} conditiiAnd Egalitati unite prin AND.
-   * @param {object} conditiiOr Egalitati unite prin OR.
-   * @param {number} offset Numarul parametrilor deja folositi.
-   * @returns {{sql:string, valori:any[]}} Fragmentul SQL si valorile separate.
-   */
+  /* Etapa 7 – Bonus 1: Condiții SQL cu operatorul OR. */
   #construiesteConditii(conditiiAnd = {}, conditiiOr = {}, offset = 0) {
     const valori = [];
     const grup = (conditii, operatorLogic) => {

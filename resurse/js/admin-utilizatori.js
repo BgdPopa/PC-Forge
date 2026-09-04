@@ -1,4 +1,4 @@
-// Etapa 8 - cerinta 9: blocarea/deblocarea se face asincron prin fetch.
+// Etapa 8 – Cerința 9: Configurarea buton.
 document.addEventListener("click", async function (eveniment) {
   const buton = eveniment.target.closest(".btn-blocare");
   if (!buton) return;

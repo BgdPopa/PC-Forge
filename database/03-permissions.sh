@@ -1,8 +1,7 @@
 #!/bin/sh
 set -eu
 
-# Etapa 6 - cerinta individuala, punctul 3:
-# utilizator separat al aplicatiei, cu drepturi pe baza, schema si tabel.
+# Etapa 6 – Cerința 3: Definirea ROLE.
 psql --set ON_ERROR_STOP=1 \
   --username "$POSTGRES_USER" \
   --dbname "$POSTGRES_DB" \

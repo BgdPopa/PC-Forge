@@ -1,7 +1,5 @@
-// Etapa 6 - cerinta individuala, punctul 3:
-// accesul centralizat la tabela produse prin utilizatorul cu drepturi limitate.
-// Etapa 7 - clasa AccesBD este folosita efectiv de modulul produselor,
-// astfel intreaga aplicatie reutilizeaza acelasi pool PostgreSQL (singleton).
+// Etapa 6 – Cerința 3: Funcția testeazaConexiune.
+// Etapa 7 – Cerință: Clasa AccesBD.
 const AccesBD = require("./acces-bd");
 const pool = AccesBD.getInstanta().getClient();
 const { obtineProduseNoiOrm } = require("./acces-orm");
@@ -12,8 +10,7 @@ async function testeazaConexiune() {
   return rezultat.rows[0];
 }
 
-// Etapa 6 - cerinta individuala, punctul 4:
-// valorile meniului sunt citite din ENUM, nu sunt scrise manual in EJS.
+// Etapa 6 – Cerința 4: Funcția obtineCategorii.
 /** @returns {Promise<string[]>} Valorile ENUM categorie_produs in ordinea bazei. */
 async function obtineCategorii() {
   const rezultat = await pool.query(`
@@ -26,8 +23,7 @@ async function obtineCategorii() {
   return rezultat.rows.map((rand) => rand.valoare);
 }
 
-// Etapa 6 - cerinta individuala, punctul 4:
-// filtrarea pe categorie se face la nivel de server cu query parametrizat.
+// Etapa 6 – Cerința 4: Funcția obtineProduse.
 /**
  * @param {string} [categorie] Categoria optionala validata de server.
  * @returns {Promise<object[]>} Produsele cerute.
@@ -55,7 +51,7 @@ async function obtineProduse(categorie) {
   return rezultat.rows;
 }
 
-// Etapa 6 - cerinta individuala, punctul 2: pagina unui produs unic.
+// Etapa 6 – Cerința 2: Citirea unui singur produs.
 /**
  * @param {number} id Identificatorul numeric al produsului.
  * @returns {Promise<object|null>} Produsul gasit sau null.
@@ -73,8 +69,7 @@ async function obtineProdusDupaId(id) {
   return rezultat.rows[0] || null;
 }
 
-// Etapa 6 - Bonus 16: produse similare din aceeasi categorie, cu prioritate
-// pentru aceeasi subcategorie si fara produsul curent.
+// Etapa 6 – Bonus 16: Produse similare.
 /** @param {object} produs Produsul de referinta. @param {number} [limita=4] Limita. @returns {Promise<object[]>} Produse similare. */
 async function obtineProduseSimilare(produs, limita = 4) {
   const rezultat = await pool.query(
@@ -89,7 +84,7 @@ async function obtineProduseSimilare(produs, limita = 4) {
   return rezultat.rows;
 }
 
-// Etapa 6 - Bonus 20: citirea stricta a celor doua produse cerute de comparatie.
+// Etapa 6 – Bonus 20: Compararea produselor.
 /** @param {number[]} ids Identificatori validati. @returns {Promise<object[]>} Produsele comparate. */
 async function obtineProduseDupaIduri(ids) {
   const rezultat = await pool.query(
@@ -102,7 +97,7 @@ async function obtineProduseDupaIduri(ids) {
   return rezultat.rows;
 }
 
-// Etapa 6 - Bonus 17: seturile, produsele lor si pretul redus sunt calculate in SQL.
+// Etapa 6 – Bonus 17: Seturi de produse și reducere.
 /** @param {number|null} [idProdus=null] Filtrare optionala dupa produs. @returns {Promise<object[]>} Seturi grupate. */
 async function obtineSeturi(idProdus = null) {
   const rezultat = await pool.query(
@@ -117,7 +112,7 @@ async function obtineSeturi(idProdus = null) {
   return rezultat.rows.map((set) => ({ ...set, reducere: Math.min(5, set.numar_produse) * 5, pret_redus: set.pret_brut * (1 - Math.min(5, set.numar_produse) * 0.05) }));
 }
 
-// Etapa 8 - Bonus 13: numarul total si marcajul utilizatorului curent.
+// Etapa 8 – Bonus 13: Datele produselor favorite.
 /** @param {number[]} ids Produsele cerute. @param {number|null} idUtilizator Utilizatorul logat. @returns {Promise<Map<number,object>>} Date favorite. */
 async function obtineDateFavorite(ids, idUtilizator = null) {
   if (!ids.length) return new Map();
@@ -131,7 +126,7 @@ async function obtineDateFavorite(ids, idUtilizator = null) {
   return new Map(rezultat.rows.map((rand) => [rand.id, rand]));
 }
 
-// Etapa 6 - Bonus 10a/10b: filtrare si sortare pe server, apelate prin fetch.
+// Etapa 6 – Bonus 10a: Filtrare pe server.
 /** @param {object} filtre Filtre validate. @returns {Promise<object[]>} ID-urile in ordinea serverului. */
 async function obtineProduseFiltrate(filtre = {}) {
   const conditii = []; const valori = [];
@@ -145,14 +140,13 @@ async function obtineProduseFiltrate(filtre = {}) {
   return rezultat.rows;
 }
 
-// Etapa 6 - Bonus 18: produsele noi pentru sectiunea de pe prima pagina
-// sunt selectate din baza de date dupa data, nu scrise manual in EJS.
+// Etapa 6 – Bonus 18: Produse noi.
 /**
  * @param {number} [limita=4] Numarul maxim de produse returnate.
  * @returns {Promise<object[]>} Cele mai recente produse.
  */
 async function obtineProduseNoi(limita = 4) {
-  // Etapa 7 - Bonus 2: aceasta selectie foloseste modelul Sequelize, nu SQL scris manual.
+  // Etapa 7 – Bonus 2: Acces ORM cu Sequelize.
   return obtineProduseNoiOrm(limita);
 }
 

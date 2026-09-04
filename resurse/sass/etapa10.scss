@@ -1,4 +1,4 @@
-/* Etapa 10 - aspect: finisare discreta, fara schimbarea identitatii PC Forge. */
+/* Etapa 10 – Cerință: Afișarea produselor. */
 :root {
   --forge-rosu: #e1012f;
   --forge-visiniu: #83001c;
@@ -36,7 +36,7 @@ footer a { text-underline-offset: .2em; }
 html[data-tema="dark"] body, html[data-tema="contrast"] body { background-image: radial-gradient(circle at 8% 6%, rgba(225,1,47,.13), transparent 27rem); }
 html[data-tema="dark"] .card:hover, html[data-tema="contrast"] .card:hover { box-shadow: 0 1rem 2.2rem rgba(0,0,0,.5); }
 
-/* Etapa 10 - responsive desktop: tema si autentificarea pot mari meniul, deci acesta se poate aseza pe doua randuri fara scroll orizontal. */
+/* Etapa 10 – Cerință: Teme persistente. */
 @media (min-width: 1101px) and (max-width: 1450px) {
   .meniu-principal__lista { flex-wrap: wrap !important; justify-content: center; }
   .tema-meniu { margin-inline: auto; }

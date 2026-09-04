@@ -1,4 +1,4 @@
-/* Etapa 6 - tema light/dark cu variabile CSS, aplicata pe toate paginile. */
+/* Etapa 6 – Cerință: Stilizarea paginii de produse. */
 html[data-tema="dark"] body {
   --culoare-fundal: #17181b;
   --culoare-zona: #a90024;
@@ -6,7 +6,7 @@ html[data-tema="dark"] body {
   --culoare-text-inchis: #e9e9ed;
   --culoare-umbra: rgba(0, 0, 0, 0.48);
 }
-/* Etapa 6 - Bonus 2: a treia tema pastreaza rosul PC Forge, dar creste contrastul. */
+/* Etapa 6 – Bonus 2: Trei teme persistente. */
 html[data-tema="contrast"] body { --culoare-fundal: #08090b; --culoare-zona: #ff174b; --culoare-zona-secundara: #3b0010; --culoare-text-inchis: #fff; --culoare-umbra: rgba(0,0,0,.65); background: #08090b; }
 html[data-tema="contrast"] .panou-filtre, html[data-tema="contrast"] .produs-card, html[data-tema="contrast"] .produs-detaliu, html[data-tema="contrast"] .cont-card { background: #111318; color: #fff; border-color: #ff174b; }
 html[data-tema="contrast"] .table { --bs-table-bg: transparent; --bs-table-color: #fff; --bs-table-striped-color: #fff; --bs-table-striped-bg: rgba(255,255,255,.08); }
@@ -23,7 +23,7 @@ body, header, footer, .zona, .panou-filtre, .produs-card, .produs-detaliu {
 .tema-icon-luna, html[data-tema="dark"] .tema-icon-soare { display: none; }
 html[data-tema="dark"] .tema-icon-luna { display: inline-block; }
 
-/* Etapa 6 - pagina de produse, integrata in identitatea vizuala PC Forge. */
+/* Etapa 6 – Cerință: Stilizarea paginii de produse. */
 .main-produse { width: min(1500px, calc(100% - 2rem)); margin: 0 auto; padding: 1.25rem 0 3rem; }
 .produse-hero, .panou-filtre, .zona-lista-produse { margin-bottom: 1.25rem; border-radius: 1.2rem; }
 .produse-hero {
@@ -33,7 +33,7 @@ html[data-tema="dark"] .tema-icon-luna { display: inline-block; }
 }
 .produse-hero h2 { margin: 0.8rem 0 0.4rem; font-size: clamp(2rem, 5vw, 4rem); }
 .produse-hero p { max-width: 760px; margin: 0; font-size: 1.08rem; }
-/* Etapa 6 - Bonus 12: anuntul ofertei si ultimele zece secunde. */
+/* Etapa 6 – Bonus 12: Oferte periodice. */
 .oferta-curenta { grid-column: 1 / -1; display: flex; align-items: center; gap: 1.25rem; margin-bottom: 1rem; padding: 1.25rem clamp(1rem,3vw,2rem); border: 2px solid #fff; border-radius: 1.2rem; background: linear-gradient(120deg,#83001c,#e1012f); color: #fff; box-shadow: 0 .9rem 2rem rgba(54,0,12,.28); }
 .oferta-curenta > div { flex: 1; }
 .oferta-curenta h2,.oferta-curenta p { margin: .2rem 0; color: #fff; }
@@ -62,7 +62,7 @@ html[data-tema="dark"] .produs-specificatii, html[data-tema="dark"] .produs-deta
 .produs-card { position: relative; overflow: hidden; border: 1px solid rgba(225, 1, 47, 0.25); background: #fff; color: #3d3d42; box-shadow: 0 0.75rem 1.5rem rgba(54, 0, 12, 0.22); }
 .produs-card[hidden] { display: none !important; }
 .produs-card__detalii { display: grid; grid-template-columns: minmax(0, 1fr) 100px; align-items: start; gap: .75rem; margin-bottom: .85rem; }
-/* Etapa 6 - cerinta individuala, punctul 5: imagine mica, uniforma, asezata in dreapta tabelului. */
+/* Etapa 6 – Cerința 5: Imaginea cardului de produs. */
 .produs-card__imagine { position: relative; overflow: hidden; align-self: start; border-radius: .75rem; }
 .produs-card__imagine img { display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; transition: transform 0.45s ease; }
 .produs-card:hover .produs-card__imagine img { transform: scale(1.05); }
@@ -75,16 +75,15 @@ html[data-tema="dark"] .produs-specificatii, html[data-tema="dark"] .produs-deta
 .produs-card--fixat::after { content: "FIXAT"; position: absolute; z-index: 2; top: .7rem; right: .7rem; padding: .2rem .5rem; border-radius: 999px; background: #e1012f; color: #fff; font-size: .7rem; font-weight: 700; }
 .produs-card .card-title a { padding: 0 !important; color: #b80027 !important; text-decoration: none !important; }
 .produs-card .card-title a:hover { color: #e1012f !important; background: transparent !important; }
-/* Etapa 6 - cerinta individuala, punctul 5: descrierea ramane lizibila sub tabel. */
+/* Etapa 6 – Cerința 5: Stilizarea selectorului .produs-card .card-text. */
 .produs-card .card-text { color: #3d3d42; }
 html[data-tema="dark"] .produs-card .card-text,
 html[data-tema="contrast"] .produs-card .card-text { color: #f3f3f4; }
-/* Etapa 10 - finisaj responsive: suprascrie min-width-ul global al tabelelor doar in cardurile de produs. */
+/* Etapa 10 – Cerință: Stilizarea și aspectul responsive. */
 .produs-specificatii { width: 100%; min-width: 0; margin-bottom: 0; font-size: 0.78rem; }
 .produs-specificatii th { width: 38%; }
 .produs-specificatii { table-layout: fixed; }
-/* Etapa 6 - cerinta individuala, punctul 5: suprascrie nowrap-ul tabelului general,
-   astfel etichetele, data romaneasca si valorile multiple incap langa imagine. */
+/* Etapa 6 – Cerința 5: Stilizarea selectorului .produs-specificatii td. */
 .produs-specificatii th,
 .produs-specificatii td { white-space: normal; overflow-wrap: anywhere; word-break: break-word; }
 .produs-card__footer { display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; padding: 1rem; background: rgba(225, 1, 47, 0.06); }
@@ -101,7 +100,7 @@ html[data-tema="contrast"] .produs-card .card-text { color: #f3f3f4; }
 .comparatie-produs .btn-close { width: .55rem; height: .55rem; font-size: .55rem; }
 .comparare-imagine { display: block; width: 120px; aspect-ratio: 3/2; margin-bottom: .5rem; object-fit: cover; border-radius: .6rem; }
 
-/* Etapa 6 - Bonus 18: prezentarea produselor noi pe prima pagina. */
+/* Etapa 6 – Bonus 18: Produse noi. */
 .zona-produse-noi { grid-column: 1 / -1; padding: clamp(1rem, 2.8vw, 2rem); background: linear-gradient(145deg, #83001c, #e1012f); color: #fff; }
 .produse-noi__antet { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
 .produse-noi__antet h2 { margin: 0.2rem 0 0; color: #fff; }
@@ -115,7 +114,7 @@ html[data-tema="contrast"] .produs-card .card-text { color: #f3f3f4; }
 .produse-noi__card p { margin: 0; }
 html[data-tema="dark"] .produse-noi__card { background: #25262b; color: #f3f3f4; }
 
-/* Etapa 6 - Bonus 19: buton si panou fix pentru programul saptamanal. */
+/* Etapa 6 – Bonus 19: Programul magazinului. */
 .buton-orar { position: fixed; z-index: 1500; right: 1rem; bottom: 5.4rem; display: inline-flex; align-items: center; gap: 0.45rem; box-shadow: 0 0.7rem 1.5rem rgba(0, 0, 0, 0.3); }
 .panou-orar { position: fixed; z-index: 1600; right: 1rem; bottom: 9.2rem; width: min(390px, calc(100% - 2rem)); max-height: calc(100vh - 10.5rem); overflow: auto; padding: 1rem; border: 2px solid #e1012f; border-radius: 1rem; background: #fff; color: #3d3d42; box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.36); }
 .panou-orar[hidden] { display: none !important; }
@@ -125,7 +124,7 @@ html[data-tema="dark"] .produse-noi__card { background: #25262b; color: #f3f3f4;
 html[data-tema="dark"] .panou-orar { background: #25262b; color: #f3f3f4; }
 html[data-tema="dark"] .panou-orar .table { --bs-table-bg: transparent; --bs-table-color: #f3f3f4; --bs-table-striped-color: #f3f3f4; --bs-table-striped-bg: rgba(255, 255, 255, 0.05); }
 
-/* Etapa 6 - pagina dinamica a unui singur produs. */
+/* Etapa 6 – Cerință: Stilizarea paginii de produse. */
 .produs-detaliu { display: grid; grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr); overflow: hidden; border-radius: 1.2rem; background: #fff; color: #3d3d42; box-shadow: 0 1rem 2.5rem var(--culoare-umbra); }
 .produs-detaliu__imagine img { width: 100%; height: 100%; min-height: 520px; object-fit: cover; }
 .produs-detaliu__continut { padding: clamp(1.3rem, 4vw, 3rem); }
@@ -168,7 +167,7 @@ html[data-tema="dark"] .set-card, html[data-tema="dark"] .seturi-produs, html[da
   .produse-noi__antet { align-items: flex-start; flex-direction: column; }
   .main-produse { width: min(100% - 1rem, 720px); }
 }
-/* Etapa 6 - task Bootstrap 0.3a: pe ecran mic raman doar iconurile. */
+/* Etapa 6 – Cerință: Stilizarea selectorului .text-buton. */
 @media screen and (max-width: 575px) {
   .text-buton { display: none; }
   .operatii-produse .btn { width: 2.8rem; min-height: 2.8rem; padding-inline: 0; }

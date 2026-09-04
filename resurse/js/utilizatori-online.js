@@ -1,4 +1,4 @@
-// Etapa 8 - cerinta 12: lista administratorilor activi se actualizeaza prin fetch.
+// Etapa 8 – Cerința 12: Funcția actualizeazaAdminiOnline.
 (function () {
   const lista = document.getElementById("lista-admini-online");
   if (!lista) return;

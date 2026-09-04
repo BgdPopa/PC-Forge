@@ -1,4 +1,5 @@
-/* Etapa 7 - animatie-banner: panou fix jos-stanga, patratic si tematic PC Forge. */
+@charset "UTF-8";
+/* Etapa 7 – Cerință: Banner animat și cookie-uri. */
 #banner {
   position: fixed;
   z-index: 2200;
@@ -21,13 +22,12 @@
   opacity: 0;
   transform: scale(0);
   transform-origin: left bottom;
-  /* Etapa 7 - animatie-banner: tranzitia ramane pentru inchiderea prin buton. */
+  /* Etapa 7 – Cerință: Banner animat și cookie-uri. */
   transition: opacity 0.45s ease, transform 0.45s ease;
 }
 
 #banner.banner--vizibil {
-  /* Etapa 7 - animatie-banner, cerinta individuala:
-     scalarea, opacitatea si culoarea evolueaza impreuna timp de 5 secunde. */
+  /* Etapa 7 – Cerință: Banner animat și cookie-uri. */
   animation: etapa7-aparitie-banner 5s linear both;
 }
 
@@ -61,7 +61,7 @@
   box-shadow: 0 0.7rem 1.8rem rgba(0, 0, 0, 0.3);
 }
 
-/* Etapa 7 - Bootstrap JS, cerinta 16: cardurile apar succesiv prin setTimeout. */
+/* Etapa 7 – Cerința 16: Stilizarea selectorului .produs-card.produs-card--animat. */
 .produs-card.produs-card--animat {
   opacity: 0;
   transform: translateY(2.5rem) scale(0.96);
@@ -83,7 +83,7 @@
   background: rgba(225, 1, 47, 0.06);
 }
 
-/* Etapa 7 - animatie-banner: starea finala ramane aplicata prin `both`. */
+/* Etapa 7 – Cerință: Banner animat și cookie-uri. */
 @keyframes etapa7-aparitie-banner {
   from {
     opacity: 0;
@@ -96,7 +96,7 @@
     background-color: #e1012f;
   }
 }
-/* Etapa 7 - animatie-banner: pe ecran mediu si mic bannerul este static. */
+/* Etapa 7 – Cerință: Banner animat și cookie-uri. */
 @media screen and (max-width: 1100px) {
   #banner,
   #banner.banner--vizibil {

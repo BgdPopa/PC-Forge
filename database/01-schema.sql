@@ -1,5 +1,4 @@
--- Etapa 6 - cerinta individuala, punctul 3: baza de date si tabelul produse.
--- Categoriile mari sunt ENUM si au maximum cinci valori, conform cerintei.
+-- Etapa 6 – Cerința 3: Baza de date a produselor.
 CREATE TYPE categorie_produs AS ENUM (
   'componente',
   'stocare',
@@ -8,8 +7,7 @@ CREATE TYPE categorie_produs AS ENUM (
   'monitoare'
 );
 
--- Etapa 6 - cerinta individuala, punctul 3j:
--- caracteristica de tip sir cu o singura valoare dintr-un set.
+-- Etapa 6 – Cerința 3j: Definirea culoare_produs.
 CREATE TYPE culoare_produs AS ENUM (
   'negru',
   'alb',

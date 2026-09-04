@@ -1,4 +1,4 @@
-// Etapa 6 - Bonus 9: imagini multiple deduse din calea imaginii principale.
+// Etapa 6 – Bonus 9: Imagini multiple pentru produs.
 const fs = require("fs");
 const path = require("path");
 const sharp = require("sharp");
@@ -19,11 +19,7 @@ function caleVarianta(calePrincipala, sufix) {
   return `/resurse/imagini/produse-variante/${baza}-${sufix}.webp`;
 }
 
-/**
- * Etapa 6 - Bonus 9: genereaza pentru fiecare fotografie un cadru de detaliu si
- * unul complet. Fisierul este refacut numai daca originalul este mai nou.
- * @returns {Promise<void>} Promisiune rezolvata dupa generarea variantelor.
- */
+/* Etapa 6 – Bonus 9: Imagini multiple pentru produs. */
 async function pregatesteVariante() {
   fs.mkdirSync(folderVariante, { recursive: true });
   const fisiere = fs.readdirSync(folderOriginale).filter((nume) =>

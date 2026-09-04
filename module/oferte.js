@@ -1,4 +1,4 @@
-// Etapa 6 - Bonus 12: oferte periodice persistate in JSON.
+// Etapa 6 – Bonus 12: Oferte periodice.
 const fs = require("fs");
 const path = require("path");
 const accesProduse = require("./acces-produse");
@@ -16,7 +16,7 @@ async function actualizeazaOferta() {
     const reduceri = [5,10,15,20,25,30,35,40,45,50];
     date.oferte.unshift({ categorie: eligibile[Math.floor(Math.random() * eligibile.length)], "data-incepere": new Date(acum).toISOString(), "data-finalizare": new Date(acum + intervalOfertaMs).toISOString(), reducere: reduceri[Math.floor(Math.random() * reduceri.length)] });
   }
-  // Etapa 6 - Bonus 12e: rotatia afecteaza exclusiv istoricul acestui JSON.
+  // Etapa 6 – Bonus 12e: Oferte periodice.
   date.oferte = date.oferte.filter((oferta, index) => index === 0 || new Date(oferta["data-finalizare"]).getTime() >= acum - pastrareIstoricMs);
   scrie(date); return date.oferte[0];
 }

@@ -1,4 +1,4 @@
-// Etapa 6 - Bonus 13: eliminarea periodica a backupurilor CSS expirate.
+// Etapa 6 – Bonus 13: Curățarea backupurilor CSS.
 const fs = require("fs");
 const path = require("path");
 

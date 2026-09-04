@@ -1,7 +1,5 @@
 @charset "UTF-8";
-/* Etapa 5 - Bootstrap customizat prin SCSS
-   Variabilele Bootstrap sunt suprascrise inainte de importul frameworkului.
-   Astfel, Bootstrap este generat direct cu tema PC Forge. */
+/* Etapa 5 – Cerință: Bootstrap personalizat prin SCSS. */
 /* Culori principale din schema cromatica */
 /* Fundal si culoare text */
 /* Font implicit */

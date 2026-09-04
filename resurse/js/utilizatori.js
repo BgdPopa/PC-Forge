@@ -1,4 +1,4 @@
-// Etapa 8 - cerinta 3: aceleasi reguli principale sunt verificate si in browser.
+// Etapa 8 – Cerința 3: Funcția valideaza.
 document.addEventListener("DOMContentLoaded", function () {
   const formular = document.getElementById("formular-inregistrare");
   if (!formular) return;

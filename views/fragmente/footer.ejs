@@ -1,10 +1,6 @@
-<%# Etapa 4 - task 5:
-    Fragment comun de footer decupat din index.html.
-    Include footerul, butonul fix "link-top" si scriptul de meniu,
-    elemente refolosite pe toate paginile site-ului. %>
+<%# Etapa 4 – Cerința 5: Paginare dinamică. %>
 
-<!-- Etapa 1 - task 18:
-     Footer cu address, tel, maps, WhatsApp si time -->
+<!-- Etapa 1 – Cerința 18: Harta interactivă. -->
 <footer id="contact">
     <h2>Contact</h2>
 
@@ -27,8 +23,7 @@
         E-Mail:
         <a href="mailto:bogdi5053@gmail.com">bogdi5053@gmail.com</a>
     </address>
-    <!-- Etapa 1 - bonus 4:
-         Iframe cu locatia Facultatii de Matematica si Informatica pe Google Maps -->
+    <!-- Etapa 1 – Bonus 4: Harta interactivă. -->
     <section id="harta-facultate">
         <h2>Locatie pe harta</h2>
         <p>Harta de mai jos indica locatia Facultatii de Matematica si Informatica.</p>
@@ -38,19 +33,17 @@
             title="Locatie Facultatea de Matematica si Informatica Bucuresti">
         </iframe>
     </section>
-    <!-- Etapa 1 - task 19:
-         Copyright si time cu datetime -->
+    <!-- Etapa 1 – Cerința 19: Configurarea dataAfisata. -->
     <small>&copy; 2026 PC Forge. Toate drepturile rezervate.</small>
     <br>
-    <%# Etapa 8 - Bonus 12: data se calculeaza din EJS-uri si produsele bazei de date. %>
+    <%# Etapa 8 – Bonus 12: Data ultimei actualizări. %>
     <% const dataAfisata = typeof dataUltimaModificare !== "undefined" ? new Date(dataUltimaModificare) : new Date(); %>
     <small>Ultima actualizare: <time datetime="<%= dataAfisata.toISOString() %>"><%= dataAfisata.toLocaleDateString("ro-RO", { day: "numeric", month: "long", year: "numeric" }) %></time></small>
     <p><a href="/politica-confidentialitate">Politica de confidențialitate și termenii site-ului</a></p>
 
 
     <div class="watermark-print">Popa Bogdan</div>
-    <!-- Etapa 1 - task 13c:
-         Link catre inceputul paginii -->
+    <!-- Etapa 1 – Cerința 13c: Paginare dinamică. -->
     <p>
         <a href="/#top">Inapoi la inceputul paginii</a>
     </p>
@@ -59,33 +52,30 @@
 <% if (typeof mesajGlobal !== "undefined" && mesajGlobal) { %><div class="alert alert-info mesaj-site-actualizat"><%= mesajGlobal %></div><% } %>
 <% if (typeof siteModificat !== "undefined" && siteModificat) { %><div id="mesaj-site-actualizat" class="alert alert-warning mesaj-site-actualizat">Au survenit modificări asupra site-ului de la ultima accesare.</div><% } %>
 
-<%# Etapa 6 - Bonus 19: programul saptamanal este disponibil pe orice pagina
-    deoarece fragmentul este inclus in footerul comun. %>
+<%# Etapa 6 – Bonus 19: Programul magazinului. %>
 <%- include("orar") %>
 
-<%# Etapa 7 - bannerul cookie este fragment comun, disponibil pe toate paginile. %>
+<%# Etapa 7 – Cerință: Banner animat și cookie-uri. %>
 <%- include("banner-cookies") %>
 
-<!-- Etapa 2 - task link-top:
-     buton fix, fara imagini, care duce la inceputul paginii -->
+<!-- Etapa 2 – Cerința link-top: Paginare dinamică. -->
 <a href="/#top" id="link-top" data-tooltip="Inapoi la inceput" aria-label="Inapoi la inceput">
     <span class="sageata-link-top"></span>
 </a>
 
-<!-- Etapa 3 - task meniu:
-     scriptul care gestioneaza meniul hamburger si submeniurile pe ecran mic -->
+<!-- Etapa 3 – Cerința meniu: Meniul site-ului. -->
 <script>
     document.addEventListener("DOMContentLoaded", function () { var n = document.querySelector(".meniu-principal"); var b = document.getElementById("meniu-hamburger-btn"); var mq = window.matchMedia("(max-width: 700px)"); if (b && n) { b.addEventListener("click", function (e) { e.stopPropagation(); var o = n.classList.toggle("meniu-principal--deschis"); b.classList.toggle("meniu-hamburger--activ", o); b.setAttribute("aria-expanded", o ? "true" : "false"); }); } if (n) { n.querySelectorAll(".meniu-principal__item--has-sub > .meniu-principal__link--subdeclansator").forEach(function (btn) { btn.addEventListener("click", function () { if (!mq.matches) return; var li = btn.closest(".meniu-principal__item--has-sub"); var open = !li.classList.contains("meniu-principal__item--sub-deschis"); n.querySelectorAll(".meniu-principal__item--sub-deschis").forEach(function (x) { if (x !== li) x.classList.remove("meniu-principal__item--sub-deschis"); }); li.classList.toggle("meniu-principal__item--sub-deschis", open); btn.setAttribute("aria-expanded", open ? "true" : "false"); }); }); } });
 </script>
 
-<!-- Etapa 6 - task tema: tema este aplicata si memorata pe toate paginile. -->
+<!-- Etapa 6 – Cerință: Tema persistentă a site-ului. -->
 <script src="/resurse/js/tema.js"></script>
-<!-- Etapa 6 - Bonus 19: deschiderea, marcarea zilei curente si inchiderea automata. -->
+<!-- Etapa 6 – Bonus 19: Programul magazinului. -->
 <script src="/resurse/js/orar.js?v=etapa6"></script>
-<!-- Etapa 7 - componenta JavaScript oficiala Bootstrap si gestionarea cookie-urilor. -->
+<!-- Etapa 7 – Cerința bootstrap_js: Bootstrap JavaScript. -->
 <script src="/resurse/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="/resurse/js/cookies.js?v=etapa7"></script>
-<!-- Etapa 8 - Bonus 12: ascunderea automata a notificarii de actualizare. -->
+<!-- Etapa 8 – Bonus 12: Actualizarea automată a datei. -->
 <script src="/resurse/js/site-actualizat.js?v=etapa8"></script>
-<!-- Etapa 8 - cerinta 12: lista administratorilor activi se actualizeaza periodic. -->
+<!-- Etapa 8 – Cerința 12: Indicatorul ultimei actualizări. -->
 <script src="/resurse/js/utilizatori-online.js?v=etapa8"></script>

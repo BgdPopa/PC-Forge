@@ -1,5 +1,4 @@
-# Etapa 6 - baza de date izolata pentru proiectul web Site Componente.
-# Containerul vechi "pcforge-postgres" al lucrarii de licenta nu este folosit.
+# Etapa 6 – Cerință: Baza de date a produselor.
 services:
   site-componente-db:
     image: postgres:16

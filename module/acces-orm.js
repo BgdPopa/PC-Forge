@@ -1,4 +1,4 @@
-// Etapa 7 - Bonus 2: Sequelize ORM, folosit alaturi de Singleton-ul AccesBD.
+// Etapa 7 – Bonus 2: Acces ORM cu Sequelize.
 const { Sequelize, DataTypes } = require("sequelize");
 const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, { host: process.env.DB_HOST || "localhost", port: Number(process.env.DB_PORT || 5432), dialect: "postgres", logging: false });
 const ProdusORM = sequelize.define("Produs", {

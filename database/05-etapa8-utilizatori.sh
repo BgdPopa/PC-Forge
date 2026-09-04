@@ -1,7 +1,7 @@
 #!/bin/sh
 set -eu
 
-# Etapa 8 - extinderea sistemului de utilizatori pentru inregistrare si autentificare.
+# Etapa 8 – Cerință: Sistemul de utilizatori.
 psql --set ON_ERROR_STOP=1 \
   --username "$POSTGRES_USER" \
   --dbname "$POSTGRES_DB" \

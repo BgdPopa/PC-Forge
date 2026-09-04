@@ -11,7 +11,7 @@
         <% if (erori.length) { %><div class="alert alert-danger"><strong>Înregistrarea nu a fost acceptată:</strong><ul><% erori.forEach(e => { %><li><%= e %></li><% }) %></ul><% if (sugestii.length) { %><p>Sugestii disponibile: <strong><%= sugestii.join(", ") %></strong></p><% } %></div><% } %>
         <% if (linkConfirmare) { %><div class="alert alert-success"><h3>Cont creat</h3><p>În modul demonstrativ, e-mailul este salvat în <code>logs/emailuri-etapa8.log</code>.</p><a class="btn btn-primary" href="<%= linkConfirmare %>">Confirmă acum adresa</a></div><% } %>
         <% if (!linkConfirmare) { %>
-        <!-- Etapa 8 - cerintele 2 si 3: formular complet si validare client/server. -->
+        <!-- Etapa 8 – Cerințele 2 și 3: Formularul de înregistrare. -->
         <form id="formular-inregistrare" method="post" enctype="multipart/form-data" novalidate>
           <div class="row g-3">
             <div class="col-md-6"><label class="form-label" for="nume">Nume</label><input class="form-control" id="nume" name="nume" required value="<%= date.nume || '' %>" /></div>

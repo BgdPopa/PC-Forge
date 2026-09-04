@@ -1,4 +1,4 @@
-// Etapa 7 - clasele Rol si RolFactory (cerinta 0.25p).
+// Etapa 7 – Cerință: Roluri și drepturi.
 const Drepturi = require("./drepturi");
 
 /** Clasa de baza pentru rolurile utilizatorilor. */
@@ -35,7 +35,7 @@ class RolModerator extends Rol {
   }
 }
 
-/** Etapa 8 - Bonus 11: rol dedicat administrarii produselor. */
+/* Etapa 8 – Bonus 11: Roluri și drepturi. */
 class RolManagerProduse extends Rol {
   constructor() { super("manager_produse", [Drepturi.vizualizareProduse, Drepturi.adaugareProduse, Drepturi.modificareProduse, Drepturi.stergereProduse]); }
 }

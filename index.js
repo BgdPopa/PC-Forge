@@ -1,38 +1,35 @@
-// Etapa 4 - task 1:
-// Importul modulelor necesare pentru server: express, path si fs
+// Etapa 4 – Cerința 1: Configurarea express.
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
 
-// Etapa 6 - incarcarea configuratiei locale si accesul la PostgreSQL.
+// Etapa 6 – Cerință: Baza de date a produselor.
 require("dotenv").config({ path: path.join(__dirname, ".env") });
 const accesProduse = require("./module/acces-produse");
 const oferte = require("./module/oferte");
 const curatareBackup = require("./module/curatare-backup");
 const imaginiProduse = require("./module/imagini-produse");
 
-// Etapa 8 - sesiuni si rutele sistemului de utilizatori.
+// Etapa 8 – Cerință: Sistemul de utilizatori.
 const session = require("express-session");
 const AccesBD = require("./module/acces-bd");
 const { creeazaRouterUtilizatori } = require("./module/rute-utilizatori");
 
-//Etapa 5 - compilare scss
+// Etapa 5 – Cerință: Compilarea automată SCSS.
 const sass = require("sass");
 const sharp = require("sharp");
 
-// Etapa 4 - task 2:
-// Crearea obiectului server express si setarea portului 8080
+// Etapa 4 – Cerința 2: Configurarea app.
 const app = express();
 const port = 8080;
 const caleOptiuniServer = path.join(__dirname, "resurse", "json", "optiuni-server.json");
 const optiuniServerInitiale = JSON.parse(fs.readFileSync(caleOptiuniServer, "utf8"));
 
-// Etapa 4 - task 4:
-// Setarea EJS ca view engine si a folderului "views" pentru template-uri
+// Etapa 4 – Cerința 4: Configurarea serverului Express.
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-// Etapa 8 - cerintele 2, 6 si Bonus 9: formulare, JSON si sesiune configurabila.
+// Etapa 8 – Bonus 9: Sesiuni persistente de autentificare.
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(session({
@@ -46,50 +43,32 @@ app.use(session({
   },
 }));
 
-// Etapa 4 - task 6:
-// Definirea folderului "resurse" ca folder static.
-// Astfel, in pagini se folosesc cai de tip /resurse/... (cereri catre server)
+// Etapa 4 – Cerința 6: Ruta /resurse.
 app.use("/resurse", express.static(path.join(__dirname, "resurse")));
 
-// Etapa 6 - task stilizare Bootstrap: pachetul oficial Bootstrap Icons.
+// Etapa 6 – Cerință: Ruta /resurse/bootstrap-icons.
 app.use(
   "/resurse/bootstrap-icons",
   express.static(path.join(__dirname, "node_modules", "bootstrap-icons", "font")),
 );
 
-// Etapa 7 - task bootstrap_js: bundle-ul oficial Bootstrap este servit local.
+// Etapa 7 – Cerința bootstrap_js: Carduri Bootstrap animate.
 app.use(
   "/resurse/bootstrap/js",
   express.static(path.join(__dirname, "node_modules", "bootstrap", "dist", "js")),
 );
 
-// Etapa 4 - task 17:
-// Cererile catre o cale din /resurse fara fisier specificat (catre un folder,
-// ex. /resurse/css/) nu sunt servite de express.static si ajung aici.
-// Pentru ele se returneaza eroarea 403 Forbidden.
+// Etapa 4 – Cerința 17: Configurarea serverului Express.
 app.get(/^\/resurse(\/.*)?$/, function (req, res) {
   afisareEroare(res, 403);
 });
 
-// Etapa 4 - task 3:
-// Afisarea cailor utile in consola.
-// __dirname     -> calea folderului in care se afla fisierul index.js
-// __filename    -> calea completa a fisierului curent (index.js)
-// process.cwd() -> folderul de lucru curent, din care a fost pornit procesul node
-//
-// Sunt __dirname si process.cwd() acelasi lucru intotdeauna? NU.
-// __dirname este mereu folderul fizic al fisierului index.js, indiferent de unde
-// pornim procesul. process.cwd() depinde de directorul curent din care rulam comanda.
-// Daca pornim "node index.js" chiar din folderul proiectului, cele doua coincid, dar
-// daca pornim din alt director (ex. "node proiect/index.js"), atunci difera.
+// Etapa 4 – Cerința 3: Configurarea serverului Express.
 console.log("__dirname     = " + __dirname);
 console.log("__filename    = " + __filename);
 console.log("process.cwd() = " + process.cwd());
 
-// Etapa 4 - task 20:
-// Vector cu folderele de creat la pornirea aplicatiei.
-// Se itereaza prin vector si se creeaza folderele care nu exista,
-// folosind path.join() pentru concatenarea cailor
+// Etapa 4 – Cerința 20: Configurarea vect_foldere.
 const vect_foldere = ["temp", "logs", "backup", "fisiere_uploadate"];
 
 vect_foldere.forEach(function (numeFolder) {
@@ -100,32 +79,30 @@ vect_foldere.forEach(function (numeFolder) {
   }
 });
 
-// Etapa 4 - task 13:
-// Variabila globala in care se incarca datele despre erori din erori.json.
-// Implicit, proprietatea obErori are valoarea null.
+// Etapa 4 – Cerința 13: Configurarea obGlobal.
 let obGlobal = {
   obErori: null,
 
-  // Etapa 5 - folderul sursa pentru fisierele SCSS
+  // Etapa 5 – Cerință: Compilarea automată SCSS.
   folderScss: path.join(__dirname, "resurse", "sass"),
 
-  // Etapa 5 - folderul destinatie pentru fisierele CSS compilate
+  // Etapa 5 – Cerință: Folderul CSS compilat.
   folderCss: path.join(__dirname, "resurse", "css"),
 
-  // Etapa 5 - folderul in care salvam backupurile CSS vechi
+  // Etapa 5 – Cerință: Compilarea automată SCSS.
   folderBackup: path.join(__dirname, "backup"),
 
-  // Etapa 5 - datele galeriei sunt citite o singura data la pornire
+  // Etapa 5 – Cerință: Datele galeriei statice.
   obGalerie: null,
 
-  // Etapa 6 - categoriile generate din ENUM-ul bazei de date
+  // Etapa 6 – Cerința 4: Categoriile produselor.
   categoriiProduse: [],
 
-  // Etapa 8 - Bonus 12: cea mai recenta modificare EJS sau din tabela produse.
+  // Etapa 8 – Bonus 12: Data ultimei actualizări.
   dataUltimaModificare: new Date(0),
 };
 
-// Etapa 6 - task meniu: etichete de prezentare pentru valorile ENUM.
+// Etapa 6 – Cerința meniu: Meniul site-ului.
 const eticheteCategorii = {
   componente: "Componente",
   stocare: "Stocare",
@@ -160,12 +137,7 @@ async function initProduse() {
   );
 }
 
-/**
- * Etapa 8 - Bonus 12: gaseste recursiv cea mai noua data a fisierelor dorite.
- * @param {string} folder Folderul analizat.
- * @param {string} extensie Extensia filtrata.
- * @returns {Date} Cea mai recenta data gasita.
- */
+/* Etapa 8 – Bonus 12: Calcularea ultimei actualizări. */
 function obtineCeaMaiNouaDataFisier(folder, extensie) {
   let dataMaxima = new Date(0);
   for (const intrare of fs.readdirSync(folder, { withFileTypes: true })) {
@@ -181,11 +153,7 @@ function obtineCeaMaiNouaDataFisier(folder, extensie) {
   return dataMaxima;
 }
 
-/**
- * Etapa 8 - Bonus 8: transforma un moment anterior intr-o durata usor de prezentat.
- * @param {string|Date|null} data Momentul ultimei autentificari.
- * @returns {string|null} Durata exprimata in zile, ore si minute.
- */
+/* Etapa 8 – Bonus 8: Formatarea activității recente. */
 function formateazaTimpTrecut(data) {
   if (!data) return null;
   let minute = Math.max(0, Math.floor((Date.now() - new Date(data).getTime()) / 60000));
@@ -198,12 +166,7 @@ function formateazaTimpTrecut(data) {
     .join(", ");
 }
 
-/**
- * Etapa 6 - cerinta individuala, punctul 5:
- * transforma data ISO a produsului in forma romaneasca ceruta in card.
- * @param {string|Date|null} data Data calendaristica primita din PostgreSQL.
- * @returns {string} Data de forma "2 Mai 2026 (Sambata)".
- */
+/* Etapa 6 – Cerința 5: Formatarea datei produsului. */
 function formateazaDataProdus(data) {
   const valoareIso = data instanceof Date
     ? data.toISOString().slice(0, 10)
@@ -226,10 +189,10 @@ function formateazaDataProdus(data) {
   return `${zi} ${luni[luna - 1]} ${an} (${zile[dataLocala.getDay()]})`;
 }
 
-// Etapa 6 - cerinta individuala: helperul este disponibil in toate template-urile EJS.
+// Etapa 6 – Cerința 5: Helperul pentru data produsului.
 app.locals.formateazaDataProdus = formateazaDataProdus;
 
-// Etapa 5 - functie auxiliara pentru crearea folderelor necesare
+// Etapa 5 – Cerință: Funcția creeazaFolderDacaNuExista.
 /**
  * Creeaza recursiv un folder numai daca acesta lipseste.
  * @param {string} caleFolder Calea absoluta a folderului.
@@ -242,7 +205,7 @@ function creeazaFolderDacaNuExista(caleFolder) {
   }
 }
 
-// Etapa 5 - compilare automata SCSS
+// Etapa 5 – Cerință: Compilarea automată SCSS.
 /**
  * Compileaza un fisier SCSS si salveaza mai intai un backup al CSS-ului existent.
  * @param {string} caleScss Cale SCSS absoluta sau relativa la folderul Sass.
@@ -329,7 +292,7 @@ function compileazaScss(caleScss, caleCss) {
   }
 }
 
-// Etapa 5 - compilarea tuturor fisierelor SCSS la pornirea serverului
+// Etapa 5 – Cerință: Compilarea automată SCSS.
 /**
  * Parcurge recursiv folderul Sass si compileaza toate fisierele principale.
  * @returns {void}
@@ -362,7 +325,7 @@ function compileazaToateScss() {
   parcurgeFolder(obGlobal.folderScss);
 }
 
-// Etapa 5 - urmarirea modificarilor din folderul SCSS
+// Etapa 5 – Cerință: Compilarea automată SCSS.
 /**
  * Porneste monitorizarea SCSS si recompilarea cu debounce de 500 ms.
  * @returns {void}
@@ -410,9 +373,7 @@ function urmaresteScss() {
   );
 }
 
-// Etapa 5 - galerie statica si galerie animata
-// Datele descriptive, intervalul de afisare si atribuirile imaginilor sunt
-// pastrate separat de template-uri, in fisierul galerie.json.
+// Etapa 5 – Cerință: Galeria animată.
 /**
  * Citeste o singura data configuratia galeriei din JSON.
  * @returns {void}
@@ -424,11 +385,7 @@ function initGalerie() {
   valideazaGalerie();
 }
 
-/**
- * Etapa 5 - Bonus 5: valideaza folderul si fiecare imagine declarata in JSON.
- * Mesajele contin calea exacta, astfel incat problema sa poata fi reparata rapid.
- * @returns {boolean} True daca toate resursele galeriei exista.
- */
+/* Etapa 5 – Bonus 5: Validarea galeriei. */
 function valideazaGalerie() {
   const erori = [];
   const caleGalerie = path.join(__dirname, String(obGlobal.obGalerie.cale_galerie || "").replace(/^\//, ""));
@@ -540,15 +497,8 @@ function obtineGalerieAnimata() {
   return { imagini: imagini, numarImagini: numarImagini };
 }
 
-// Etapa 4 - task 13:
-// initErori() citeste si parseaza erori.json, seteaza calea absoluta (servita de
-// server) pentru fiecare imagine folosind cale_baza si salveaza obiectul in obGlobal.obErori
-/**
- * Etapa 4 - Bonus: cauta proprietati JSON repetate direct in textul fisierului,
- * inainte ca JSON.parse() sa pastreze numai ultima lor valoare.
- * @param {string} continut Textul JSON original.
- * @returns {string[]} Cheile duplicate si pozitiile aproximative din fisier.
- */
+// Etapa 4 – Cerința 13: Funcția gasesteCheiDuplicateJson.
+/* Etapa 4 – Cerință: Funcția gasesteCheiDuplicateJson. */
 function gasesteCheiDuplicateJson(continut) {
   const stiva = [];
   const duplicate = [];
@@ -588,11 +538,7 @@ function gasesteCheiDuplicateJson(continut) {
   return duplicate;
 }
 
-/**
- * Etapa 4 - Bonus: verifica structura, imaginile si identificatorii din erori.json.
- * @param {string} caleErori Calea absoluta a fisierului JSON.
- * @returns {object} Obiectul validat, pregatit pentru initializare.
- */
+/* Etapa 4 – Cerință: Funcția valideazaDateErori. */
 function valideazaDateErori(caleErori) {
   if (!fs.existsSync(caleErori)) {
     console.error(`[Etapa 4 - Bonus] Lipseste fisierul obligatoriu: ${caleErori}`);
@@ -673,12 +619,7 @@ function initErori() {
   obGlobal.obErori = obErori;
 }
 
-// Etapa 4 - task 14:
-// afisareEroare() afiseaza o pagina de eroare folosind template-ul eroare.ejs.
-// Daca exista o eroare cu identificatorul dat, preia titlul/textul/imaginea din JSON,
-// dar argumentele titlu/text/imagine au prioritate daca sunt precizate.
-// Daca identificatorul lipseste sau nu este gasit, se foloseste eroarea default.
-// Statusul HTTP se seteaza doar daca eroarea are status: true.
+// Etapa 4 – Cerința 14: Configurarea serverului Express.
 /**
  * Randeaza pagina unei erori configurate sau eroarea implicita.
  * @param {import("express").Response} res Raspunsul Express.
@@ -714,22 +655,21 @@ function afisareEroare(res, identificator, titlu, text, imagine) {
   });
 }
 
-// Etapa 4 - task 13:
-// Incarcarea datelor despre erori la pornirea aplicatiei
+// Etapa 4 – Cerința 13: Funcția verificaMentenanta.
 initErori();
 initGalerie();
-// Etapa 6 - Bonus 12: generatorul periodic de oferte.
+// Etapa 6 – Bonus 12: Oferte periodice.
 oferte.porneste();
-// Etapa 5 - compilare automata SCSS
+// Etapa 5 – Cerință: Compilarea automată SCSS.
 compileazaToateScss();
 urmaresteScss();
-// Etapa 6 - Bonus 13: backupurile CSS expirate sunt verificate la pornire si apoi periodic.
+// Etapa 6 – Bonus 13: Curățarea backupurilor CSS.
 curatareBackup.porneste({
   folderBackup: obGlobal.folderBackup,
   caleOptiuniServer: caleOptiuniServer,
 });
 
-// Etapa 8 - Bonus 7: modul de mentenanta este controlat din fisierul JSON.
+// Etapa 8 – Bonus 7: Modul de mentenanță.
 app.use(function verificaMentenanta(req, res, next) {
   const optiuni = JSON.parse(fs.readFileSync(caleOptiuniServer, "utf8"));
   if (optiuni.mentenanta && req.path !== "/favicon.ico") {
@@ -738,7 +678,7 @@ app.use(function verificaMentenanta(req, res, next) {
   next();
 });
 
-// Etapa 8 - date comune pentru header, footer si activitatea utilizatorului.
+// Etapa 8 – Cerință: Sistemul de utilizatori.
 app.use(async function pregatesteUtilizatorCurent(req, res, next) {
   res.locals.utilizatorCurent = req.session.utilizator || null;
   res.locals.timpUltimaLogare = formateazaTimpTrecut(
@@ -769,29 +709,23 @@ app.use(async function pregatesteUtilizatorCurent(req, res, next) {
   next();
 });
 
-// Etapa 8 - toate rutele de cont si administrare sunt montate inaintea rutelor generale.
+// Etapa 8 – Cerință: Ruta /favicon.ico.
 app.use(creeazaRouterUtilizatori());
 
-// Etapa 4 - task 19:
-// Ruta pentru /favicon.ico. Browserele cer faviconul pentru diverse raspunsuri,
-// nu doar pentru pagini html. Il trimitem cu sendFile() din calea reala existenta.
+// Etapa 4 – Cerința 19: Ruta /favicon.ico.
 app.get("/favicon.ico", function (req, res) {
   res.sendFile(path.join(__dirname, "resurse", "favicons", "favicon.ico"));
 });
 
-// Etapa 4 - task 18:
-// La cererea oricarui fisier cu extensia .ejs se returneaza eroarea 400 Bad Request.
-// Fisierele EJS nu pot fi accesate direct, ci doar randate de server.
+// Etapa 4 – Cerința 18: Configurarea serverului Express.
 app.get(/\.ejs$/, function (req, res) {
   afisareEroare(res, 400);
 });
 
-// Etapa 4 - task 8:
-// Prima pagina (index) este accesibila prin "/", "/index" si "/home",
-// folosind un vector de cai in apelul app.get(). Se transmite ip-ul utilizatorului.
+// Etapa 4 – Cerința 8: Configurarea produseNoi.
 app.get(["/", "/index", "/home"], async function (req, res) {
   try {
-    // Etapa 6 - Bonus 18: sectiunea de noutati este alimentata din PostgreSQL.
+    // Etapa 6 – Bonus 18: Produse noi.
     const produseNoi = await accesProduse.obtineProduseNoi(4);
     const ofertaCurenta = oferte.obtineOfertaCurenta();
     res.render("pagini/index", {
@@ -807,7 +741,7 @@ app.get(["/", "/index", "/home"], async function (req, res) {
   }
 });
 
-// Etapa 5 - aceeasi galerie statica apare si pe pagina dedicata, prin fragment EJS
+// Etapa 5 – Cerință: Galeria statică.
 app.get("/galerie-componente", function (req, res) {
   res.render("pagini/galerie-componente", {
     ip: req.ip,
@@ -815,8 +749,7 @@ app.get("/galerie-componente", function (req, res) {
   });
 });
 
-// Etapa 6 - cerinta individuala, punctele 1, 4 si 5:
-// lista produselor, optional filtrata pe server dupa categoria din meniu.
+// Etapa 6 – Cerința 1, 4 și 5: Configurarea categorieCeruta.
 app.get("/produse", async function (req, res) {
   try {
     const categorieCeruta =
@@ -826,11 +759,11 @@ app.get("/produse", async function (req, res) {
     });
     const categorie = categorieValida ? categorieCeruta : "";
     const produse = await accesProduse.obtineProduse(categorie);
-    // Etapa 8 - Bonus 13: marcajul si totalul favorit sunt atasate datelor EJS.
+    // Etapa 8 – Bonus 13: Favorite și notificări de stoc.
     const dateFavorite = await accesProduse.obtineDateFavorite(produse.map((produs) => produs.id), req.session.utilizator?.id);
     produse.forEach((produs) => Object.assign(produs, dateFavorite.get(produs.id) || { numar_favorite: 0, este_favorit: false }));
 
-    // Etapa 6 - Bonus 14 si Bonus 18: marcaje calculate prin program.
+    // Etapa 6 – Bonusurile 14 și 18: Marcajele Cel mai ieftin și Nou.
     const pretMinimPeCategorie = new Map();
     produse.forEach(function (produs) {
       const minimCurent = pretMinimPeCategorie.get(produs.categorie);
@@ -838,7 +771,7 @@ app.get("/produse", async function (req, res) {
         pretMinimPeCategorie.set(produs.categorie, produs.pret);
       }
     });
-    // Etapa 6 - Bonus 12d: pret redus calculat fara modificarea bazei.
+    // Etapa 6 – Bonus 12d: Oferte periodice.
     const ofertaCurenta = oferte.obtineOfertaCurenta();
     produse.forEach((produs) => {
       if (ofertaCurenta && produs.categorie === ofertaCurenta.categorie) {
@@ -856,8 +789,7 @@ app.get("/produse", async function (req, res) {
         intervalProdusNou;
     });
 
-    // Etapa 6 - Bonus 1: atributele si optiunile celor opt tipuri de control
-    // se genereaza din produsele citite din PostgreSQL.
+    // Etapa 6 – Bonus 1: Filtre generate din date.
     const scoruri = produse.map((produs) => produs.scor_performanta);
     const subcategorii = [...new Set(produse.map((produs) => produs.subcategorie))].sort();
     const culori = [...new Set(produse.map((produs) => produs.culoare))].sort();
@@ -910,7 +842,7 @@ app.get("/produse", async function (req, res) {
   }
 });
 
-// Etapa 6 - cerinta individuala, punctul 2: pagina dinamica a produsului unic.
+// Etapa 6 – Cerința 2: Pagina individuală a produsului.
 app.get("/produs/:id", async function (req, res) {
   const id = Number.parseInt(req.params.id, 10);
   if (!Number.isInteger(id) || id <= 0) {
@@ -924,12 +856,11 @@ app.get("/produs/:id", async function (req, res) {
       afisareEroare(res, 404);
       return;
     }
-    // Etapa 6 - Bonusurile 9 si 16: imagini multiple si produse similare.
+    // Etapa 6 – Bonus 9: Imagini multiple pentru produs.
     const produseSimilare = await accesProduse.obtineProduseSimilare(produs, 4);
     const dateFavorite = await accesProduse.obtineDateFavorite([produs.id], req.session.utilizator?.id);
     Object.assign(produs, dateFavorite.get(produs.id) || { numar_favorite: 0, este_favorit: false });
-    // Etapa 6 - Bonus 9: variantele sunt imagini reale derivate din imaginea
-    // produsului curent; nu mai folosim fotografiile altor produse similare.
+    // Etapa 6 – Bonus 9: Imagini multiple pentru produs.
     produs.imagini = imaginiProduse.obtineImaginiProdus(produs.imagine);
     const seturi = await accesProduse.obtineSeturi(produs.id);
     res.render("pagini/produs", { ip: req.ip, produs: produs, produseSimilare: produseSimilare, seturi: seturi });
@@ -939,13 +870,13 @@ app.get("/produs/:id", async function (req, res) {
   }
 });
 
-// Etapa 6 - Bonus 17: pagina tuturor seturilor PC Forge.
+// Etapa 6 – Bonus 17: Seturi de produse și reducere.
 app.get("/seturi", async function (req, res) {
   try { res.render("pagini/seturi", { ip: req.ip, seturi: await accesProduse.obtineSeturi() }); }
   catch (eroare) { console.error("Eroare seturi: " + eroare.message); afisareEroare(res); }
 });
 
-// Etapa 6 - Bonus 10a/10b: aceleasi date pot fi filtrate pe server prin fetch.
+// Etapa 6 – Bonus 10a: Filtrare pe server.
 app.get("/api/produse-filtrate", async function (req, res) {
   try {
     const categorie = obGlobal.categoriiProduse.some((item) => item.valoare === req.query.categorie) ? req.query.categorie : "";
@@ -954,7 +885,7 @@ app.get("/api/produse-filtrate", async function (req, res) {
   } catch (eroare) { res.status(400).json({ eroare: eroare.message }); }
 });
 
-// Etapa 6 - Bonus 20: fereastra separata cu specificatiile in paralel.
+// Etapa 6 – Bonus 20: Compararea produselor.
 app.get("/comparare", async function (req, res) {
   const ids = String(req.query.ids || "").split(",").map((valoare) => Number.parseInt(valoare, 10)).filter((id) => Number.isInteger(id) && id > 0).slice(0, 2);
   if (ids.length !== 2) return afisareEroare(res, 400, "Comparație incompletă", "Selectează exact două produse.");
@@ -968,16 +899,12 @@ app.get("/comparare", async function (req, res) {
   }
 });
 
-// Etapa 4 - task 15:
-// Ruta pentru pagina suplimentara "Despre"
+// Etapa 4 – Cerința 15: Configurarea pagina.
 app.get("/despre", function (req, res) {
   res.render("pagini/despre", { ip: req.ip });
 });
 
-// Etapa 4 - task 9 si 10:
-// Ruta generala pentru "/*" - trebuie sa fie ultima ruta de pagini.
-// Incearca sa randeze pagina ceruta; daca view-ul nu exista (mesajul incepe cu
-// "Failed to lookup view") se afiseaza eroarea 404, altfel o eroare generica.
+// Etapa 4 – Cerința 9 și 10: Configurarea pagina.
 app.get("/*", function (req, res) {
   let pagina = req.params[0];
 
@@ -1005,8 +932,7 @@ app.get("/*", function (req, res) {
   }
 });
 
-// Etapa 4 - task 2:
-// Pornirea serverului pe portul setat
+// Etapa 4 – Cerința 2: Configurarea serverului Express.
 Promise.all([pregatesteMiniaturiGalerie(), imaginiProduse.pregatesteVariante(), initProduse()])
   .then(function () {
     app.listen(port, function () {

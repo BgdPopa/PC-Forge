@@ -3,7 +3,7 @@
   <%- include("../fragmente/head", { titlu: "PC Forge - Comparare produse" }) %>
   <body id="top">
     <main class="main-cont">
-      <%# Etapa 6 - Bonus 20: specificatii aliniate pe aceleasi randuri. %>
+      <%# Etapa 6 – Bonus 20: Compararea produselor. %>
       <section class="cont-card cont-card--lat comparare-pagina">
         <span class="eyebrow">Etapa 6 · Bonus 20</span><h1>Comparație directă</h1>
         <div class="table-responsive"><table class="table table-striped table-bordered align-middle"><thead><tr><th>Caracteristică</th><% produse.forEach(function(produs) { %><th><img class="comparare-imagine" src="<%= produs.imagine %>" alt="" /><a href="/produs/<%= produs.id %>"><%= produs.nume %></a></th><% }); %></tr></thead><tbody>

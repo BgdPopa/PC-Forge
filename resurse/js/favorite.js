@@ -1,4 +1,4 @@
-// Etapa 8 - Bonus 13: favorite prin fetch si actualizarea periodica a contoarelor.
+// Etapa 8 – Bonus 13: Produse favorite.
 document.addEventListener("DOMContentLoaded", function () {
   async function comutaFavorit(buton) {
     const card = buton.closest("[data-produs-id]");

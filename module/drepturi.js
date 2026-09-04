@@ -1,5 +1,4 @@
-// Etapa 7 - obiectul Drepturi (cerinta 0.05p):
-// simbolurile nu pot fi falsificate prin simpla folosire a aceluiasi text.
+// Etapa 7 – Cerință: Drepturile utilizatorilor.
 const Drepturi = Object.freeze({
   vizualizareProduse: Symbol("vizualizare produse"),
   cumparareProduse: Symbol("cumparare produse"),

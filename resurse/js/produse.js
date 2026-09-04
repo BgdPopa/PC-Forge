@@ -1,4 +1,4 @@
-// Etapa 6 - cerinta individuala: filtrare, sortare, calculare si validare.
+// Etapa 6 – Cerință: Filtrarea produselor.
 document.addEventListener("DOMContentLoaded", function () {
   const lista = document.getElementById("lista-produse");
   if (!lista) return;
@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const numarProduse = document.getElementById("numar-produse");
   const salveazaFiltre = document.getElementById("salveaza-filtre");
   const cheieFiltrePersistente = `pc-forge-filtre:${window.location.search}`;
-  // Etapa 6 - Bonusurile 5, 6 si 20: stare separata pentru paginare, tab si comparatie.
+  // Etapa 6 – Bonus 5: Paginare dinamică.
   const produsePePagina = 6;
   const cheieAscunseTab = "pc-forge-produse-ascunse-tab";
   const cheieComparatie = "pc-forge-comparatie";
@@ -23,8 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const ascunseTab = new Set(JSON.parse(sessionStorage.getItem(cheieAscunseTab) || "[]"));
   const culoriValide = Array.from(document.querySelectorAll("#lista-culori option")).map((optiune) => optiune.value.toLowerCase());
 
-  // Etapa 7 - cerinta 16 bootstrap_js: cardurile Bootstrap apar la t, 2t, 3t...
-  // Pentru 20 de produse, ultimul apare la 4 secunde, deci animatia depaseste 3*t.
+  // Etapa 7 – Cerința 16: Carduri Bootstrap animate.
   function animeazaCarduriBootstrap() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const t = 200;
@@ -36,12 +35,12 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Etapa 6 - Bonus 7: diacriticele sunt echivalente cu literele fara diacritice.
+  // Etapa 6 – Bonus 7: Căutare fără diacritice.
   function normalizeazaText(text) {
     return text.toLocaleLowerCase("ro").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ș/g, "s").replace(/ț/g, "t");
   }
 
-  // Etapa 6 - punctul 10: validarea se executa inaintea operatiilor.
+  // Etapa 6 – Cerință: Funcția valideazaInputuri.
   function valideazaInputuri(afiseazaMesaje) {
     const numeValid = /^[\p{L}\p{N}\s.+-]*$/u.test(inpNume.value.trim());
     inpNume.setCustomValidity(numeValid ? "" : "Numele conține simboluri nepermise.");
@@ -73,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return Array.from(select.selectedOptions).map((optiune) => optiune.value);
   }
 
-  // Etapa 7 - Bonus 3: serializarea tuturor filtrelor in localStorage.
+  // Etapa 7 – Bonus 3: Filtre persistente.
   function obtineStareFiltre() {
     return {
       nume: inpNume.value,
@@ -117,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Etapa 6 - cerintele 6 si 7: toate cele opt inputuri participa la filtrare.
+  // Etapa 6 – Cerință: Filtrarea produselor.
   function aplicaFiltrare(afiseazaMesaje = false) {
     valoareScor.value = inpScor.value;
     if (!valideazaInputuri(afiseazaMesaje)) return false;
@@ -146,15 +145,14 @@ document.addEventListener("DOMContentLoaded", function () {
         (!filtru.subcategorie || produs.dataset.subcategorie === filtru.subcategorie) &&
         (filtru.conectivitate.length === 0 || filtru.conectivitate.every((valoare) => conexiuniProdus.includes(valoare)));
 
-      // Etapa 6 - Bonus 6: un produs fixat suprascrie filtrul, iar cel ascuns
-      // in sessionStorage ramane invizibil numai in tabul curent.
+      // Etapa 6 – Bonus 6: Fixarea și ascunderea produselor.
       produs.dataset.ascunsTemporar = "false";
       const eligibil = (corespunde || produs.classList.contains("produs-card--fixat")) && !ascunseTab.has(produs.dataset.produsId);
       produs.dataset.corespunde = String(eligibil);
       if (eligibil) numarVizibile++;
     });
 
-    // Etapa 6 - Bonus 3 si Bonus 15.
+    // Etapa 6 – Bonusurile 3 și 15: Mesaj pentru zero rezultate.
     mesajFaraProduse.hidden = numarVizibile !== 0;
     numarProduse.textContent = `${numarVizibile} ${numarVizibile === 1 ? "produs" : "produse"}`;
     paginaCurenta = 1;
@@ -163,7 +161,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return true;
   }
 
-  // Etapa 6 - Bonus 5: genereaza ceil(N/K) butoane si afiseaza intervalul paginii P.
+  // Etapa 6 – Bonus 5: Paginare dinamică.
   function actualizeazaPaginare() {
     const eligibile = produse.filter((produs) => produs.dataset.corespunde === "true" && produs.dataset.ascunsTemporar !== "true");
     const numarPagini = Math.max(1, Math.ceil(eligibile.length / produsePePagina));
@@ -198,7 +196,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return String(a).localeCompare(String(b), "ro", { numeric: true });
   }
 
-  // Etapa 6 - punctul 8.2 si Bonus 8: sortare dupa doua chei alese.
+  // Etapa 6 – Bonus 8: Sortare după două chei.
   function sorteazaProduse(sens) {
     if (!valideazaInputuri(true)) return;
     const cheie1 = document.getElementById("cheie-sortare-1").value;
@@ -213,7 +211,7 @@ document.addEventListener("DOMContentLoaded", function () {
     actualizeazaPaginare();
   }
 
-  // Etapa 6 - punctul 8.3: rezultatul este creat dinamic si sters dupa 2 secunde.
+  // Etapa 6 – Cerință: Funcția calculeazaPreturi.
   function calculeazaPreturi() {
     if (!valideazaInputuri(true)) return;
     const preturi = produse.filter((produs) => !produs.hidden).map((produs) => Number(produs.dataset.pret));
@@ -238,7 +236,7 @@ document.addEventListener("DOMContentLoaded", function () {
     setTimeout(() => rezultat.remove(), 2000);
   }
 
-  // Etapa 6 - punctele 8.4 si 9: resetare confirmata si ordine initiala.
+  // Etapa 6 – Cerință: Funcția reseteazaFiltre.
   function reseteazaFiltre() {
     if (!window.confirm("Dorești să resetezi toate filtrele și sortarea?")) return;
     inpNume.value = "";
@@ -260,7 +258,7 @@ document.addEventListener("DOMContentLoaded", function () {
     aplicaFiltrare();
   }
 
-  // Etapa 6 - Bonus 6: cele trei actiuni cerute pentru fiecare card.
+  // Etapa 6 – Bonus 6: Fixarea și ascunderea produselor.
   lista.addEventListener("click", function (eveniment) {
     const card = eveniment.target.closest(".produs-card");
     if (!card) return;
@@ -282,7 +280,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Etapa 6 - Bonus 11: click pe zona neinteractiva a cardului deschide modalul.
+  // Etapa 6 – Bonus 11: Modal Bootstrap.
   lista.addEventListener("click", function (eveniment) {
     if (eveniment.target.closest("a, button, input, select, label")) return;
     const card = eveniment.target.closest(".produs-card");
@@ -293,7 +291,7 @@ document.addEventListener("DOMContentLoaded", function () {
     window.bootstrap.Modal.getOrCreateInstance(document.getElementById("modal-produs")).show();
   });
 
-  // Etapa 6 - Bonus 20: comparatia persista cel mult o zi in localStorage.
+  // Etapa 6 – Bonus 20: Compararea produselor.
   function citesteComparatie() {
     try {
       const stare = JSON.parse(localStorage.getItem(cheieComparatie) || "null");
@@ -336,7 +334,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("afiseaza-comparatie").addEventListener("click", () => { const ids = citesteComparatie().map((produs) => produs.id).join(","); window.open(`/comparare?ids=${ids}`, "pc-forge-comparatie", "width=980,height=720"); });
 
   document.getElementById("btn-filtrare").addEventListener("click", () => aplicaFiltrare(true));
-  // Etapa 6 - Bonus 10a/10b: fetch trimite filtrele, serverul intoarce ordinea ID-urilor.
+  // Etapa 6 – Bonus 10a: Filtrare pe server.
   document.getElementById("btn-filtrare-server").addEventListener("click", async function () {
     if (!valideazaInputuri(true)) return;
     const params = new URLSearchParams({ nume: inpNume.value.trim(), scor: inpScor.value, categorie: valoriSelectate(".filtru-categorie")[0] || "", cheie1: document.getElementById("cheie-sortare-1").value, cheie2: document.getElementById("cheie-sortare-2").value, sens: "asc" });
@@ -358,7 +356,7 @@ document.addEventListener("DOMContentLoaded", function () {
     else localStorage.removeItem(cheieFiltrePersistente);
   });
 
-  // Etapa 6 - Bonus 4: filtrarea se actualizeaza imediat la schimbarea inputurilor.
+  // Etapa 6 – Bonus 4: Filtrare imediată.
   document.querySelectorAll("#zona-filtre input, #zona-filtre textarea, #zona-filtre select").forEach(function (input) {
     const eveniment = input.matches('input[type="text"], input[type="range"], textarea') ? "input" : "change";
     input.addEventListener(eveniment, () => aplicaFiltrare(false));

@@ -1,10 +1,9 @@
-// Etapa 6 - task tema light/dark:
-// tema se memoreaza in localStorage si se aplica pe toate paginile site-ului.
+// Etapa 6 – Cerință: Teme persistente.
 (function () {
   const cheieTema = "pc-forge-tema";
   const temaServer = window.pcForgeUtilizator?.tema;
   const temaSalvata = temaServer || localStorage.getItem(cheieTema);
-  // Etapa 6 - Bonus 2: sunt acceptate trei teme persistente.
+  // Etapa 6 – Bonus 2: Trei teme persistente.
   const temaInitiala = ["light", "dark", "contrast"].includes(temaSalvata) ? temaSalvata : "light";
 
   function aplicaTema(tema) {

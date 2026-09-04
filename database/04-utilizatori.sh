@@ -1,8 +1,7 @@
 #!/bin/sh
 set -eu
 
-# Etapa 7 - pregatirea sistemului de utilizatori.
-# Crearea ruleaza ca administrator, apoi aplicatia primeste numai drepturile necesare.
+# Etapa 7 – Cerință: Sistemul de utilizatori.
 psql --set ON_ERROR_STOP=1 \
   --username "$POSTGRES_USER" \
   --dbname "$POSTGRES_DB" \
